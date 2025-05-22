@@ -17,11 +17,12 @@ class PermissionSeeder extends Seeder
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
         $permissions_arr = [
-            'Items' => [
-                'item access'   => 'Allow user to access item list and details',
-                'item create'   => 'Allow user to create item.',
-                'item edit'     => 'Allow user to edit item details.',
-                'item delete'   => 'Allow user to delete item.'
+            'Types' => [
+                'type access'   => 'Allow user to access mom type list and details',
+                'type create'   => 'Allow user to create mom type.',
+                'type edit'     => 'Allow user to edit mom type details.',
+                'type upload'   => 'Allow user to upload mom types.',
+                'type delete'   => 'Allow user to delete mom type.'
             ],
             'Companies' => [
                 'company access'    => 'Allow user to access company list and details.',
