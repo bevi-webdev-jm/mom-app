@@ -300,6 +300,13 @@ return [
 
     'menu' => [
         [
+            'text'      => 'Types',
+            'url'       => 'mom-types',
+            'icon'      => 'fas fa-fw fa-sitemap',
+            'can'       => 'type access',
+            'active'    => ['mom-types', 'mom-type*']
+        ],
+        [
             'text'  => 'settings',
             'url'   => '#',
             'icon'  => 'fa fa-fw fa-cog',
