@@ -24,7 +24,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['register' => false, 'reset' => false, 'verify' => false]);
 
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);

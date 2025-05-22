@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'Laravel Starter',
+    'title' => 'MOM APP',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => 'Laravel Starter',
+    'logo' => 'MOM APP',
     'logo_img' => 'images/jm-logo-ai.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -505,5 +505,5 @@ return [
 
     'livewire' => true,
 
-    'gmail_login' => false,
+    'gmail_login' => true,
 ];
