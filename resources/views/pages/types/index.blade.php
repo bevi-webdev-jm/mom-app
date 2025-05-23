@@ -20,6 +20,12 @@
                             {{__('adminlte::types.new_type')}}
                         </a>
                     @endcan
+                    @can('type upload')
+                        <a href="" class="btn btn-success btn-xs" id="btn-upload">
+                            <i class="fa fa-upload"></i>
+                            {{__('adminlte::utilities.upload')}}
+                        </a>
+                    @endcan
                 </div>
             </div>
         </div>
@@ -81,6 +87,12 @@
             {{ $types->links() }}
         </div>
     </div>
+
+    <div class="modal fade" id="type-upload-modal" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <livewire:types.upload/>
+        </div>
+    </div>
 @stop
 
 {{-- Push extra CSS --}}
@@ -101,4 +113,14 @@
             });
         });
     </script>
+    @can('type upload')
+        <script>
+            $(function() {
+                $('#btn-upload').click(function(e) {
+                    e.preventDefault();
+                    $('#type-upload-modal').modal('show');
+                });
+            });
+        </script>
+    @endcan
 @endpush
