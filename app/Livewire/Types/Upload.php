@@ -43,7 +43,6 @@ class Upload extends Component
                     $this->types_data[] = $row['TYPES'];
                 }
             });
-            
     }
 
     public function saveTypes() {

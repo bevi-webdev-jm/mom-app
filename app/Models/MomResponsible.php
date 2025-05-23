@@ -7,13 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Session;
 
-class MomType extends Model
+class MomResponsible extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
     protected $fillable = [
-        'type'
+        'mom_detail_id',
+        'user_id',
     ];
 
     public function getConnectionName()
