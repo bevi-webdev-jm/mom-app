@@ -20,7 +20,8 @@
         "spatie/laravel-activitylog": "^4.10",
         "spatie/laravel-html": "^3.5",
         "spatie/laravel-image-optimizer": "^1.8",
-        "spatie/laravel-permission": "^6.15"
+        "spatie/laravel-permission": "^6.15",
+        "spatie/simple-excel": "^3.7"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.15",
