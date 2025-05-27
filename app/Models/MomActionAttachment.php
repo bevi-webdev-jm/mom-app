@@ -22,4 +22,8 @@ class MomActionAttachment extends Model
     {
         return Session::get('db_connection', 'mysql');
     }
+
+    public function action() {
+        return $this->belongsTo('App\Models\MomAction');
+    }
 }

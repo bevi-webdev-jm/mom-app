@@ -86,4 +86,8 @@ class User extends Authenticatable
     public function company() {
         return $this->belongsTo('App\Models\Company');
     }
+
+    public function moms() {
+        return $this->belongsToMany('App\Models\Mom');
+    }
 }

@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('mom_details', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('mom_id')->nullable();
-            $table->string('topic');
+            $table->text('topic');
+            $table->text('next_step')->nullable();
             $table->date('target_date')->nullable();
             $table->date('completed_date')->nullable();
             $table->text('remarks')->nullable();
