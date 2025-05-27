@@ -14,14 +14,31 @@ class Mom extends Model
     
     protected $fillable = [
         'mom_type_id',
+        'user_id',
         'mom_number',
         'agenda',
-        'target_date',
+        'meeting_date',
         'status',
     ];
 
     public function getConnectionName()
     {
         return Session::get('db_connection', 'mysql');
+    }
+
+    public function type() {
+        return $this->belongsTo('App\Models\MomType');
+    }
+
+    public function details() {
+        return $this->hasMany('App\Models\MomDetail');
+    }
+
+    public function participants() {
+        return $this->belongsToMany('App\Models\User');
+    }
+
+    public function user() {
+        return $this->belongsTo('App\Models\User');
     }
 }

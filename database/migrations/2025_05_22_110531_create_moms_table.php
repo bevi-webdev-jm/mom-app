@@ -14,13 +14,19 @@ return new class extends Migration
         Schema::create('moms', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('mom_type_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->string('mom_number');
             $table->string('agenda');
-            $table->date('target_date');
+            $table->date('meeting_date');
             $table->string('status')->nullable();
             $table->timestamps();
 
             $table->foreign('mom_type_id')
                 ->references('id')->on('mom_types')
+                ->onDelete('cascade');
+
+            $table->foreign('user_id')
+                ->references('id')->on('users')
                 ->onDelete('cascade');
 
             $table->softDeletes();

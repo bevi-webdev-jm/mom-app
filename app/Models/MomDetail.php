@@ -15,6 +15,7 @@ class MomDetail extends Model
     protected $fillable = [
         'mom_id',
         'topic',
+        'next_step',
         'target_date',
         'completed_date',
         'remarks',
@@ -24,5 +25,17 @@ class MomDetail extends Model
     public function getConnectionName()
     {
         return Session::get('db_connection', 'mysql');
+    }
+
+    public function mom() {
+        return $this->belongsTo('App\Models\Mom');
+    }
+
+    public function actions() {
+        return $this->hasMany('App\Models\MomAction');
+    }
+
+    public function responsibles() {
+        return $this->hasMany('App\Models\MomResponsible');
     }
 }
