@@ -42,6 +42,10 @@
                         <thead class="tex-center bg-dark">
                             <tr class="text-center">
                                 <th>{{__('adminlte::moms.mom_number')}}</th>
+                                <th>{{__('adminlte::moms.agenda')}}</th>
+                                <th>{{__('adminlte::moms.meeting_date')}}</th>
+                                <th>{{__('adminlte::utilities.status')}}</th>
+                                <th>{{__('adminlte::users.user')}}</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -50,6 +54,18 @@
                                 <tr>
                                     <td class="align-middle text-center">
                                         {{$mom->mom_number}}
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        {{$mom->agenda}}
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        {{$mom->meeting_date}}
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        {{$mom->status}}
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        {{$mom->user->name}}
                                     </td>
                                     <td class="align-middle text-right p-0 pr-1">
                                         <a href="{{route('mom.show', encrypt($mom->id))}}" class="btn btn-info btn-xs mb-0 ml-0">
