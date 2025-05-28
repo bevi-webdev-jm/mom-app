@@ -18,7 +18,7 @@
                         <div class="card-body scroll-box">
                             <ul class="list-group">
                                 @foreach($users as $user)
-                                    <a href="#" class="list-group-item py-1" wire:click.prevent="selectUser({{$user->id}})" wire:transition wire:loading.attr="disabled">
+                                    <a href="#" class="list-group-item py-1" wire:click.prevent="selectUser({{$user->id}})" wire:loading.attr="disabled">
                                         <strong class="text-dark">{{$user->name}}</strong>
                                     </a>
                                 @endforeach
@@ -39,7 +39,7 @@
                         <div class="card-body scroll-box">
                             <ul class="list-group">
                                 @foreach($filtered_selected_users as  $user)
-                                    <a href="#" class="list-group-item py-1" wire:click.prevent="unselectUser({{$user->id}})" wire:transition wire:loading.attr="disabled">
+                                    <a href="#" class="list-group-item py-1" wire:click.prevent="unselectUser({{$user->id}})" wire:loading.attr="disabled">
                                         <strong class="text-dark">{{$user->name}}</strong>
                                     </a>
                                 @endforeach

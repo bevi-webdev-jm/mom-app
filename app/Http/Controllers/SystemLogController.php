@@ -40,7 +40,11 @@ class SystemLogController extends Controller
                         'user_id' => [
                             'class'     => \App\Models\User::class,
                             'column'    => 'name'
-                        ]
+                        ],
+                        'mom_type_id' => [
+                            'class'     => \App\Models\MomType::class,
+                            'column'    => 'type'
+                        ],
                     ];
     
                     foreach($changes as $key => $update) {
@@ -57,16 +61,12 @@ class SystemLogController extends Controller
             
                             // Check if old value exists
                             $old_val = !empty($old_val)
-                                ? cache()->rememberForever("$class:$old_val", function () use ($class, $old_val) {
-                                    return $class::find($old_val)[$column] ?? '-';
-                                })
+                                ? $class::find($old_val)[$column] ?? '-'
                                 : '-';
             
                             // Check if new value exists
                             $new_val = !empty($new_val)
-                                ? cache()->rememberForever("$class:$new_val", function () use ($class, $new_val) {
-                                    return $class::find($new_val)[$column] ?? '-';
-                                })
+                                ? $class::find($new_val)[$column] ?? '-'
                                 : '-';
                         }
             
