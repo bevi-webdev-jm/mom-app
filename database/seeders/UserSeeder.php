@@ -23,5 +23,7 @@ class UserSeeder extends Seeder
         $user->save();
 
         $user->assignRole('superadmin');
+
+        User::factory()->count(20)->create();
     }
 }

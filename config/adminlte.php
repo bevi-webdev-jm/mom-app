@@ -300,11 +300,18 @@ return [
 
     'menu' => [
         [
+            'text'      => 'mom',
+            'url'       => 'moms',
+            'icon'      => 'fas fa-fw fa-hourglass-half',
+            'can'       => 'mom access',
+            'active'    => ['moms', 'mom/*']
+        ],
+        [
             'text'      => 'Types',
             'url'       => 'mom-types',
             'icon'      => 'fas fa-fw fa-sitemap',
             'can'       => 'type access',
-            'active'    => ['mom-types', 'mom-type*']
+            'active'    => ['mom-types', 'mom-type/*']
         ],
         [
             'text'  => 'settings',
@@ -317,21 +324,21 @@ return [
                     'url'       => 'companies',
                     'icon'      => 'fas fa-fw fa-building',
                     'can'       => 'company access',
-                    'active'    => ['companies', 'company*']
+                    'active'    => ['companies', 'company/*']
                 ],
                 [
                     'text'      => 'users',
                     'url'       => 'users',
                     'icon'      => 'fas fa-fw fa-users',
                     'can'       => 'user access',
-                    'active'    => ['users', 'user*']
+                    'active'    => ['users', 'user/*']
                 ],
                 [
                     'text'      => 'roles',
                     'url'       => 'roles',
                     'icon'      => 'fas fa-fw fa-user-lock',
                     'can'       => 'role access',
-                    'active'    => ['roles', 'role*']
+                    'active'    => ['roles', 'role/*']
                 ],
                 [
                     'text'      => 'system_settings',
