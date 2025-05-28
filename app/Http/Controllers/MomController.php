@@ -18,8 +18,14 @@ class MomController extends Controller
         Session::forget('mom_data');
 
         $moms = Mom::orderBy('mom_number', 'DESC')
-            ->when(!empty($search), function($query) {
-                $query->where('mom_number', 'LIKE', '%'.$search.'%');
+            ->when(!empty($search), function($query) use($search) {
+                $query->where('mom_number', 'LIKE', '%'.$search.'%')
+                    ->orWhere('agenda', 'LIKE', '%'.$search.'%')
+                    ->orWhere('meeting_date', 'LIKE', '%'.$search.'%')
+                    ->orWhere('status', 'LIKE', '%'.$search.'%')
+                    ->orWhereHas('user', function($qry) use($search) {
+                        $qry->where('name', 'LIKE', '%'.$search.'%');
+                    });
             })
             ->paginate($this->getDataPerPage())
             ->appends(request()->query());
