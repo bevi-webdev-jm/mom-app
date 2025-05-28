@@ -21,4 +21,12 @@ class MomResponsible extends Model
     {
         return Session::get('db_connection', 'mysql');
     }
+
+    public function detail() {
+        return $this->belongsTo('App\Models\MomDetail');
+    }
+
+    public function user() {
+        return $this->belongsTo('App\Models\User');
+    }
 }

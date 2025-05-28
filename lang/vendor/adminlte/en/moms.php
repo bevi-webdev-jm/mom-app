@@ -20,5 +20,10 @@ return [
 
     'add_topic'             => 'Add Topic',
     'topic_list'            => 'Topic List',
+    'topic'                 => 'Topic',
+    'next_step'             => 'Next Step',
+    'target_date'           => 'Target Date',
+    'responsible'           => 'Responsible',
+    'save_topic'            => 'Save Topic',
 
 ];
