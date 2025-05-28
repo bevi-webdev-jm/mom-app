@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'mom'               => 'Minutes of Meeting',
     'settings'          => 'Settings',
     'companies'         => 'Companies',
     'users'             => 'Users',

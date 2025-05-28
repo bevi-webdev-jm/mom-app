@@ -6,7 +6,7 @@ use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\{
     RoleController, UserController, CompanyController,
     SystemLogController, SystemSettingController, HomeController,
-    NotificationController, MomTypeController
+    NotificationController, MomTypeController, MomController
 };
 
 /*
@@ -46,6 +46,14 @@ Route::group(['middleware' => ['auth', 'optimizeImages']], function() {
     // NOTIFICATION
     Route::get('test-notification', [NotificationController::class, 'testNotification'])->name('test-notification');
     Route::get('notifications', [NotificationController::class, 'index'])->name('notifications');
+
+    // MOM ROUTES
+    Route::group(['middleware' => 'permission:mom access'], function() {
+        Route::get('moms', [MomController::class, 'index'])->name('mom.index');
+        Route::get('mom/create', [MomController::class, 'create'])->name('mom.create')->middleware('permission:mom create');
+        Route::get('mom/{id}', [MomController::class, 'show'])->name('mom.show');
+        Route::get('mom/{id}/edit', [MomController::class, 'edit'])->name('mom.edit')->middleware('permission:mom edit');
+    });
 
     // MOM TYPES ROUTES
     Route::group(['middleware' => 'permission:type access'], function() {
