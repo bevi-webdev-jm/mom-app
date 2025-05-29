@@ -12,6 +12,13 @@ class MomController extends Controller
 {
     use SettingTrait;
 
+    public $status_arr = [
+        'draft'         => 'secondary',
+        'submitted'     => 'info',
+        'ongoing'       => 'warning',
+        'completed'     => 'success',
+    ];
+
     public function index(Request $request) {
         $search = trim($request->get('search'));
 
@@ -33,6 +40,7 @@ class MomController extends Controller
         return view('pages.moms.index')->with([
             'search' => $search,
             'moms' => $moms,
+            'status_arr' => $this->status_arr,
         ]);
     }
 

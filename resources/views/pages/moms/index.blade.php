@@ -62,7 +62,9 @@
                                         {{$mom->meeting_date}}
                                     </td>
                                     <td class="align-middle text-center">
-                                        {{$mom->status}}
+                                        <span class="badge badge-{{$status_arr[$mom->status]}} text-uppercase">
+                                            {{$mom->status}}
+                                        </span>
                                     </td>
                                     <td class="align-middle text-center">
                                         {{$mom->user->name}}

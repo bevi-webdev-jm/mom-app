@@ -10,7 +10,7 @@
                         <i class="fa fa-save mr-1"></i>
                         {{__('adminlte::moms.save_as_draft')}}
                     </button>
-                    <button class="btn btn-success btn-sm" wire:click.prevent="saveMom('submit')">
+                    <button class="btn btn-success btn-sm" wire:click.prevent="saveMom('submitted')">
                         <i class="fa fa-save mr-1"></i>
                         {{__('adminlte::utilities.submit')}}
                     </button>

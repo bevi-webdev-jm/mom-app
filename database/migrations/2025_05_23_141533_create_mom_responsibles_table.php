@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('mom_responsibles', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('mom_detail_id')->nullable();
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->timestamps();
+            $table->unsignedBigInteger('mom_detail_id');
+            $table->unsignedBigInteger('user_id');
+
+            $table->primary(['mom_detail_id', 'user_id']);
 
             $table->foreign('mom_detail_id')
                 ->references('id')->on('mom_details')
@@ -24,8 +24,6 @@ return new class extends Migration
             $table->foreign('user_id')
                 ->references('id')->on('users')
                 ->onDelete('cascade');
-
-            $table->softDeletes();
         });
     }
 

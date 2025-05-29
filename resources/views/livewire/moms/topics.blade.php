@@ -15,7 +15,7 @@
                 <!-- LIST -->
                 <ul class="list-group">
                     @foreach($details as $detail)
-                        <livewire:moms.topics.item :detail="$detail" :key="$detail->id"/>
+                        <livewire:moms.topics.item :detail="$detail" :responsibles="$responsibles" :key="$detail->id"/>
                     @endforeach
                 </ul>
 
@@ -64,7 +64,7 @@
                                 <div class="form-group">
                                     <label for="responsible_id">{{__('adminlte::moms.responsible')}}</label>
                                     <select id="responsible_id" class="form-control{{$errors->has('responsible_id') ? ' is-invalid' : ''}}" wire:model="responsible_id">
-                                        <option value="">- select -</option>
+                                        <option value="">- {{__('adminlte::utilities.select')}} -</option>
                                         @foreach($responsibles as $responsible)
                                             <option value="{{$responsible['id']}}">{{$responsible['name']}}</option>
                                         @endforeach
