@@ -94,8 +94,8 @@
     </div>
 
     <strong>
-        <a href="{{ config('app.company_url', '#') }}"  class="text-dark">
-            {{ config('app.company_name', 'My company') }}
+        <a href="{{ config('app.company_url', 'https://bevi.com.ph/') }}"  class="text-dark" target="_blank">
+            {{ config('app.company_name', 'BEVI') }}
         </a>
     </strong>
 @stop

@@ -14,6 +14,7 @@ return [
     'upload'            => 'Upload',
     'details'           => 'Details',
     'required'          => 'Required',
+    'select'            => 'Select',
     'settings'          => 'Settings',
     'status'            => 'status',
     'offline'           => 'Offline',

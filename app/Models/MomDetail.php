@@ -36,6 +36,6 @@ class MomDetail extends Model
     }
 
     public function responsibles() {
-        return $this->hasMany('App\Models\MomResponsible');
+        return $this->belongsToMany('App\Models\User', 'mom_responsibles');
     }
 }

@@ -39,10 +39,12 @@
 
         </div>
         <div class="modal-footer text-right">
-            <button class="btn btn-primary" wire:click.prevent="saveTypes" wire:loading.attr="disabled">
-                <i class="fa fa-save"></i>
-                {{__('adminlte::utilities.upload')}}
-            </button>
+            @if(!empty($types_data))
+                <button class="btn btn-primary" wire:click.prevent="saveTypes" wire:loading.attr="disabled">
+                    <i class="fa fa-save"></i>
+                    {{__('adminlte::utilities.upload')}}
+                </button>
+            @endif
             <button type="button" class="btn btn-default" data-dismiss="modal">
                 {{__('adminlte::utilities.close')}}
             </button>

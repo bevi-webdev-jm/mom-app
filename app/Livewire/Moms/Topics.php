@@ -81,10 +81,7 @@ class Topics extends Component
             'status' => NULL,
         ]);
 
-        $responsible = MomResponsible::create([
-            'mom_detail_id' => $detail->id,
-            'user_id' => $this->responsible_id,
-        ]);
+        $detail->responsibles()->sync($this->responsible_id);
 
         $this->changeType(0);
         $this->reset('topic', 'next_step', 'target_date', 'responsible_id');
