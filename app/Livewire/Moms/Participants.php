@@ -65,8 +65,10 @@ class Participants extends Component
 
     private function saveParticipants() {
         $changes_arr['old']['arr'] = $this->mom->participants->pluck('name');
+
         $this->mom->participants()->sync(array_keys($this->selected_users));
-        $changes_arr['changes']['arr'] = $this->mom->participants->pluck('name');
+        
+        $changes_arr['changes']['arr'] = collect($this->selected_users)->pluck('name');
 
         // logs
         activity('updated')

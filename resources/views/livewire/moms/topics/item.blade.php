@@ -49,12 +49,12 @@
 
                 <button class="btn btn-primary btn-xs" wire:click.prevent="updateDetail" wire:loading.attr="disabled">
                     <i class="fa fa-save fa-sm"></i>
-                    {{__('adminlte::utilities.save')}}
+                    {{__('adminlte::utilities.update')}}
                 </button>
                 
             </div>
             <div class="card-body callout callout-info mb-0">
-                
+                <strong class="text-lg">{{__('adminlte::moms.actions_taken')}}</strong>
             </div>
         </div>
     @endif
