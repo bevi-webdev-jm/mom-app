@@ -78,7 +78,7 @@ class Topics extends Component
             'target_date' => $this->target_date,
             'completed_date' => NULL,
             'remarks' => NULL,
-            'status' => NULL,
+            'status' => 'open',
         ]);
 
         $detail->responsibles()->sync($this->responsible_id);

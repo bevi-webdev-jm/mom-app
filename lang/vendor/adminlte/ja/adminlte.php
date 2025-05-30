@@ -26,4 +26,13 @@ return [
     'verify_request_another' => 'こちらをクリックして再送信',
     'confirm_password_message' => '続行するにはパスワードを確認してください',
     'remember_me_hint' => '手動でログアウトするまで認証状態を保持',
+
+    // Added keys for welcome.blade.php
+    'welcome' => 'ようこそ',
+    'home' => 'ホーム',
+    'welcome_message' => 'この美しい管理パネルへようこそ。',
+    'log_in' => 'ログイン',
+
+    // Added key for home.blade.php
+    'test_notification' => 'テスト通知',
 ];

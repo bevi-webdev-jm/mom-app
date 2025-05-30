@@ -27,5 +27,9 @@ return [
     'save_topic'            => 'Save Topic',
 
     'mom_details'           => 'Minutes Of Meeting Details',
-    'actions_taken'     => 'Actions Taken',
+    'actions_taken'         => 'Actions Taken',
+    'attachments'           => 'Attachments',
+    'attachment_file'       => 'Attachment File',
+
+    'completed'             => 'Completed',
 ];

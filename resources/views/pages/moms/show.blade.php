@@ -20,15 +20,20 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body text-lg">
                     <h5>
                         <b>{{__('adminlte::moms.mom_number')}}</b>: <strong class="badge badge-success text-lg">{{$mom->mom_number}}</strong>
                     </h5>
-                    <b>{{__('adminlte::moms.agenda')}}:</b> {{$mom->agenda}}
-                    <br>
+                    <b>{{__('adminlte::moms.agenda')}}:</b> <p class="ml-3 mb-0 font-weight-bold text-danger">{{$mom->agenda}}</p>
                     <b>{{__('adminlte::moms.meeting_date')}}:</b> {{$mom->meeting_date}}
                     <br>
                     <b>{{__('adminlte::utilities.status')}}:</b> <span class="badge badge-{{$status_arr[$mom->status]}}">{{$mom->status}}</span>
+                    <br>
+                    <b>{{__('adminlte::utilities.created_by')}}:</b> {{$mom->user->name}}
+                    <br>
+                    <b>{{__('adminlte::utilities.created_at')}}:</b> {{$mom->created_at}}
+                    <br>
+                    <b>{{__('adminlte::utilities.updated_at')}}:</b> {{$mom->updated_at}}
                 </div>
             </div>
         </div>
@@ -72,7 +77,7 @@
                 </div>
                 <div class="card-body">
                     @foreach($mom->details as $detail)
-                        <livewire:moms.topics.item :detail="$detail" :responsibles="$mom->participants" :key="$detail->id"/>
+                        <livewire:moms.topics.item :detail="$detail" :responsibles="$mom->participants" type="show" :key="$detail->id"/>
                     @endforeach
                 </div>
             </div>
@@ -90,12 +95,10 @@
             width: 50px !important;
             height: 50px !important;
         }
-        .users-list > li {
-            width: 20%;
-        }
-
+        
         .users-list-name {
             white-space: pre-wrap;
+            font-weight: 800;
         }
     </style>
 @endpush

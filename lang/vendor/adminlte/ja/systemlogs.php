@@ -2,9 +2,11 @@
 
 return [
     'system_logs'       => 'システムログ',
-    'system_log_list'   => 'システムログ一覧',
+    'system_log_list'   => 'システムログリスト',
     'log_name'          => 'ログ名',
     'log_description'   => 'ログの説明',
-    'changes'           => '変更内容',
+    'changes'           => '変更',
     'timestamp'         => 'タイムスタンプ',
+    'from'              => 'から',
+    'to'                => 'へ',
 ];

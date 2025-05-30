@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Session;
 class MomActionAttachment extends Model
 {
     use HasFactory;
-    use SofrDeletes;
+    use SoftDeletes;
 
     protected $fillable = [
         'mom_action_id',

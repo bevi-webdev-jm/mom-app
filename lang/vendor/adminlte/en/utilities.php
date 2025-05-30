@@ -24,9 +24,13 @@ return [
     'preview'           => 'Preview',
     'created_at'        => 'Created at',
     'updated_at'        => 'Updated at',
+    'created_by'        => 'Created By',
     'upload_file'       => 'Upload File',
     'system_settings'   => 'System Settings',
     'data_per_page'     => 'Data per page',
     'email_sending'     => 'Email sending',
     'save_settings'     => 'Save Settings',
+    'remarks'           => 'Remarks',
+    'no_data_available' => 'No data available',
+    'please_wait'       => 'Please Wait',
 ];

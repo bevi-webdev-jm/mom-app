@@ -33,6 +33,9 @@
                 <a class="dropdown-item" href="{{ route('lang.switch', 'en') }}">
                     <span class="fi fi-us shadow"></span> English
                 </a>
+                <a class="dropdown-item" href="{{ route('lang.switch', 'fil') }}">
+                    <span class="fi fi-ph shadow"></span> Filipino
+                </a>
                 <a class="dropdown-item" href="{{ route('lang.switch', 'ja') }}">
                     <span class="fi fi-jp shadow"></span> Japanese
                 </a>
@@ -104,7 +107,7 @@
 
 @section('preloader')
     <i class="fas fa-atom fa-spin fa-10x text-primary"></i>
-    <h3 class="mt-3 text-secondary">Please wait...</h3>
+    <h3 class="mt-3 text-secondary">{{__('adminlte::utilities.please_wait')}}...</h3>
 @stop
 
 {{-- Add common Javascript/Jquery code --}}
