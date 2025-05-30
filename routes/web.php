@@ -30,7 +30,7 @@ Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
 Route::get('lang/{locale}', function ($locale) {
-    if (!in_array($locale, ['en', 'ja', 'zh-CN'])) {
+    if (!in_array($locale, ['en', 'ja', 'zh-CN', 'fil'])) {
         abort(400);
     }
     session(['locale' => $locale]);

@@ -307,7 +307,7 @@ return [
             'active'    => ['moms', 'mom/*']
         ],
         [
-            'text'      => 'Types',
+            'text'      => 'types',
             'url'       => 'mom-types',
             'icon'      => 'fas fa-fw fa-sitemap',
             'can'       => 'type access',

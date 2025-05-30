@@ -26,4 +26,13 @@ return [
     'verify_request_another' => '点击这里请求另一个',
     'confirm_password_message' => '请确认您的密码以继续。',
     'remember_me_hint' => '保持登录状态，直到您手动退出。',
+
+    // Added keys for welcome.blade.php
+    'welcome' => '欢迎',
+    'home' => '首页',
+    'welcome_message' => '欢迎使用这个漂亮的管理面板。',
+    'log_in' => '登录',
+
+    // Added key for home.blade.php
+    'test_notification' => '测试通知',
 ];

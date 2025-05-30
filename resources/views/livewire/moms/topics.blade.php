@@ -15,7 +15,7 @@
                 <!-- LIST -->
                 <ul class="list-group">
                     @foreach($details as $detail)
-                        <livewire:moms.topics.item :detail="$detail" :responsibles="$responsibles" :key="$detail->id"/>
+                        <livewire:moms.topics.item :detail="$detail" :responsibles="$responsibles" type="form" :key="$detail->id"/>
                     @endforeach
                 </ul>
 
