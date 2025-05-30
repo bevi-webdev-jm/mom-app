@@ -25,7 +25,7 @@
             <a class="nav-link dropdown-toggle" href="#" id="langDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 @php
                     $locale = app()->getLocale();
-                    $flags = ['en' => 'us', 'ja' => 'jp', 'zh-CN' => 'cn'];
+                    $flags = ['en' => 'us', 'ja' => 'jp', 'zh-CN' => 'cn', 'fil' => 'ph'];
                 @endphp
                 <span class="fi fi-{{ $flags[$locale] ?? 'us' }}"></span> {{ strtoupper($locale) }}
             </a>
