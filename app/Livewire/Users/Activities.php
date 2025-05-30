@@ -65,16 +65,12 @@ class Activities extends Component
             
                             // Check if old value exists
                             $old_val = !empty($old_val)
-                                ? cache()->rememberForever("$class:$old_val", function () use ($class, $old_val) {
-                                    return $class::find($old_val)[$column] ?? '-';
-                                })
+                                ? $class::find($old_val)[$column] ?? '-'
                                 : '-';
             
                             // Check if new value exists
                             $new_val = !empty($new_val)
-                                ? cache()->rememberForever("$class:$new_val", function () use ($class, $new_val) {
-                                    return $class::find($new_val)[$column] ?? '-';
-                                })
+                                ? $class::find($new_val)[$column] ?? '-'
                                 : '-';
                         }
             

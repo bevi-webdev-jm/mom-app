@@ -98,6 +98,14 @@ class MomController extends Controller
         ]);
     }
 
+    public function show($id) {
+        $mom = Mom::findOrFail(decrypt($id));
+
+        return view('pages.moms.show')->with([
+            'mom' => $mom,
+            'status_arr' => $this->status_arr,
+        ]);
+    }
 
     public function edit($id) {
         $mom = Mom::findOrFail(decrypt($id));

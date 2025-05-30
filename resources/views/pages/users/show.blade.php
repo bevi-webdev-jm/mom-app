@@ -25,6 +25,13 @@
                     </div>
                 </div>
                 <div class="card-body py-1">
+
+                    <div class="text-center">
+                        <img class="profile-user-img img-fluid img-circle"
+                            src="{{$user->adminlte_image()}}"
+                            alt="User profile picture">
+                    </div>
+
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item py-1 border-top-0">
                             <b class="text-uppercase">{{__('adminlte::utilities.status')}}:</b>

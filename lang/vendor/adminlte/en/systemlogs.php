@@ -6,5 +6,7 @@ return [
     'log_name'          => 'Log Name',
     'log_description'   => 'Log Description',
     'changes'           => 'Changes',
-    'timestamp'         => 'Timestamp'
+    'timestamp'         => 'Timestamp',
+    'from'              => 'From',
+    'to'                => 'To',
 ];

@@ -83,6 +83,11 @@ class Topics extends Component
 
         $detail->responsibles()->sync($this->responsible_id);
 
+        // logs
+        activity('created')
+            ->performedOn($detail)
+            ->log(':causer.name has created a topic :subject.topic');
+
         $this->changeType(0);
         $this->reset('topic', 'next_step', 'target_date', 'responsible_id');
     }
