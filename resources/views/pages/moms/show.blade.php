@@ -16,8 +16,11 @@
                             <strong class="text-lg">{{__('adminlte::moms.mom_details')}}</strong>
                         </div>
                         <div class="col-lg-6 text-right">
-                            
-                        </div>
+                            <a href="{{route('mom.index')}}" class="btn btn-secondary btn-sm">
+                                <i class="fa fa-caret-left mr-1"></i>
+                                {{__('adminlte::utilities.back')}}
+                            </a>
+                        </div> 
                     </div>
                 </div>
                 <div class="card-body text-lg">

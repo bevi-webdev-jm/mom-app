@@ -32,4 +32,5 @@ return [
     'attachment_file'       => 'Attachment File',
 
     'completed'             => 'Completed',
+    'days_completed'        => 'Days Completed',
 ];

@@ -1,7 +1,8 @@
 <div>
     
     @if($view == 0)
-        <div class="callout callout-info topic-item" wire:click="changeView(1)">
+        <div class="callout callout-info topic-item" 
+            wire:click="changeView(1)">
             <h5><b>{{__('adminlte::moms.target_date')}}</b>: {{$detail->target_date}}</h5>
             <b>{{__('adminlte::moms.topic')}}:</b> {{$detail->topic}}
             <br>
@@ -10,6 +11,11 @@
             <b>{{__('adminlte::moms.responsible')}}:</b> {{$detail->responsibles()->first()->name}}
             <br>
             <b>{{__('adminlte::utilities.status')}}:</b> <span class="badge badge-{{$status_arr[$detail->status]}}">{{$detail->status}}</span>
+            @if(!empty($this->days_completed))
+                <br>
+                <b>{{__('adminlte::moms.days_completed')}}:</b>
+                {{$days_completed}}
+            @endif
         </div>
     @else
         <div class="card">
@@ -63,7 +69,13 @@
                     <b>{{__('adminlte::moms.responsible')}}:</b> {{$detail->responsibles()->first()->name}}
                     <br>
                     <b>{{__('adminlte::utilities.status')}}:</b> <span class="badge badge-{{$status_arr[$detail->status]}}">{{$detail->status}}</span>
-                    
+                    <br>
+                    <b>{{__('adminlte::moms.completed_date')}}:</b> {{$detail->completed_date}}
+                    @if(!empty($this->days_completed))
+                        <br>
+                        <b>{{__('adminlte::moms.days_completed')}}:</b>
+                        {{$days_completed}}
+                    @endif
                 @endif
                 
             </div>
@@ -80,84 +92,123 @@
 
                     <strong class="text-lg">{{__('adminlte::moms.actions_taken')}}</strong>
                     <hr class="mt-0">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label for="actions_taken">{{__('adminlte::moms.actions_taken')}}</label>
-                                <textarea id="actions_taken" class="form-control{{$errors->has('actions_taken') ? ' is-invalid' : ''}}" wire:model="actions_taken" placeholder="{{__('adminlte::moms.actions_taken')}}"></textarea>
-                                <small class="text-danger">{{$errors->first('actions_taken')}}</small>
+                    
+                    @if($detail->status !== 'completed')
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="actions_taken">{{__('adminlte::moms.actions_taken')}}</label>
+                                    <textarea id="actions_taken" class="form-control{{$errors->has('actions_taken') ? ' is-invalid' : ''}}" wire:model="actions_taken" placeholder="{{__('adminlte::moms.actions_taken')}}"></textarea>
+                                    <small class="text-danger">{{$errors->first('actions_taken')}}</small>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="remarks">{{__('adminlte::utilities.remarks')}}</label>
+                                    <textarea id="remarks" class="form-control{{$errors->has('remarks') ? ' is-invalid' : ''}}" wire:model="remarks" placeholder="{{__('adminlte::utilities.remarks')}}"></textarea>
+                                    <small class="text-danger">{{$errors->first('remarks')}}</small>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label for="remarks">{{__('adminlte::utilities.remarks')}}</label>
-                                <textarea id="remarks" class="form-control{{$errors->has('remarks') ? ' is-invalid' : ''}}" wire:model="remarks" placeholder="{{__('adminlte::utilities.remarks')}}"></textarea>
-                                <small class="text-danger">{{$errors->first('remarks')}}</small>
-                            </div>
-                        </div>
-                    </div>
 
-                    <strong class="text-lg">{{__('adminlte::moms.attachments')}}</strong>
-                    <hr class="mt-0">
+                        <strong class="text-lg">{{__('adminlte::moms.attachments')}}</strong>
+                        <hr class="mt-0">
 
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label for="attachments">{{__('adminlte::moms.attachments')}}</label>
-                                <input type="file" class="form-control{{$errors->has('attachments') ? ' is-invalid' : ''}}" wire:model="attachments" multiple>
-                                <small class="text-danger">{{$errors->first('attachments')}}</small>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="attachments">{{__('adminlte::moms.attachments')}}</label>
+                                    <input type="file" class="form-control{{$errors->has('attachments') ? ' is-invalid' : ''}}" wire:model="attachments" multiple>
+                                    <small class="text-danger">{{$errors->first('attachments')}}</small>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-12 table-responsive">
-                            <table class="table table-bordered table-sm">
-                                <thead>
-                                    <tr>
-                                        <th>{{__('adminlte::moms.attachment_file')}}</th>
-                                        <th>{{__('adminlte::utilities.remarks')}}</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @if(!empty($detail->actions->count()) && !empty($detail->actions()->first()->attachments()->count()))
-                                        @foreach($detail->actions()->first()->attachments as $attachment)
-                                            <tr>
-                                                <td>
-                                                    <a href="{{asset($attachment->path)}}" class="text-primary">
-                                                        {{$attachment->path}}
-                                                    </a>
-                                                </td>
-                                                <td>
-                                                    {{$attachment->remarks}}
-                                                </td>
-                                                <td></td>
-                                            </tr>
-                                        @endforeach
-                                    @else
+                            <div class="col-12 table-responsive">
+                                <table class="table table-bordered table-sm">
+                                    <thead>
                                         <tr>
-                                            <td colspan="3" class="text-center align-middle">
-                                                {{__('adminlte::utilities.no_data_available')}}
+                                            <th>{{__('adminlte::moms.attachment_file')}}</th>
+                                            <th>{{__('adminlte::utilities.remarks')}}</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if(!empty($detail->actions->count()) && !empty($detail->actions()->first()->attachments()->count()))
+                                            @foreach($detail->actions()->first()->attachments as $attachment)
+                                                <tr>
+                                                    <td>
+                                                        <a href="{{asset($attachment->path)}}" class="text-primary">
+                                                            {{$attachment->path}}
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        {{$attachment->remarks}}
+                                                    </td>
+                                                    <td></td>
+                                                </tr>
+                                            @endforeach
+                                        @else
+                                            <tr>
+                                                <td colspan="3" class="text-center align-middle">
+                                                    {{__('adminlte::utilities.no_data_available')}}
+                                                </td>
+                                            </tr>
+                                        @endif
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    
+                        <div class="row">
+                            <div class="col-12">
+                                <button class="btn btn-primary btn-sm" wire:click.prevent="saveAction" wire:loading.attr="disabled">
+                                    <i class="fa fa-save mr-1"></i>
+                                    {{__('adminlte::utilities.save')}}
+                                </button>
+                                @if(!empty($detail->actions->count()))
+                                    <button class="btn btn-success btn-sm" wire:click.prevent="completeTopic" wire:loading.attr="disabled">
+                                        <i class="fa fa-check mr-1"></i>
+                                        {{__('adminlte::moms.completed')}}
+                                    </button>
+                                @endif
+                            </div>
+                        </div>
+                    @else
+                        @php
+                            $action = $detail->actions()->first();
+                        @endphp
+                        <b>{{__('adminlte::moms.actions_taken')}}:</b> {{$action->action_taken}}
+                        <br>
+                        <b>{{__('adminlte::utilities.remarks')}}:</b> {{$action->remarks}}
+                        <br>
+
+                        <strong class="text-lg">{{__('adminlte::moms.attachments')}}</strong>
+                        <hr class="mt-0">
+
+                        <table class="table table-bordered table-sm">
+                            <thead>
+                                <tr>
+                                    <th>{{__('adminlte::moms.attachment_file')}}</th>
+                                    <th>{{__('adminlte::utilities.remarks')}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if(!empty($detail->actions->count()) && !empty($detail->actions()->first()->attachments()->count()))
+                                    @foreach($detail->actions()->first()->attachments as $attachment)
+                                        <tr>
+                                            <td>
+                                                <a href="{{asset($attachment->path)}}" class="text-primary">
+                                                    {{$attachment->path}}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                {{$attachment->remarks}}
                                             </td>
                                         </tr>
-                                    @endif
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-12">
-                            <button class="btn btn-primary btn-sm" wire:click.prevent="saveAction" wire:loading.attr="disabled">
-                                <i class="fa fa-save mr-1"></i>
-                                {{__('adminlte::utilities.save')}}
-                            </button>
-                            @if(!empty($detail->actions->count()))
-                                <button class="btn btn-success btn-sm" wire:click.prevent="completeTopic" wire:loading.attr="disabled">
-                                    <i class="fa fa-check mr-1"></i>
-                                    {{__('adminlte::moms.completed')}}
-                                </button>
-                            @endif
-                        </div>
-                    </div>
+                                    @endforeach
+                                @endif
+                            </tbody>
+                        </table>
+                    @endif
                     
                 </div>
             @endif

@@ -24,6 +24,8 @@ class Item extends Component
     public $target_date, $topic, $next_step, $responsible_id;
     public $actions_taken, $remarks, $attachments;
 
+    public $days_completed;
+
     public $status_arr = [
         'open' => 'secondary',
         'ongoing' => 'info',
@@ -124,6 +126,14 @@ class Item extends Component
                     ]);
                 }
             }
+        } else {
+            // Compute days completed
+            $completedDate = Carbon::parse($this->detail->completed_date);
+            $targetDate = Carbon::parse($this->detail->target_date);
+
+            $daysToComplete = $completedDate->diffInDays($targetDate, false); // false = returns negative if completed before target
+
+            $this->days_completed = $daysToComplete;
         }
     }
 
@@ -168,4 +178,15 @@ class Item extends Component
 
         $this->checkDaysExtended();
     }
-}
+
+    public function completeTopic() {
+        $this->saveAction();
+        
+        $this->detail->update([
+            'completed_date' => date('Y-m-d'),
+            'status' => 'completed'
+        ]);
+        
+        $this->checkDaysExtended();
+    }
+} 
