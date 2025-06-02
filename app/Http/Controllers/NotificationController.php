@@ -26,7 +26,11 @@ class NotificationController extends Controller
     }
 
     public function testNotification() {
-        auth()->user()->notify(new TestNotification());
+        try {
+            auth()->user()->notify(new TestNotification());
+        } catch(\Exception $e) {
+            Log::error('Notification failed: '.$e->getMessage());
+        }
 
         return back();
     }
