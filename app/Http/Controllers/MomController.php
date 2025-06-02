@@ -114,5 +114,9 @@ class MomController extends Controller
             'mom' => $mom
         ]);
     }
+
+    public function upload() {
+        return view('pages.moms.upload');
+    }
     
 }

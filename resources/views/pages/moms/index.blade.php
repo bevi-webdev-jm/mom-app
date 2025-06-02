@@ -20,6 +20,12 @@
                             {{__('adminlte::moms.new_mom')}}
                         </a>
                     @endcan
+                    @can('mom upload')
+                        <a href="{{route('mom.upload')}}" class="btn btn-success btn-xs">
+                            <i class="fa fa-upload"></i>
+                            {{__('adminlte::moms.upload_mom')}}
+                        </a>
+                    @endcan
                 </div>
             </div>
         </div>
