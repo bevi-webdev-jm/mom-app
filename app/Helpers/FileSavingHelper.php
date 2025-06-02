@@ -25,4 +25,12 @@ class FileSavingHelper {
         return "uploads/" . $path;
     }
 
+    public function deleteFile($path) {
+        // Strip the "uploads/" prefix if present
+        $cleanPath = str_replace('uploads/', '', $path);
+
+        // Delete the file using the 'uploads' disk
+        return Storage::disk('uploads')->delete($cleanPath);
+    }
+
 }
