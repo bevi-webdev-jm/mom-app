@@ -21,6 +21,7 @@ class PermissionSeeder extends Seeder
                 'mom access'    => 'Allow user to access mom list and details.',
                 'mom create'    => 'Allow user to create mom.',
                 'mom edit'      => 'Allow user to edit mom details.',
+                'mom upload'    => 'Allow user to upload mom details',
                 'mom delete'    => 'Allow user to delete mom.',
             ],
             'Types' => [

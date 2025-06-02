@@ -51,6 +51,7 @@ Route::group(['middleware' => ['auth', 'optimizeImages']], function() {
     Route::group(['middleware' => 'permission:mom access'], function() {
         Route::get('moms', [MomController::class, 'index'])->name('mom.index');
         Route::get('mom/create', [MomController::class, 'create'])->name('mom.create')->middleware('permission:mom create');
+        Route::get('mom/upload', [MomController::class, 'upload'])->name('mom.upload')->middleware('permission:mom upload');
         Route::get('mom/{id}', [MomController::class, 'show'])->name('mom.show');
         Route::get('mom/{id}/edit', [MomController::class, 'edit'])->name('mom.edit')->middleware('permission:mom edit');
     });
