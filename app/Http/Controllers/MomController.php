@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Mom;
 use App\Http\Traits\SettingTrait;
 use Illuminate\Support\Facades\Session;
+use App\Helpers\MomNumberHelper;
 
 class MomController extends Controller
 {
@@ -44,40 +45,13 @@ class MomController extends Controller
         ]);
     }
 
-    private function generateMomNumber() {
-        $date_code = date('Ymd');
-
-        do {
-            $mom_number = 'MOM-'.$date_code.'-0001';
-            // get the most recent sales order
-            $mom = Mom::withTrashed()->orderBy('mom_number', 'DESC')
-                ->first();
-            if(!empty($mom)) {
-                $latest_mom_number = $mom->mom_number;
-                list(, $prev_date, $last_number) = explode('-', $latest_mom_number);
-
-                // Increment the number based on the date
-                $number = ($date_code == $prev_date) ? ((int)$last_number + 1) : 1;
-
-                // Format the number with leading zeros
-                $formatted_number = str_pad($number, 4, '0', STR_PAD_LEFT);
-
-                // Construct the new control number
-                $mom_number = "MOM-$date_code-$formatted_number";
-            }
-
-        } while(Mom::withTrashed()->where('mom_number', $mom_number)->exists());
-
-        return $mom_number;
-    }
-
     public function create() {
         $mom_data = Session::get('mom_data');
         if(empty($mom_data)) {
             $mom = Mom::create([
                 'mom_type_id' => NULL,
                 'user_id' => auth()->user()->id,
-                'mom_number' => $this->generateMomNumber(),
+                'mom_number' => MomNumberHelper::generateMomNumber(),
                 'agenda' => '',
                 'meeting_date' => date('Y-m-d'),
                 'status' => 'draft',
