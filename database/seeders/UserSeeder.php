@@ -85,7 +85,7 @@ class UserSeeder extends Seeder
             ]);
             $user->save();
 
-            $user->assignRole('superadmin');
+            $user->assignRole('user');
         }
     }
 }

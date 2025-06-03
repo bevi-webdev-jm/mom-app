@@ -2,7 +2,7 @@
 
 return [
     'mom'               => 'Minutes of Meeting',
-    'types'             => 'Types',
+    'types'             => 'MOM Types',
     'settings'          => 'Settings',
     'companies'         => 'Companies',
     'users'             => 'Users',

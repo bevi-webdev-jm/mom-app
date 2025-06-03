@@ -38,6 +38,7 @@ return [
     'completed_date'        => 'Completed Date',
     'upload_mom'            => 'Upload Minutes of Meeting',
     'upload_file'           => 'Upload File',
+    'mom_uploaded'          => 'Minutes of meeting has been successfully uploaded.',
 
     'action_saved'          => 'Actions saved',
 ];

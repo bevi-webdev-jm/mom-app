@@ -114,6 +114,8 @@ class Upload extends Component
             $mom->participants()->sync($attendees_ids);
         }
 
-        return redirect()->route('mom.index');
+        return redirect()->route('mom.index')->with([
+            'message_success' => __('adminlte::moms.mom_uploaded')
+        ]);
     }
 }
