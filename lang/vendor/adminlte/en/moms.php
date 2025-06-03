@@ -25,6 +25,8 @@ return [
     'target_date'           => 'Target Date',
     'responsible'           => 'Responsible',
     'save_topic'            => 'Save Topic',
+    'topic_updated'         => 'Topic has been successfully updated.',
+    'topic_created'         => 'Topic has been successfully created.',
 
     'mom_details'           => 'Minutes Of Meeting Details',
     'actions_taken'         => 'Actions Taken',
@@ -36,4 +38,6 @@ return [
     'completed_date'        => 'Completed Date',
     'upload_mom'            => 'Upload Minutes of Meeting',
     'upload_file'           => 'Upload File',
+
+    'action_saved'          => 'Actions saved',
 ];

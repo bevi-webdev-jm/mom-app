@@ -20,6 +20,13 @@
     @else
         <div class="card">
             <div class="card-header callout callout-info mb-0 pb-2">
+
+                @if(!empty($messages['success']))
+                    <div class="alert alert-success">
+                        <span>{{$messages['success']}}</span>
+                    </div>
+                @endif
+
                 @if($type == 'form')
                     <div class="form-group row mb-0">
                         <label for="target_date" class="col-sm-2 col-form-label">{{__('adminlte::moms.target_date')}}</label>
@@ -127,7 +134,6 @@
                                     <thead>
                                         <tr>
                                             <th>{{__('adminlte::moms.attachment_file')}}</th>
-                                            <th>{{__('adminlte::utilities.remarks')}}</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -140,10 +146,12 @@
                                                             {{$attachment->path}}
                                                         </a>
                                                     </td>
-                                                    <td>
-                                                        {{$attachment->remarks}}
+                                                    <td class="p-0 text-center align-middle">
+                                                        <button class="btn btn-danger btn-xs" wire:click.prevent="removeAttachment({{$attachment->id}})">
+                                                            <i class="fa fa-trash-alt"></i>
+                                                            {{__('adminlte::utilities.remove')}}
+                                                        </button>
                                                     </td>
-                                                    <td></td>
                                                 </tr>
                                             @endforeach
                                         @else

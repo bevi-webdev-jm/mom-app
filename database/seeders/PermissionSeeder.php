@@ -52,7 +52,8 @@ class PermissionSeeder extends Seeder
             ],
             'System' => [
                 'system settings'   => 'Allow user to access system settings.',
-                'system logs'       => 'Allow user to access system logs.'
+                'system logs'       => 'Allow user to access system logs.',
+                'system online'     => 'Allow user to view online users.',
             ]
         ];
 

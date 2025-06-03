@@ -10,15 +10,17 @@
 @auth
     @section('content_top_nav_right')
 
-        <!-- Online Users -->
-        <li class="nav-item">
-            <a href="#" class="nav-link" id="btn-online-users">
-                <i class="fa fa-user"></i>
-                <span class="navbar-badge">
-                    <i class="fa fa-circle text-success"></i>
-                </span>
-            </a>
-        </li>
+        @can('system online')
+            <!-- Online Users -->
+            <li class="nav-item">
+                <a href="#" class="nav-link" id="btn-online-users">
+                    <i class="fa fa-user"></i>
+                    <span class="navbar-badge">
+                        <i class="fa fa-circle text-success"></i>
+                    </span>
+                </a>
+            </li>
+        @endcan
 
         <!-- language toggle -->
         <li class="nav-item dropdown">
@@ -82,11 +84,13 @@
         </div>
     </div>
 
-    <div class="modal fade" id="online-users-modal" aria-hidden="true">
-        <div class="modal-dialog">
-            <livewire:online-users/>
+    @can('system online')
+        <div class="modal fade" id="online-users-modal" aria-hidden="true">
+            <div class="modal-dialog">
+                <livewire:online-users/>
+            </div>
         </div>
-    </div>
+    @endcan
 @stop
 
 {{-- Create a common footer --}}
@@ -113,27 +117,33 @@
 {{-- Add common Javascript/Jquery code --}}
 
 @push('js')
-<script>
-    $(function() {
-        // Dark mode toggle
-        $('#darkModeToggle').on('click', function(e) {
-            e.preventDefault();
-            $('body').toggleClass('dark-mode');
-            $(this).find('i').toggleClass('fa-moon').toggleClass('fa-sun');
+    <script>
+        $(function() {
+            // Dark mode toggle
+            $('#darkModeToggle').on('click', function(e) {
+                e.preventDefault();
+                $('body').toggleClass('dark-mode');
+                $(this).find('i').toggleClass('fa-moon').toggleClass('fa-sun');
+                
+                $('body').find('.main-header')
+                    .toggleClass('navbar-dark navbar-light')
+                    .toggleClass('navbar-dark navbar-dark', !$('body').find('.main-header').hasClass('navbar-dark navbar-dark'));
+            });
+
             
-            $('body').find('.main-header')
-                .toggleClass('navbar-dark navbar-light')
-                .toggleClass('navbar-dark navbar-dark', !$('body').find('.main-header').hasClass('navbar-dark navbar-dark'));
         });
+    </script>
 
-        $('body').on('click','#btn-online-users', function(e) {
-            e.preventDefault();
-            $('#online-users-modal').modal('show');
-        });
-    });
-
-    
-</script>
+    @can('system online')
+        <script>
+            $(function() {
+                $('body').on('click','#btn-online-users', function(e) {
+                    e.preventDefault();
+                    $('#online-users-modal').modal('show');
+                });
+            });
+        </script>
+    @endcan
 @endpush
 
 {{-- Add common CSS customizations --}}
