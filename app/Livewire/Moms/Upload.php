@@ -92,6 +92,7 @@ class Upload extends Component
                 'status' => 'draft',
             ]);
 
+            $attendees_ids = [];
             foreach($mom_val['topics'] as $topic) {
                 $mom_detail = MomDetail::create([
                     'mom_id' => $mom->id,
@@ -105,8 +106,12 @@ class Upload extends Component
 
                 if(!empty($topic['responsible_model'])) {
                     $mom_detail->responsibles()->sync($topic['responsible_model']['id']);
+
+                    $attendees_ids[] = $topic['responsible_model']['id'];
                 }
             }
+
+            $mom->participants()->sync($attendees_ids);
         }
 
         return redirect()->route('mom.index');

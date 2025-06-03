@@ -34,4 +34,5 @@ return [
     'no_data_available' => 'No data available',
     'please_wait'       => 'Please Wait',
     'check'             => 'Check',
+    'remove'            => 'Remove',
 ];

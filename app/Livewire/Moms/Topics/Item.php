@@ -26,6 +26,8 @@ class Item extends Component
 
     public $days_completed;
 
+    public $messages = [];
+
     public $status_arr = [
         'open' => 'secondary',
         'ongoing' => 'info',
@@ -99,6 +101,8 @@ class Item extends Component
             ->performedOn($this->detail)
             ->withProperties($changes_arr)
             ->log(':causer.name has updated topic :subject.topic');
+
+        $this->messages['success'] = __('adminlte::moms.topic_updated');
     }
 
     private function checkDaysExtended() {
@@ -176,7 +180,11 @@ class Item extends Component
             }
         }
 
+        $this->reset('attachments');
+
         $this->checkDaysExtended();
+
+        $this->messages['success'] = __('adminlte::moms.action_saved');
     }
 
     public function completeTopic() {
@@ -188,5 +196,11 @@ class Item extends Component
         ]);
         
         $this->checkDaysExtended();
+    }
+
+    public function removeAttachment($attachment_id) {
+        $attachment = MomActionAttachment::findOrFail($attachment_id);
+        FileSavingHelper::deleteFile($attachment->path);
+        $attachment->delete();
     }
 } 

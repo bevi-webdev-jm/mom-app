@@ -1,6 +1,8 @@
 <?php
 namespace App\Helpers;
 
+use Illuminate\Support\Facades\Storage;
+
 class FileSavingHelper {
 
     public static function saveFile($file, $id, $module)
@@ -25,7 +27,7 @@ class FileSavingHelper {
         return "uploads/" . $path;
     }
 
-    public function deleteFile($path) {
+    public static function deleteFile($path) {
         // Strip the "uploads/" prefix if present
         $cleanPath = str_replace('uploads/', '', $path);
 

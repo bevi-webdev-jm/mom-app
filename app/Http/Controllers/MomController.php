@@ -35,6 +35,14 @@ class MomController extends Controller
                         $qry->where('name', 'LIKE', '%'.$search.'%');
                     });
             })
+            ->when(!auth()->user()->hasRole('superadmin'), function($query) {
+                $query->where(function($qry) {
+                    $qry->whereHas('participants', function($qry1) {
+                        $qry1->where('id', auth()->user()->id);
+                    })
+                    ->orWhere('user_id', auth()->user()->id);
+                });
+            })
             ->paginate($this->getDataPerPage())
             ->appends(request()->query());
 
