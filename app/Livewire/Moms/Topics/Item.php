@@ -46,7 +46,7 @@ class Item extends Component
         $this->target_date = $detail->target_date;
         $this->topic = $detail->topic;
         $this->next_step = $detail->next_step;
-        $this->responsible_id = $detail->responsibles()->first()->id;
+        $this->responsible_id = $detail->responsibles()->first()->id ?? NULL;
 
         if(!empty($this->detail->actions->count())) {
             $action = $this->detail->actions()->first();

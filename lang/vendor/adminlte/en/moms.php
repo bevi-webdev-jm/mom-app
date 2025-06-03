@@ -33,6 +33,7 @@ return [
 
     'completed'             => 'Completed',
     'days_completed'        => 'Days Completed',
+    'completed_date'        => 'Completed Date',
     'upload_mom'            => 'Upload Minutes of Meeting',
     'upload_file'           => 'Upload File',
 ];
