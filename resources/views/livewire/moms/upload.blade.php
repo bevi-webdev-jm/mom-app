@@ -35,7 +35,8 @@
         <div class="card-footer text-right">
             @if(!empty($mom_data))
                 <button class="btn btn-primary btn-sm" wire:click.prevent="saveMom" wire:loading.attr="disabled">
-                    <i class="fa fa-save"></i>
+                    <i class="fa fa-save" wire:loading.remove></i>
+                    <i class="fa fa-spinner fa-spin" wire:loading></i>
                     {{__('adminlte::utilities.save')}}
                 </button>
             @endif
@@ -44,7 +45,7 @@
 
     @if(!empty($mom_data))
         @foreach($mom_data as $mom_number => $mom_arr)
-            <div class="card card-outline card-primary mt-2">
+            <div class="card card-outline card-primary mt-2" wire:transition>
                 <div class="card-header">
                     <h5>
                         <b>{{__('adminlte::moms.mom_number')}}</b>: <strong class="badge badge-success text-lg">{{$mom_number}}</strong>
