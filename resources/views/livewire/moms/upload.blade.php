@@ -22,6 +22,13 @@
                     <small class="text-danger">{{$errors->first('upload_file')}}</small>
                 </div>
 
+                <div class="col-12 my-2">
+                    <a href="{{asset('templates/MOM UPLOAD TEMPLATE.xlsx')}}" class="text-primary">
+                        <i class="fa fa-download mr-1"></i>
+                        {{__('adminlte::utilities.download_template')}}
+                    </a>
+                </div>
+
                 <div class="col-12 mt-2">
                     <button class="btn btn-primary btn-sm" wire:loading.attr="disabled" wire:click.prevent="checkData">
                         <i class="fa fa-check" wire:loading.remove></i>

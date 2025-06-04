@@ -35,4 +35,5 @@ return [
     'please_wait'       => 'Please Wait',
     'check'             => 'Check',
     'remove'            => 'Remove',
+    'download_template' => 'Download Template',
 ];

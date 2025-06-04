@@ -32,4 +32,5 @@ return [
     'save_settings'     => '保存设置',
     'remarks'           => '备注',
     'no_data_available' => '无可用数据',
+    'please_wait'       => '请稍候',
 ];

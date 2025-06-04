@@ -12,6 +12,13 @@
                     <small class="text-danger">{{$errors->first('file')}}</small>
                 </div>
 
+                <div class="col-12 my-2">
+                    <a href="{{asset('templates/TYPES TEMPLATE.xlsx')}}" class="text-primary">
+                        <i class="fa fa-download mr-1"></i>
+                        {{__('adminlte::utilities.download_template')}}
+                    </a>
+                </div>
+
                 <div class="col-lg-12 mt-2">
                     <button class="btn btn-primary btn-xs" wire:click.prevent="checkFile" wire:loading.attr="disabled">CHECK</button>
                     <i class="fa fa-spinner fa-spin ml-3" wire:loading></i>
