@@ -76,16 +76,18 @@
                                         {{$mom->user->name}}
                                     </td>
                                     <td class="align-middle text-right p-0 pr-1">
+                                        @can('mom edit')
+                                            @if($mom->status == 'draft')
+                                                <a href="{{route('mom.edit', encrypt($mom->id))}}" class="btn btn-success btn-xs mb-0 ml-0">
+                                                    <i class="fa fa-pen-alt"></i>
+                                                    {{__('adminlte::utilities.edit')}}
+                                                </a>
+                                            @endif
+                                        @endcan
                                         <a href="{{route('mom.show', encrypt($mom->id))}}" class="btn btn-info btn-xs mb-0 ml-0">
                                             <i class="fa fa-list"></i>
                                             {{__('adminlte::utilities.view')}}
                                         </a>
-                                        @can('mom edit')
-                                            <a href="{{route('mom.edit', encrypt($mom->id))}}" class="btn btn-success btn-xs mb-0 ml-0">
-                                                <i class="fa fa-pen-alt"></i>
-                                                {{__('adminlte::utilities.edit')}}
-                                            </a>
-                                        @endcan
                                         @can('mom delete')
                                             <a href="" class="btn btn-danger btn-xs mb-0 ml-0 btn-delete" data-id="{{encrypt($mom->id)}}">
                                                 <i class="fa fa-trash-alt"></i>
@@ -96,7 +98,7 @@
                                 </tr>
                             @endforeach
                         </tbody>
-                    </table>
+                    </table> 
                 </div>
             </div>
 
