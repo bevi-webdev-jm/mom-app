@@ -41,4 +41,6 @@ return [
     'mom_uploaded'          => 'Minutes of meeting has been successfully uploaded.',
 
     'action_saved'          => 'Actions saved',
+    'mom_submitted'         => 'Minutes of meeting has been successfully submitted.',
+    'mom_updated'           => 'Minutes of meeting has been successfully updated.',
 ];

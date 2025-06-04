@@ -3,7 +3,7 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-lg-6">
-                    <strong class="badge badge-secondary text-uppercase text-lg">{{$mom->status}}</strong>
+                    <strong class="badge badge-{{$status_arr[$mom->status]}} text-uppercase text-lg">{{$mom->status}}</strong>
                 </div>
                 <div class="col-lg-6 text-right">
                     <button class="btn btn-primary btn-sm" wire:click.prevent="saveMom('draft')">

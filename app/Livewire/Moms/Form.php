@@ -14,6 +14,13 @@ class Form extends Component
 
     public $meeting_date, $type_id, $agenda;
 
+    public $status_arr = [
+        'draft'         => 'secondary',
+        'submitted'     => 'info',
+        'ongoing'       => 'warning',
+        'completed'     => 'success',
+    ];
+
     public function render()
     {
         return view('livewire.moms.form');
@@ -59,5 +66,15 @@ class Form extends Component
             ->performedOn($this->mom)
             ->withProperties($changes_arr)
             ->log(':causer.name has updated the mom :subject.mom_number');
+
+        if($status == 'submitted') {
+            return redirect()->route('mom.index')->with([
+                'message_success' => __('adminlte::moms.mom_submitted')
+            ]);
+        } else {
+            return redirect()->route('mom.edit', encrypt($this->mom->id))->with([
+                'message_success' => __('adminlte::moms.mom_updated')
+            ]);
+        }
     }
 }
