@@ -25,11 +25,20 @@ return [
     'target_date'           => '目标日期',
     'responsible'           => '负责人',
     'save_topic'            => '保存议题',
+    'topic_updated'         => '议题已成功更新。',
+    'topic_created'         => '议题已成功创建。',
 
     'mom_details'           => '会议记录详情',
     'actions_taken'         => '采取的行动',
     'attachments'           => '附件',
     'attachment_file'       => '附件文件',
 
-    'completed'             => '完成',
+    'completed'             => '已完成',
+    'days_completed'        => '完成天数',
+    'completed_date'        => '完成日期',
+    'upload_mom'            => '上传会议记录',
+    'upload_file'           => '上传文件',
+    'mom_uploaded'          => '会议记录已成功上传。',
+
+    'action_saved'          => '行动已保存',
 ];

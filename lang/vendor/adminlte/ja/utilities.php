@@ -32,4 +32,5 @@ return [
     'save_settings'     => '設定を保存',
     'remarks'           => '備考',
     'no_data_available' => 'データがありません',
+    'please_wait'       => 'お待ちください',
 ];

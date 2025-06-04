@@ -45,7 +45,6 @@ class Upload extends Component
     }
 
     private function processRow($row) {
-
         // find responsible name from users
         $responsible = User::where('name', $row['RESPONSIBLE'])->first();
         // find type from mom types
@@ -83,35 +82,40 @@ class Upload extends Component
 
     public function saveMom() {
         foreach($this->mom_data as $mom_number => $mom_val) {
-            $mom = Mom::create([
-                'mom_type_id' => $mom_val['header']['type_model']['id'] ?? NULL,
-                'user_id' => auth()->user()->id,
-                'mom_number' => MomNumberHelper::generateMomNumber($mom_number),
-                'agenda' => $mom_val['header']['agenda'] ?? '',
-                'meeting_date' => $mom_val['header']['meeting_date'] ?? date('Y-m-d'),
-                'status' => 'draft',
-            ]);
 
-            $attendees_ids = [];
-            foreach($mom_val['topics'] as $topic) {
-                $mom_detail = MomDetail::create([
-                    'mom_id' => $mom->id,
-                    'topic' => $topic['topic'],
-                    'next_step' => $topic['next_step'],
-                    'target_date' => date('Y-m-d', strtotime($topic['target_date'])),
-                    'completed_date' => NULL,
-                    'remarks' => $topic['remarks'],
-                    'status' => 'open',
+            // check if already exists
+            $mom = Mom::where('mom_number', $mom_number)->first();
+            if(empty($mom)) {
+                $mom = Mom::create([
+                    'mom_type_id' => $mom_val['header']['type_model']['id'] ?? NULL,
+                    'user_id' => auth()->user()->id,
+                    'mom_number' => MomNumberHelper::generateMomNumber($mom_number),
+                    'agenda' => $mom_val['header']['agenda'] ?? '',
+                    'meeting_date' => $mom_val['header']['meeting_date'] ?? date('Y-m-d'),
+                    'status' => 'draft',
                 ]);
-
-                if(!empty($topic['responsible_model'])) {
-                    $mom_detail->responsibles()->sync($topic['responsible_model']['id']);
-
-                    $attendees_ids[] = $topic['responsible_model']['id'];
+    
+                $attendees_ids = [];
+                foreach($mom_val['topics'] as $topic) {
+                    $mom_detail = MomDetail::create([
+                        'mom_id' => $mom->id,
+                        'topic' => $topic['topic'],
+                        'next_step' => $topic['next_step'],
+                        'target_date' => date('Y-m-d', strtotime($topic['target_date'])),
+                        'completed_date' => NULL,
+                        'remarks' => $topic['remarks'],
+                        'status' => 'open',
+                    ]);
+    
+                    if(!empty($topic['responsible_model'])) {
+                        $mom_detail->responsibles()->sync($topic['responsible_model']['id']);
+    
+                        $attendees_ids[] = $topic['responsible_model']['id'];
+                    }
                 }
+    
+                $mom->participants()->sync($attendees_ids);
             }
-
-            $mom->participants()->sync($attendees_ids);
         }
 
         return redirect()->route('mom.index')->with([

@@ -25,11 +25,20 @@ return [
     'target_date'           => '目標日',
     'responsible'           => '担当者',
     'save_topic'            => 'トピックを保存',
+    'topic_updated'         => 'トピックが正常に更新されました。',
+    'topic_created'         => 'トピックが正常に作成されました。',
 
     'mom_details'           => '議事録の詳細',
-    'actions_taken'         => '取られた行動',
+    'actions_taken'         => '実施されたアクション',
     'attachments'           => '添付ファイル',
     'attachment_file'       => '添付ファイル',
 
     'completed'             => '完了',
+    'days_completed'        => '完了日数',
+    'completed_date'        => '完了日',
+    'upload_mom'            => '議事録をアップロード',
+    'upload_file'           => 'ファイルをアップロード',
+    'mom_uploaded'          => '議事録が正常にアップロードされました。',
+
+    'action_saved'          => 'アクションが保存されました',
 ];

@@ -85,6 +85,7 @@ class Item extends Component
         ]);
         
         $changes_arr['old'] = $this->detail->getOriginal();
+        $changes_arr['old']['arr'] = $this->detail->responsibles()->pluck('name');
 
         $this->detail->update([
             'target_date' => $this->target_date,
@@ -95,6 +96,7 @@ class Item extends Component
         $this->detail->responsibles()->sync($this->responsible_id);
 
         $changes_arr['changes'] = $this->detail->getChanges();
+        $changes_arr['changes']['arr'] = $this->detail->responsibles()->pluck('name');
 
         // logs
         activity('updated')
