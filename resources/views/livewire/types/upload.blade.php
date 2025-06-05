@@ -20,8 +20,12 @@
                 </div>
 
                 <div class="col-lg-12 mt-2">
-                    <button class="btn btn-primary btn-xs" wire:click.prevent="checkFile" wire:loading.attr="disabled">CHECK</button>
-                    <i class="fa fa-spinner fa-spin ml-3" wire:loading></i>
+                    <button class="btn btn-primary btn-xs" wire:click.prevent="checkFile" wire:loading.attr="disabled">
+                        <i class="fa fa-check fa-sm" wire:loading.remove></i>
+                        <i class="fa fa-spinner fa-spin fa-sm" wire:loading></i>
+                        CHECK
+                    </button>
+                    
                 </div>
             </div>
 

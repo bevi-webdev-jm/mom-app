@@ -152,7 +152,20 @@
 @laravelPWA
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons@7/css/flag-icons.min.css"/>
 <style type="text/css">
-
-
+    .content-wrapper {
+        background-color: #f6ebdb;
+    }
+    .main-footer {
+        background-color: rgba(246, 235, 219, 0.36);
+    }
+    .card .card-body {
+        background-color: rgba(246, 235, 219, 0.30);
+    }
+    .card .card-header {
+        background-color: rgba(246, 235, 219, 0.20);
+    }
+    .card .card-footer {
+        background-color: rgba(201, 192, 177, 0.2);
+    }
 </style>
 @endpush

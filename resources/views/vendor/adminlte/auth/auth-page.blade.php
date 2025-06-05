@@ -17,6 +17,11 @@
 @endphp
 
 @section('adminlte_css')
+    <style>
+        .login-page {
+            background-color: #f6ebdb;
+        }
+    </style>
     @stack('css')
     @yield('css')
 @stop

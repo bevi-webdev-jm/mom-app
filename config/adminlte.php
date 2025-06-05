@@ -64,7 +64,7 @@ return [
     */
 
     'logo' => 'MOM APP',
-    'logo_img' => 'images/jm-logo-ai.png',
+    'logo_img' => 'images/mom-logo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -86,7 +86,7 @@ return [
     'auth_logo' => [
         'enabled' => false,
         'img' => [
-            'path' => 'images/jm-logo-ai.png',
+            'path' => 'images/mom-logo.png',
             'alt' => 'Auth Logo',
             'class' => '',
             'width' => 50,
@@ -113,7 +113,7 @@ return [
         'enabled' => true,
         'mode' => 'fullscreen',
         'img' => [
-            'path' => 'images/jm-logo-ai.png',
+            'path' => 'images/mom-logo.png',
             'alt' => 'AdminLTE Preloader Image',
             'effect' => 'animation__shake',
             'width' => 60,
@@ -171,9 +171,9 @@ return [
     |
     */
 
-    'classes_auth_card' => 'bg-gradient-dark',
+    'classes_auth_card' => 'bg-gradient-navy',
     'classes_auth_header' => '',
-    'classes_auth_body' => 'bg-gradient-dark',
+    'classes_auth_body' => 'bg-gradient-navy',
     'classes_auth_footer' => 'text-center',
     'classes_auth_icon' => 'fa-fw text-light',
     'classes_auth_btn' => 'btn-flat btn-light',
@@ -191,15 +191,15 @@ return [
     */
 
     'classes_body' => 'text-sm',
-    'classes_brand' => '',
+    'classes_brand' => ' bg-navy',
     'classes_brand_text' => '',
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
-    'classes_sidebar_nav' => '',
+    'classes_sidebar' => 'sidebar-dark-navy elevation-4 bg-navy',
+    'classes_sidebar_nav' => 'bg-navy',
     'classes_topnav' => 'navbar-dark navbar-light',
-    'classes_topnav_nav' => 'navbar-expand',
+    'classes_topnav_nav' => 'navbar-expand bg-navy',
     'classes_topnav_container' => 'container',
 
     /*

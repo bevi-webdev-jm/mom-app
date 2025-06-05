@@ -3,36 +3,65 @@
 {{-- Customize layout sections --}}
 
 @section('subtitle', __('adminlte::adminlte.welcome'))
-@section('content_header_title', __('adminlte::adminlte.home'))
+@section('content_header_title', __('adminlte::adminlte.welcome'))
 @section('content_header_subtitle', __('adminlte::adminlte.welcome'))
 
 {{-- Content body: main page content --}}
 
 @section('content_body')
-    <p>{{ __('adminlte::adminlte.welcome_message') }}</p>
+    <div class="hero-section card p-4 shadow-sm text-center">
+        <h2 class="welcome-message">Welcome to the Minutes of Meeting System</h2>
+        <p class="intro-text">
+            Efficiently record meeting minutes, manage tasks assigned during meetings, and receive timely notifications about your responsibilities.
+            Stay organized and never miss an important update or deadline.
+        </p>
 
-    @auth
-        <a href="{{ url('/home') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
-            {{ __('adminlte::adminlte.home') }}
-        </a>
-    @else
-        <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
-            {{ __('adminlte::adminlte.log_in') }}
-        </a>
-
-        @if (Route::has('register'))
-            <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
-                {{ __('adminlte::adminlte.register') }}
+        @auth
+            <a href="{{ url('/home') }}" class="btn btn-primary btn-sm mt-3">
+                {{ __('adminlte::adminlte.home') }}
             </a>
-        @endif
-    @endauth
+        @else
+            <a href="{{ route('login') }}" class="btn btn-primary btn-sm mt-3">
+                {{ __('adminlte::adminlte.log_in') }}
+            </a>
+
+            @if (Route::has('register'))
+                <a href="{{ route('register') }}" class="btn btn-secondary btn-sm mt-3 ml-2">
+                    {{ __('adminlte::adminlte.register') }}
+                </a>
+            @endif
+        @endauth
+    </div>
 @stop
 
 {{-- Push extra CSS --}}
 
 @push('css')
-    {{-- Add here extra stylesheets --}}
-    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+    <style>
+        .hero-section {
+            background-color: #fff8f0;
+            border-radius: 8px;
+            max-width: 700px;
+            margin: 2rem auto;
+            text-align: center;
+        }
+        .welcome-message {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #6c757d;
+        }
+        .intro-text {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: #495057;
+        }
+        .btn {
+            min-width: 100px;
+        }
+        .ml-2 {
+            margin-left: 0.5rem;
+        }
+    </style>
 @endpush
 
 {{-- Push extra scripts --}}
