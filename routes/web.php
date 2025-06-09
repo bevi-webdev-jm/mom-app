@@ -39,6 +39,10 @@ Route::get('lang/{locale}', function ($locale) {
 
 Route::get('error-logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->middleware('auth');
 
+Route::get('check-notification', function() {
+    return new App\Notifications\MomSubmittedNotification();
+});
+
 Route::group(['middleware' => ['auth', 'optimizeImages']], function() {
     // PROFILE
     Route::get('profile/{id}', [UserController::class, 'profile'])->name('profile');

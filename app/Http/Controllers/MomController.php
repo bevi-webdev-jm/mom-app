@@ -33,6 +33,9 @@ class MomController extends Controller
                     ->orWhere('status', 'LIKE', '%'.$search.'%')
                     ->orWhereHas('user', function($qry) use($search) {
                         $qry->where('name', 'LIKE', '%'.$search.'%');
+                    })
+                    ->orWhereHas('type', function($qry) use($search) {
+                        $qry->where('type', 'LIKE', '%'.$search.'%');
                     });
             })
             ->when(!auth()->user()->hasRole('superadmin'), function($query) {

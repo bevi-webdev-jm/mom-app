@@ -48,6 +48,7 @@
                         <thead class="tex-center bg-dark">
                             <tr class="text-center">
                                 <th>{{__('adminlte::moms.mom_number')}}</th>
+                                <th>{{__('adminlte::types.type')}}</th>
                                 <th>{{__('adminlte::moms.agenda')}}</th>
                                 <th>{{__('adminlte::moms.meeting_date')}}</th>
                                 <th>{{__('adminlte::utilities.status')}}</th>
@@ -62,7 +63,10 @@
                                         {{$mom->mom_number}}
                                     </td>
                                     <td class="align-middle text-center">
-                                        {{$mom->agenda}}
+                                        {{$mom->type->type ?? '-'}}
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        {{$mom->agenda ?? '-'}}
                                     </td>
                                     <td class="align-middle text-center">
                                         {{$mom->meeting_date}}

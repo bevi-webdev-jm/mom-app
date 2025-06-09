@@ -10,6 +10,7 @@ var filesToCache = [
     "/vendor/adminlte/dist/js/adminlte.min.js",
     "/images/Default_pfp.svg.png",
     "/images/jm-logo-ai.png",
+    "/images/mom-logo.png",
     "/images/icons/icon-72x72.png",
     "/images/icons/icon-96x96.png",
     "/images/icons/icon-128x128.png",
