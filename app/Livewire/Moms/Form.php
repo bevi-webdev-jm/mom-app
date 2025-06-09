@@ -6,6 +6,7 @@ use Livewire\Component;
 
 use App\Models\Mom;
 use App\Models\MomType;
+use App\Helpers\NotificationHelper;
 
 class Form extends Component
 {
@@ -68,6 +69,9 @@ class Form extends Component
             ->log(':causer.name has updated the mom :subject.mom_number');
 
         if($status == 'submitted') {
+            // send notifications
+            NotificationHelper::notifyMomSubmitted($this->mom);
+
             return redirect()->route('mom.index')->with([
                 'message_success' => __('adminlte::moms.mom_submitted')
             ]);
