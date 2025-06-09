@@ -35,17 +35,18 @@
         }
     });
 ">
-    <div class="space-x-2">
-        <button
-            wire:click="triggerAlarm"
-            class="btn btn-primary"
-        >
-            🔥 Trigger Alarm
-        </button>
-
-        <button wire:click="resetAlarm" class="btn btn-secondary">
-            🧯 Reset Alarm
-        </button>
+    <div class="row">
+        <div class="col-lg-6 py-2">
+            <button wire:click="triggerAlarm" class="btn btn-primary btn-lg btn-block py-5">
+                <span class="text-lg">🔥 Trigger Alarm</span>
+            </button>
+        </div>
+        <div class="col-lg-6 py-2">
+            <button wire:click="resetAlarm" class="btn btn-secondary btn-lg btn-block py-5">
+                <span class="text-lg">🧯 Reset Alarm</span> 
+            </button>
+        </div>
+        
     </div>
 
     <audio x-ref="alarmAudio" src="{{ asset('sounds/alarm.mp3') }}" style="display:none;"></audio>
