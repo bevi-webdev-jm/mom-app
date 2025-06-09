@@ -3,6 +3,7 @@
 return [
     'mom'               => 'Minutes of Meeting',
     'types'             => 'MOM Types',
+    'fire_alarm'        => 'Fire Alarm',
     'settings'          => 'Settings',
     'companies'         => 'Companies',
     'users'             => 'Users',

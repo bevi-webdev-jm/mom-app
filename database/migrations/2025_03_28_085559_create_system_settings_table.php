@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('data_per_page')->default(10);
             $table->boolean('email_sending')->default(false);
+            $table->boolean('alarm_on')->default(false);
             $table->timestamps();
         });
     }

@@ -6,7 +6,8 @@ use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\{
     RoleController, UserController, CompanyController,
     SystemLogController, SystemSettingController, HomeController,
-    NotificationController, MomTypeController, MomController
+    NotificationController, MomTypeController, MomController,
+    FireAlarmController
 };
 
 /*
@@ -46,6 +47,9 @@ Route::get('check-notification', function() {
 Route::group(['middleware' => ['auth', 'optimizeImages']], function() {
     // PROFILE
     Route::get('profile/{id}', [UserController::class, 'profile'])->name('profile');
+
+    // FIRE ALARM
+    Route::get('fire-alarm', [FireAlarmController::class, 'index'])->name('fire-alarm')->middleware('permission:fire alarm access');
 
     // NOTIFICATION
     Route::get('test-notification', [NotificationController::class, 'testNotification'])->name('test-notification');

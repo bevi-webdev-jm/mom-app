@@ -13,6 +13,7 @@ class SystemSetting extends Model
     protected $fillable = [
         'data_per_page',
         'email_sending',
+        'alarm_on',
     ];
 
     /**

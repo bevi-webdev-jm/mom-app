@@ -314,6 +314,13 @@ return [
             'active'    => ['mom-types', 'mom-type/*']
         ],
         [
+            'text'      => 'fire_alarm',
+            'url'       => 'fire-alarm',
+            'icon'      => 'fas fa-fw fa-exclamation',
+            'can'       => 'fire alarm access',
+            'active'    => ['fire-alarm']
+        ],
+        [
             'text'  => 'settings',
             'url'   => '#',
             'icon'  => 'fa fa-fw fa-cog',

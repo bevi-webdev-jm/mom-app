@@ -6,6 +6,7 @@ use Livewire\Component;
 
 use App\Models\Mom;
 use App\Models\MomType;
+use App\Models\MomApproval;
 use App\Helpers\NotificationHelper;
 
 class Form extends Component
@@ -71,6 +72,14 @@ class Form extends Component
         if($status == 'submitted') {
             // send notifications
             NotificationHelper::notifyMomSubmitted($this->mom);
+
+            // approval history
+            $approval = MomApproval::create([
+                'mom_id' => $this->mom->id,
+                'user_id' => auth()->user()->id,
+                'status' => $status,
+                'remarks' => NULL
+            ]);
 
             return redirect()->route('mom.index')->with([
                 'message_success' => __('adminlte::moms.mom_submitted')
