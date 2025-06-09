@@ -1,7 +1,7 @@
 <div wire:poll.1s="loadAlarmState" x-data="{ alarmTriggered: @entangle('alarmTriggered') }" x-init="
     const audio = $refs.alarmAudio;
     let audioUnlocked = false;
-    let alarmHasPlayed = false;git 
+    let alarmHasPlayed = false;
 
     function unlockAudio() {
         if (!audioUnlocked) {
