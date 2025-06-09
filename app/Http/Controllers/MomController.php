@@ -26,6 +26,7 @@ class MomController extends Controller
         Session::forget('mom_data');
 
         $moms = Mom::orderBy('mom_number', 'DESC')
+            ->with('user')
             ->when(!empty($search), function($query) use($search) {
                 $query->where('mom_number', 'LIKE', '%'.$search.'%')
                     ->orWhere('agenda', 'LIKE', '%'.$search.'%')

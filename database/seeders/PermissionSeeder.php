@@ -31,6 +31,9 @@ class PermissionSeeder extends Seeder
                 'type upload'   => 'Allow user to upload mom types.',
                 'type delete'   => 'Allow user to delete mom type.'
             ],
+            'Fire Alarm'    => [
+                'fire alarm access' => 'Allow user to access fire alarm.',
+            ],
             'Companies' => [
                 'company access'    => 'Allow user to access company list and details.',
                 'company create'    => 'Allow user to create company.',
@@ -54,7 +57,7 @@ class PermissionSeeder extends Seeder
                 'system settings'   => 'Allow user to access system settings.',
                 'system logs'       => 'Allow user to access system logs.',
                 'system online'     => 'Allow user to view online users.',
-            ]
+            ],
         ];
 
         foreach($permissions_arr as $module => $permissions) {

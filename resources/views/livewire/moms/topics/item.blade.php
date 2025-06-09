@@ -8,7 +8,7 @@
             <br>
             <b>{{__('adminlte::moms.next_step')}}:</b> {{$detail->next_step}}
             <br>
-            <b>{{__('adminlte::moms.responsible')}}:</b> {{$detail->responsibles()->first()->name ?? '-'}}
+            <b>{{__('adminlte::moms.responsible')}}:</b> {{!empty($responsible_id) ? collect($responsibles)->where('id', $responsible_id)->first()['name'] : '-'}}
             <br>
             <b>{{__('adminlte::utilities.status')}}:</b> <span class="badge badge-{{$status_arr[$detail->status]}}">{{$detail->status}}</span>
             @if(!empty($this->days_completed))
@@ -23,7 +23,10 @@
 
                 @if(!empty($messages['success']))
                     <div class="alert alert-success">
-                        <span>{{$messages['success']}}</span>
+                        <strong>{{$messages['success']}}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                 @endif
 
