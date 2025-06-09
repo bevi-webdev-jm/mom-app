@@ -13,14 +13,14 @@ class MomSubmittedNotification extends Notification
     use Queueable;
     use SettingTrait;
 
-    protected $message;
+    protected $mom;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct($mom)
     {
-        $this->message = 'A new MOM has been submitted.';
+        $this->mom = $mom;
     }
 
     /**
@@ -45,10 +45,14 @@ class MomSubmittedNotification extends Notification
         return (new MailMessage)
                     ->subject('New MOM Submitted')
                     ->greeting('Hello!')
-                    ->line('A new MOM has been submitted and requires your attention.')
-                    ->action('View MOMs', url('/moms'))
+                    ->line('A new MOM ['.$this->mom->mom_number.'] has been submitted and requires your attention.')
+                    ->action('View Details', url('/mom'.encrypt($this->mom->id)))
                     ->line('Please review the MOM at your earliest convenience.')
-                    ->salutation('Regards, Your Application Team');
+                    ->salutation('Regards, IT Dept');
+
+        return (new MailMessage)
+            ->subject('New MOM Submitted')
+            ->view('mails.mom-mail', ['mom' => $this->mom]);
     }
 
     /**
@@ -60,8 +64,8 @@ class MomSubmittedNotification extends Notification
     {
         return [
             'title' => 'Mom Submitted',
-            'message' => $this->message,
-            'action_url' => url('mom'),
+            'message' => 'A new MOM ['.$this->mom->mom_number.'] has been submitted and requires your attention.',
+            'action_url' => url('mom/'.encrypt($this->mom->id)),
         ];
     }
 }

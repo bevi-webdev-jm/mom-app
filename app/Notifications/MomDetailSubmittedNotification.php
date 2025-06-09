@@ -13,14 +13,14 @@ class MomDetailSubmittedNotification extends Notification
     use Queueable;
     use SettingTrait;
 
-    protected $message;
+    protected $detail;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct($detail)
     {
-        $this->message = 'A MOM detail has been submitted.';
+        $this->detail = $detail;
     }
 
     /**
@@ -46,9 +46,9 @@ class MomDetailSubmittedNotification extends Notification
                     ->subject('MOM Detail Submitted')
                     ->greeting('Hello!')
                     ->line('A MOM detail has been submitted and requires your attention.')
-                    ->action('View MOM Details', url('/moms'))
+                    ->action('View MOM Details', url('mom/'.encrypt($this->detail->mom->id)))
                     ->line('Please review the MOM details at your earliest convenience.')
-                    ->salutation('Regards, Your Application Team');
+                    ->salutation('Regards, IT Dept');
     }
 
     /**
@@ -60,8 +60,8 @@ class MomDetailSubmittedNotification extends Notification
     {
         return [
             'title' => 'Mom Submitted',
-            'message' => $this->message,
-            'action_url' => url('mom'),
+            'message' => 'A MOM detail has been submitted and requires your attention.',
+            'action_url' => url('mom/'.encrypt($this->detail->mom->id)),
         ];
     }
 }
