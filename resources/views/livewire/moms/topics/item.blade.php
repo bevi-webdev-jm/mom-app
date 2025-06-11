@@ -8,7 +8,7 @@
             <br>
             <b>{{__('adminlte::moms.next_step')}}:</b> {{$detail->next_step}}
             <br>
-            <b>{{__('adminlte::moms.responsible')}}:</b> {{!empty($responsible_id) ? collect($responsibles)->where('id', $responsible_id)->first()['name'] : '-'}}
+            <b>{{__('adminlte::moms.responsible')}}:</b> {{!empty($responsible_id) ? (collect($responsibles)->where('id', $responsible_id)->first()['name'] ?? '-') : '-'}}
             <br>
             <b>{{__('adminlte::utilities.status')}}:</b> <span class="badge badge-{{$status_arr[$detail->status]}}">{{$detail->status}}</span>
             @if(!empty($this->days_completed))

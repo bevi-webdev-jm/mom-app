@@ -17,6 +17,6 @@ trait SettingTrait {
     }
 
     public function getEmailSending() {
-        return $this->systemSetting->getEmailSending ?? 0;
+        return $this->systemSetting->email_sending ?? 0;
     }
 }

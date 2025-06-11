@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Relations\HasMany; // Add this
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -75,7 +76,11 @@ class User extends Authenticatable
 
     public function adminlte_desc()
     {
-        return implode(', ', $this->getRoleNames()->toArray()) ?? '-';
+        $roleNames = $this->getRoleNames()->toArray();
+        if (empty($roleNames)) {
+            return '-';
+        }
+        return implode(', ', $roleNames);
     }
 
     public function adminlte_profile_url()
@@ -89,5 +94,10 @@ class User extends Authenticatable
 
     public function moms() {
         return $this->belongsToMany('App\Models\Mom');
+    }
+
+    public function posts(): HasMany
+    {
+        return $this->hasMany(Post::class); // Assuming you have a Post model
     }
 }
