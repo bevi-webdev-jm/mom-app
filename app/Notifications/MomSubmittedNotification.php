@@ -46,13 +46,13 @@ class MomSubmittedNotification extends Notification
                     ->subject('New MOM Submitted')
                     ->greeting('Hello!')
                     ->line('A new MOM ['.$this->mom->mom_number.'] has been submitted and requires your attention.')
-                    ->action('View Details', url('/mom'.encrypt($this->mom->id)))
+                    ->action('View Details', url('/mom/'.encrypt($this->mom->id)))
                     ->line('Please review the MOM at your earliest convenience.')
                     ->salutation('Regards, IT Dept');
 
-        return (new MailMessage)
-            ->subject('New MOM Submitted')
-            ->view('mails.mom-mail', ['mom' => $this->mom]);
+        // return (new MailMessage)
+        //     ->subject('New MOM Submitted')
+        //     ->view('pages.mails.mom-mail', ['mom' => $this->mom]);
     }
 
     /**

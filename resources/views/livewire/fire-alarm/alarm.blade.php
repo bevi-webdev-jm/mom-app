@@ -49,9 +49,9 @@
         
     </div>
 
-    <audio x-ref="alarmAudio" src="{{ asset('sounds/alarm.mp3') }}" style="display:none;"></audio>
+    <audio x-ref="alarmAudio" src="{{ asset('sounds/alarm.mp3') }}" loop style="display:none;"></audio>
 
     <div class="mt-2 text-sm text-gray-500">
         Alarm State: <span x-text="alarmTriggered ? 'ON' : 'OFF'"></span>
-    </div>
+    </div> 
 </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Notifications\MomSubmittedNotification;
+use App\Notifications\TestNotification;
 
 class NotificationController extends Controller
 {
@@ -27,7 +28,8 @@ class NotificationController extends Controller
 
     public function testNotification() {
         try {
-            auth()->user()->notify(new MomSubmittedNotification());
+            // auth()->user()->notify(new MomSubmittedNotification(\App\Models\Mom::first()));
+            auth()->user()->notify(new TestNotification());
         } catch(\Exception $e) {
             Log::error('Notification failed: '.$e->getMessage());
         }
