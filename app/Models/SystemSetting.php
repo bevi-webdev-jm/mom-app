@@ -14,6 +14,8 @@ class SystemSetting extends Model
         'data_per_page',
         'email_sending',
         'alarm_on',
+        'fire_alarm_on',
+        'notification_days_before',
     ];
 
     /**

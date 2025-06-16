@@ -9,7 +9,7 @@ use App\Models\SystemSetting;
 class SystemSettings extends Component
 {
     public $system_setting;
-    public $data_per_page, $email_sending;
+    public $data_per_page, $email_sending, $notification_days_before;
 
     public function render()
     {
@@ -20,6 +20,7 @@ class SystemSettings extends Component
         $this->system_setting = SystemSetting::first();
         $this->data_per_page = $this->system_setting->data_per_page;
         $this->email_sending = $this->system_setting->email_sending;
+        $this->notification_days_before = $this->system_setting->notification_days_before;
     }
 
     public function saveSetting() {
@@ -33,7 +34,8 @@ class SystemSettings extends Component
 
         $this->system_setting->update([
             'data_per_page' => $this->data_per_page ?? 10,
-            'email_sending' => $this->email_sending ?? 0
+            'email_sending' => $this->email_sending ?? 0,
+            'notification_days_before' => $this->notification_days_before ?? 3,
         ]);
 
         $changes_arr['changes'] = $this->system_setting->getChanges();
