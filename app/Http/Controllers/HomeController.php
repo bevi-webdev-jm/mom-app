@@ -5,6 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Notifications\TestNotification;
 
+/**
+ * Class HomeController
+ * 
+ * Controller for handling the home page and dashboard.
+ * Applies authentication middleware to all routes.
+ */
 class HomeController extends Controller
 {
     /**
@@ -14,6 +20,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
+        // Apply authentication middleware to all methods
         $this->middleware('auth');
     }
 
@@ -24,6 +31,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // Return the home view (dashboard)
         return view('home');
     }
 }
