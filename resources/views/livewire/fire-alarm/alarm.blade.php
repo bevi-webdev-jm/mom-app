@@ -46,12 +46,14 @@
                 <span class="text-lg">{{$title}}</span>
             </button>
         </div>
-        <div class="col-lg-6 py-2">
-            <button wire:click="resetAlarm" class="btn btn-secondary btn-lg btn-block py-5">
-                <i class="fa fa-ban fa-xl mr-1"></i>
-                <span class="text-lg"> Reset Alarm</span>
-            </button>
-        </div>
+        @if($alarmTriggered)
+            <div class="col-lg-6 py-2">
+                <button wire:click="resetAlarm" class="btn btn-secondary btn-lg btn-block py-5">
+                    <i class="fa fa-ban fa-xl mr-1"></i>
+                    <span class="text-lg"> Reset Alarm</span>
+                </button>
+            </div>
+        @endif
     </div>
 
     {{-- The audio element remains the same --}}

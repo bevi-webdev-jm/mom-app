@@ -33,8 +33,10 @@ class Alarm extends Component
     {
         if($this->title == 'Fire Alarm') {
             SystemSetting::query()->update(['fire_alarm_on' => true]);
+            SystemSetting::query()->update(['alarm_on' => false]);
         } else {
             SystemSetting::query()->update(['alarm_on' => true]);
+            SystemSetting::query()->update(['fire_alarm_on' => false]);
         }
         $this->alarmTriggered = true;
     }
@@ -50,11 +52,8 @@ class Alarm extends Component
 
     public function resetAlarm(): void
     {
-        if($this->title == 'Fire Alarm') {
-            SystemSetting::query()->update(['fire_alarm_on' => false]);
-        } else {
-            SystemSetting::query()->update(['alarm_on' => false]);
-        }
+        SystemSetting::query()->update(['fire_alarm_on' => false]);
+        SystemSetting::query()->update(['alarm_on' => false]);
         $this->alarmTriggered = false;
     }
 }
