@@ -8,6 +8,8 @@ use App\Models\SystemSetting;
 class Alarm extends Component
 {
     public bool $alarmTriggered = false;
+    public $sound;
+    public $title;
 
     protected $listeners = ['triggerAlarm'];
 
@@ -29,18 +31,30 @@ class Alarm extends Component
 
     public function triggerAlarm(): void
     {
-        SystemSetting::query()->update(['alarm_on' => true]);
+        if($this->title == 'Fire Alarm') {
+            SystemSetting::query()->update(['fire_alarm_on' => true]);
+        } else {
+            SystemSetting::query()->update(['alarm_on' => true]);
+        }
         $this->alarmTriggered = true;
     }
 
     public function loadAlarmState(): void
     {
-        $this->alarmTriggered = SystemSetting::first()->alarm_on ?? false;
+        if($this->title == 'Fire Alarm') {
+            $this->alarmTriggered = SystemSetting::first()->fire_alarm_on ?? false;
+        } else {
+            $this->alarmTriggered = SystemSetting::first()->alarm_on ?? false;
+        }
     }
 
     public function resetAlarm(): void
     {
-        SystemSetting::query()->update(['alarm_on' => false]);
+        if($this->title == 'Fire Alarm') {
+            SystemSetting::query()->update(['fire_alarm_on' => false]);
+        } else {
+            SystemSetting::query()->update(['alarm_on' => false]);
+        }
         $this->alarmTriggered = false;
     }
 }

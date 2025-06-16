@@ -16,6 +16,8 @@ return new class extends Migration
             $table->integer('data_per_page')->default(10);
             $table->boolean('email_sending')->default(false);
             $table->boolean('alarm_on')->default(false);
+            $table->boolean('fire_alarm_on')->default(false);
+            $table->integer('notification_days_before')->default(3);
             $table->timestamps();
         });
     }

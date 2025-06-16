@@ -13,6 +13,14 @@
                         <small class="text-center">{{$errors->first('data_per_page')}}</small>
                     </div>
                 </div>
+
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        {{ html()->label('DAYS BEFORE NOTIFY', 'notification_days_before')->class(['mb-0']) }}
+                        {{ html()->number('notification_days_before', $notification_days_before)->class(['form-control', 'form-control-sm', 'is-invalid' => $errors->has('notification_days_before')])->placeholder('Data per page')->attribute('wire:model', 'notification_days_before') }}
+                        <small class="text-center">{{$errors->first('notification_days_before')}}</small>
+                    </div>
+                </div>
             </div>
 
             <hr>

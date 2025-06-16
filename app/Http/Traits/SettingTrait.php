@@ -19,4 +19,9 @@ trait SettingTrait {
     public function getEmailSending() {
         return $this->systemSetting->email_sending ?? 0;
     }
+
+    public function getNotificationDaysBefore() {
+        return $this->systemSetting->notification_days_before ?? 3;
+    }
+
 }
