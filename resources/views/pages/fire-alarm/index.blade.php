@@ -7,7 +7,7 @@
 
 {{-- Content body: main page content --}}
 @section('content_body')
-    <div class="card">
+    <!-- <div class="card">
         <div class="card-header py-2">
             <div class="row">
                 <div class="col-lg-6 align-middle">
@@ -22,7 +22,7 @@
         </div>
         <div class="card-footer">
         </div>
-    </div>
+    </div> -->
 
     <div class="card">
         <div class="card-header py-2">
