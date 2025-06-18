@@ -42,17 +42,35 @@ class MomSubmittedNotification extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
-        return (new MailMessage)
-                    ->subject('New MOM Submitted')
-                    ->greeting('Hello!')
-                    ->line('A new MOM ['.$this->mom->mom_number.'] has been submitted and requires your attention.')
-                    ->action('View Details', url('/mom/'.encrypt($this->mom->id)))
-                    ->line('Please review the MOM at your earliest convenience.')
-                    ->salutation('Regards, IT Dept');
+        $subject = "MOM Submission Notification";
+        $greeting = 'Hello,';
+        $introLines = [
+            "A new Minutes of Meeting (MOM) with number \"<strong>{$this->mom->mom_number}</strong>\" has been submitted and requires your attention.",
+            "Here are the details:"
+        ];
+        $tableData = [
+            'MOM Number' => $this->mom->mom_number,
+            'Agenda' => $this->mom->agenda,
+            'Meeting Date' => \Carbon\Carbon::parse($this->mom->meeting_date)->format('F j, Y'),
+            'Created By' => $this->mom->user->name
+        ];
+        $outroLines = [
+            "Please review the submitted MOM at your earliest convenience by clicking the button above."
+        ];
 
-        // return (new MailMessage)
-        //     ->subject('New MOM Submitted')
-        //     ->view('pages.mails.mom-mail', ['mom' => $this->mom]);
+        $url = url('mom/' . encrypt($this->mom->id));
+
+        return (new MailMessage)
+            ->subject($subject)
+            ->view('pages.mails.mail-template', [
+                'emailTitle' => $subject,
+                'emailHeading' => 'MOM DETAIL SUBMITTED',
+                'greeting' => $greeting,
+                'introLines' => $introLines,
+                'outroLines' => $outroLines,
+                'tableData' => $tableData,
+                'url' => $url,
+            ]);
     }
 
     /**

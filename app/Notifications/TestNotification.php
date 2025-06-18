@@ -28,11 +28,11 @@ class TestNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        if($this->getEmailSending()) {
+        if($this->getEmailSending() == 1) {
             return ['database', 'mail'];
         } else {
             return ['database'];
-        } 
+        }
     }
 
     /**

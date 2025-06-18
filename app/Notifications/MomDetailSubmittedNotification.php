@@ -42,13 +42,34 @@ class MomDetailSubmittedNotification extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
+        $subject = "MOM DETAIL SUBMISSION";
+        $greeting = 'Hello,';
+        $introLines = [
+            "A new detail regarding the topic \"<strong>{$this->detail->topic}</strong>\" has been submitted for MOM number <strong>{$this->detail->mom->mom_number}</strong>. Your review is requested.",
+            "Here are the details:"
+        ];
+        $tableData = [
+            'Topic' => $this->detail->topic,
+            'Next Step' => $this->detail->next_step,
+            'Target Date' => \Carbon\Carbon::parse($this->detail->target)->format('F j, Y'),
+        ];
+        $outroLines = [
+            "Please review the submitted MOM detail at your earliest convenience by clicking the button above."
+        ];
+
+        $url = url('mom/' . encrypt($this->detail->mom->id));
+
         return (new MailMessage)
-                    ->subject('MOM Detail Submitted')
-                    ->greeting('Hello!')
-                    ->line('A MOM detail has been submitted and requires your attention.')
-                    ->action('View MOM Details', url('mom/'.encrypt($this->detail->mom->id)))
-                    ->line('Please review the MOM details at your earliest convenience.')
-                    ->salutation('Regards, IT Dept');
+            ->subject($subject)
+            ->view('pages.mails.mail-template', [
+                'emailTitle' => $subject,
+                'emailHeading' => 'MOM DETAIL SUBMITTED',
+                'greeting' => $greeting,
+                'introLines' => $introLines,
+                'outroLines' => $outroLines,
+                'tableData' => $tableData,
+                'url' => $url,
+            ]);
     }
 
     /**
