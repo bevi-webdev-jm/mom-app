@@ -84,8 +84,12 @@ class Item extends Component
             ]
         ]);
         
-        $changes_arr['old'] = $this->detail->getOriginal();
-        $changes_arr['old']['arr'] = $this->detail->responsibles()->pluck('name');
+        $logging_properties = [];
+        // Capture state BEFORE main attribute update and sync
+        // It's good practice to refresh the model if it might have been changed elsewhere or to ensure fresh state.
+        // However, getOriginal() should give the state as it was when loaded or last saved.
+        $logging_properties['old'] = $this->detail->getOriginal(); 
+        $logging_properties['old']['arr'] = $this->detail->responsibles()->pluck('name')->toArray();
 
         $this->detail->update([
             'target_date' => $this->target_date,
@@ -93,22 +97,31 @@ class Item extends Component
             'next_step' => $this->next_step
         ]);
 
-        $this->detail->responsibles()->sync($this->responsible_id);
+        // Assuming responsible_id is a single ID and validated by 'required' rule
+        // sync() expects an array of IDs.
+        if ($this->responsible_id) {
+            $this->detail->responsibles()->sync([$this->responsible_id]);
+        } else {
+            // If it's possible to have no responsible person and 'required' rule is removed for it.
+            $this->detail->responsibles()->sync([]); 
+        }
 
-        $changes_arr['changes'] = $this->detail->getChanges();
-        $changes_arr['changes']['arr'] = $this->detail->responsibles()->pluck('name');
+        // Capture changes AFTER update and sync
+        $logging_properties['changes'] = $this->detail->getChanges(); // Changed attributes of MomDetail
+        // Use fresh() to ensure we get the latest state of the relationship after sync
+        $logging_properties['changes']['arr'] = $this->detail->fresh()->responsibles()->pluck('name')->toArray();
 
         // logs
         activity('updated')
             ->performedOn($this->detail)
-            ->withProperties($changes_arr)
+            ->withProperties($logging_properties)
             ->log(':causer.name has updated topic :subject.topic');
 
         $this->messages['success'] = __('adminlte::moms.topic_updated');
     }
 
     private function checkDaysExtended() {
-        if($this->detail->status !== 'completed') {
+         if ($this->detail->status != 'completed') {
             $currentDate = Carbon::today();
             $targetDate = Carbon::parse($this->detail->target_date);
   
@@ -185,19 +198,31 @@ class Item extends Component
         $this->reset('attachments');
 
         $this->checkDaysExtended();
+        $this->checkMomStatus();
 
         $this->messages['success'] = __('adminlte::moms.action_saved');
     }
 
     public function completeTopic() {
         $this->saveAction();
+
+        $changes_arr['old'] = $this->detail->getOriginal();
         
         $this->detail->update([
             'completed_date' => date('Y-m-d'),
             'status' => 'completed'
         ]);
+
+        $changes_arr['changes'] = $this->detail->getChanges();
+
+        // logs
+        activity('updated')
+            ->performedOn($this->detail)
+            ->withProperties($changes_arr)
+            ->log(':causer.name has completed topic :subject.topic');
         
         $this->checkDaysExtended();
+        $this->checkMomStatus();
     }
 
     public function removeAttachment($attachment_id) {
@@ -205,4 +230,13 @@ class Item extends Component
         FileSavingHelper::deleteFile($attachment->path);
         $attachment->delete();
     }
-} 
+
+    private function checkMomStatus() {
+        $mom = $this->detail->mom;
+        
+        // check if all details has been completed
+        $status = ($mom->details()->where('status', '!=', 'completed')->count() == 0) ? 'completed' : 'ongoing';
+        
+        $mom->update(['status' => $status]);
+    }
+}

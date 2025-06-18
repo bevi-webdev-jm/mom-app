@@ -9,9 +9,9 @@ Here are the MOM details:
 | Field         | Value                         |
 |---------------|-------------------------------|
 | MOM Number    | {{ $mom->mom_number }}        |
-| Submitted By  | {{ $mom->submitted_by->name ?? 'N/A' }} |
-| Date          | {{ \Carbon\Carbon::parse($mom->submitted_at)->format('F j, Y') }} |
-| Project       | {{ $mom->project->name ?? 'N/A' }}      |
+| Agenda        | {{ $mom->agenda?? 'N/A' }} |
+| Meeting Date  | {{ \Carbon\Carbon::parse($mom->meeting_date)->format('F j, Y') }} |
+| Created By    | {{ $mom->user->name ?? 'N/A' }}      |
 @endcomponent
 
 @component('mail::button', ['url' => url('mom/' . encrypt($mom->id))])

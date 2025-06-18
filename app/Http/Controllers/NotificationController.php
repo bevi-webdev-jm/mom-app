@@ -6,9 +6,15 @@ use Illuminate\Http\Request;
 
 use App\Notifications\MomSubmittedNotification;
 use App\Notifications\TestNotification;
+use Illuminate\Support\Facades\Log;
+
+use App\Http\Traits\SettingTrait;
+
 
 class NotificationController extends Controller
 {
+    use SettingTrait;
+
     public function index(Request $request) {
         $search = trim($request->get('search'));
 
@@ -29,7 +35,8 @@ class NotificationController extends Controller
     public function testNotification() {
         try {
             // auth()->user()->notify(new MomSubmittedNotification(\App\Models\Mom::first()));
-            auth()->user()->notify(new TestNotification());
+            \App\Models\User::find(12)->notify(new TestNotification());
+            Log::error('Notification sent');
         } catch(\Exception $e) {
             Log::error('Notification failed: '.$e->getMessage());
         }

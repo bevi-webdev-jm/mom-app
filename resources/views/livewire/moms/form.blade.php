@@ -6,11 +6,11 @@
                     <strong class="badge badge-{{$status_arr[$mom->status]}} text-uppercase text-lg">{{$mom->status}}</strong>
                 </div>
                 <div class="col-lg-6 text-right">
-                    <button class="btn btn-primary btn-sm" wire:click.prevent="saveMom('draft')">
+                    <button class="btn btn-primary btn-sm" wire:click.prevent="saveMom('draft')" wire:loading.attr="disabled">
                         <i class="fa fa-save mr-1"></i>
                         {{__('adminlte::moms.save_as_draft')}}
                     </button>
-                    <button class="btn btn-success btn-sm" wire:click.prevent="saveMom('submitted')">
+                    <button class="btn btn-success btn-sm" wire:click.prevent="saveMom('submitted')" wire:loading.attr="disabled">
                         <i class="fa fa-save mr-1"></i>
                         {{__('adminlte::utilities.submit')}}
                     </button>
