@@ -42,8 +42,8 @@ class MomSubmittedNotification extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
-        $subject = "MOM Submission Notification";
-        $greeting = 'Hello,';
+        $subject = "MOM SUBMISSION [".$this->mom->mom_number.']';
+        $greeting = "Hello, {$notifiable->name}";
         $introLines = [
             "A new Minutes of Meeting (MOM) with number \"<strong>{$this->mom->mom_number}</strong>\" has been submitted and requires your attention.",
             "Here are the details:"
