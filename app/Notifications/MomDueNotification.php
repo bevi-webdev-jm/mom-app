@@ -42,10 +42,39 @@ class MomDueNotification extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
+        $formattedTargetDate = \Carbon\Carbon::parse($this->detail->target_date)->format('F j, Y');
+
+        $subject = "MOM Detail Due Reminder: {$this->detail->mom->mom_number} - {$this->detail->topic}";
+        $greeting = "Hello, {$notifiable->name}";
+        $introLines = [
+            "This is a reminder that the following MOM detail is approaching its due date:",
+            "MOM Number: <strong>{$this->detail->mom->mom_number}</strong>",
+            "Here are the details:"
+        ];
+        $tableData = [
+            'Topic' => $this->detail->topic,
+            'Next Step' => $this->detail->next_step,
+            'Target Date' => $formattedTargetDate,
+            'Status' => ucfirst($this->detail->status),
+        ];
+        $outroLines = [
+            "Please take the necessary actions to complete this item by its target date of <strong>{$formattedTargetDate}</strong>.",
+            "You can view the full MOM details by clicking the button above."
+        ];
+
+        $url = url('mom/' . encrypt($this->detail->mom->id));
+
         return (new MailMessage)
-            ->line('MoM is near target date.')
-            ->action('Notification Action', url('/mom/'.encrypt($this->detail->id)))
-            ->line('Thank you for using our application!');
+            ->subject($subject)
+            ->view('pages.mails.mail-template', [
+                'emailTitle' => $subject,
+                'emailHeading' => 'MOM DETAIL DUE REMINDER',
+                'greeting' => $greeting,
+                'introLines' => $introLines,
+                'outroLines' => $outroLines,
+                'tableData' => $tableData,
+                'url' => $url,
+            ]);
     }
 
     /**
@@ -55,10 +84,11 @@ class MomDueNotification extends Notification
      */
     public function toArray(object $notifiable): array
     {
+        $formattedTargetDate = \Carbon\Carbon::parse($this->detail->target_date)->format('M j, Y');
         return [
-            'title' => 'MoM detail due date',
-            'message' => 'This is a test notification message.',
-            'action_url' => url('mom/'.encrypt($this->detail->id)),
+            'title' => "MOM Detail Due: {$this->detail->topic}",
+            'message' => "The MOM detail '{$this->detail->topic}' for MOM #{$this->detail->mom->mom_number} is due on {$formattedTargetDate}.",
+            'action_url' => url('mom/'.encrypt($this->detail->mom->id)),
         ];
     }
 }

@@ -43,7 +43,7 @@ class MomDetailSubmittedNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         $subject = "MOM DETAIL SUBMISSION";
-        $greeting = 'Hello,';
+        $greeting = "Hello, {$notifiable->name}";
         $introLines = [
             "A new detail regarding the topic \"<strong>{$this->detail->topic}</strong>\" has been submitted for MOM number <strong>{$this->detail->mom->mom_number}</strong>. Your review is requested.",
             "Here are the details:"
