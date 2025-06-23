@@ -63,8 +63,8 @@ return [
     |
     */
 
-    'logo' => 'MOM APP',
-    'logo_img' => 'images/mom-logo.png',
+    'logo' => '',
+    'logo_img' => 'images/mom-logo2.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -84,13 +84,13 @@ return [
     */
 
     'auth_logo' => [
-        'enabled' => false,
+        'enabled' => true,
         'img' => [
-            'path' => 'images/mom-logo.png',
+            'path' => 'images/mom-logo2.png',
             'alt' => 'Auth Logo',
             'class' => '',
-            'width' => 50,
-            'height' => 50,
+            'width' => 330,
+            'height' => 300,
         ],
     ],
 
@@ -113,7 +113,7 @@ return [
         'enabled' => true,
         'mode' => 'fullscreen',
         'img' => [
-            'path' => 'images/mom-logo.png',
+            'path' => 'images/mom-logo2.png',
             'alt' => 'AdminLTE Preloader Image',
             'effect' => 'animation__shake',
             'width' => 60,

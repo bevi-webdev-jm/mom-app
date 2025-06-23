@@ -1,5 +1,9 @@
 @extends('adminlte::page')
 
+@section('adminlte_head')
+    <link rel="icon" href="{{ asset('images/mom-logo2.png') }}" type="image/png" />
+@stop
+
 {{-- Extend and customize the browser title --}}
 
 @section('title')
