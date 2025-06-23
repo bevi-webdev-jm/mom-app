@@ -42,7 +42,7 @@ class MomDetailSubmittedNotification extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
-        $subject = "MOM DETAIL SUBMISSION";
+        $subject = "MOM TOPIC SUBMISSION";
         $greeting = "Hello, {$notifiable->name}";
         $introLines = [
             "A new detail regarding the topic \"<strong>{$this->detail->topic}</strong>\" has been submitted for MOM number <strong>{$this->detail->mom->mom_number}</strong>. Your review is requested.",
@@ -54,7 +54,7 @@ class MomDetailSubmittedNotification extends Notification
             'Target Date' => \Carbon\Carbon::parse($this->detail->target)->format('F j, Y'),
         ];
         $outroLines = [
-            "Please review the submitted MOM detail at your earliest convenience by clicking the button above."
+            "Please review the submitted MOM topic at your earliest convenience by clicking the button above."
         ];
 
         $url = url('mom/' . encrypt($this->detail->mom->id));
@@ -63,7 +63,7 @@ class MomDetailSubmittedNotification extends Notification
             ->subject($subject)
             ->view('pages.mails.mail-template', [
                 'emailTitle' => $subject,
-                'emailHeading' => 'MOM DETAIL SUBMITTED',
+                'emailHeading' => 'MOM TOPIC SUBMITTED',
                 'greeting' => $greeting,
                 'introLines' => $introLines,
                 'outroLines' => $outroLines,

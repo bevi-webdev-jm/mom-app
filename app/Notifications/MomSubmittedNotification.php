@@ -64,7 +64,7 @@ class MomSubmittedNotification extends Notification
             ->subject($subject)
             ->view('pages.mails.mail-template', [
                 'emailTitle' => $subject,
-                'emailHeading' => 'MOM DETAIL SUBMITTED',
+                'emailHeading' => 'MOM SUBMITTED',
                 'greeting' => $greeting,
                 'introLines' => $introLines,
                 'outroLines' => $outroLines,

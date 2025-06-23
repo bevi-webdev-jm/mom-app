@@ -8,12 +8,12 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\Http\Traits\SettingTrait;
 
-class MomDueNotification extends Notification
+class MomCompletedNotification extends Notification
 {
     use Queueable;
     use SettingTrait;
 
-    public $detail;
+    protected $detail;
 
     /**
      * Create a new notification instance.
@@ -34,7 +34,7 @@ class MomDueNotification extends Notification
             return ['database', 'mail'];
         } else {
             return ['database'];
-        } 
+        }
     }
 
     /**
@@ -42,24 +42,23 @@ class MomDueNotification extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
-        $formattedTargetDate = \Carbon\Carbon::parse($this->detail->target_date)->format('F j, Y');
-
-        $subject = "MOM Topic Due Reminder: {$this->detail->mom->mom_number} - {$this->detail->topic}";
+        $subject = "MOM Topic Completed: {$this->detail->mom->mom_number} - {$this->detail->topic}";
         $greeting = "Hello, {$notifiable->name}";
         $introLines = [
-            "This is a reminder that the following MOM topic is approaching its due date:",
+            "The following MOM topic has been marked as completed:",
             "MOM Number: <strong>{$this->detail->mom->mom_number}</strong>",
             "Here are the details:"
         ];
         $tableData = [
             'Topic' => $this->detail->topic,
-            'Next Step' => $this->detail->next_step,
-            'Target Date' => $formattedTargetDate,
-            'Status' => ucfirst($this->detail->status),
+            'Original Next Step' => $this->detail->next_step,
+            'Target Date' => \Carbon\Carbon::parse($this->detail->target)->format('F j, Y'),
+            'Status' => ucfirst($this->detail->status), // Should reflect 'Completed'
+            'Completed On' => $this->detail->updated_at->format('F j, Y'), // Assuming updated_at reflects completion
         ];
         $outroLines = [
-            "Please take the necessary actions to complete this item by its target date of <strong>{$formattedTargetDate}</strong>.",
-            "You can view the full MOM topic details by clicking the button above."
+            "This item is now considered closed. No further action is required for this specific topic.",
+            "You can view the full MOM topic details by clicking the button below."
         ];
 
         $url = url('mom/' . encrypt($this->detail->mom->id));
@@ -68,7 +67,7 @@ class MomDueNotification extends Notification
             ->subject($subject)
             ->view('pages.mails.mail-template', [
                 'emailTitle' => $subject,
-                'emailHeading' => 'MOM TOPIC DUE REMINDER',
+                'emailHeading' => 'MOM TOPIC COMPLETED',
                 'greeting' => $greeting,
                 'introLines' => $introLines,
                 'outroLines' => $outroLines,
@@ -84,10 +83,9 @@ class MomDueNotification extends Notification
      */
     public function toArray(object $notifiable): array
     {
-        $formattedTargetDate = \Carbon\Carbon::parse($this->detail->target_date)->format('M j, Y');
         return [
-            'title' => "MOM Topiuc Due: {$this->detail->topic}",
-            'message' => "The MOM topic '{$this->detail->topic}' for MOM #{$this->detail->mom->mom_number} is due on {$formattedTargetDate}.",
+            'title' => "MOM Topic Completed",
+            'message' => "The MOM topic '{$this->detail->topic}' for MOM #{$this->detail->mom->mom_number} has been marked as completed.",
             'action_url' => url('mom/'.encrypt($this->detail->mom->id)),
         ];
     }

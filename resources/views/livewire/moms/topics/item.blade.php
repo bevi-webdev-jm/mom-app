@@ -235,9 +235,9 @@
                     @php
                         $action = $detail->actions()->first();
                     @endphp
-                    <b>{{__('adminlte::moms.actions_taken')}}:</b> {{$action->action_taken}}
+                    <b>{{__('adminlte::moms.actions_taken')}}:</b> {{$action->action_taken ?? '-'}}
                     <br>
-                    <b>{{__('adminlte::utilities.remarks')}}:</b> {{$action->remarks}}
+                    <b>{{__('adminlte::utilities.remarks')}}:</b> {{$action->remarks ?? '-'}}
                     <br>
 
                     <strong class="text-lg">{{__('adminlte::moms.attachments')}}</strong>
