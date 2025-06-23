@@ -96,8 +96,7 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Mom');
     }
 
-    public function posts(): HasMany
-    {
-        return $this->hasMany(Post::class); // Assuming you have a Post model
+    public function mom_details() {
+        return $this->belongsToMany('App\Models\MomDetail', 'mom_responsibles');
     }
 }

@@ -9,12 +9,26 @@
 {{-- Content body: main page content --}}
 
 @section('content_body')
-    <div class="hero-section card p-4 shadow-sm text-center">
+    <div class="hero-section card p-4 shadow-sm">
         <h2 class="welcome-message">Welcome to the Minutes of Meeting System</h2>
         <p class="intro-text">
-            Efficiently record meeting minutes, manage tasks assigned during meetings, and receive timely notifications about your responsibilities.
+            This system helps you efficiently record meeting minutes, manage tasks assigned during meetings, and receive timely notifications about your responsibilities.
             Stay organized and never miss an important update or deadline.
         </p>
+
+        <div class="additional-info mt-4">
+            <h4>Key Features</h4>
+            <ul class="info-list text-left mx-auto" style="max-width: 500px;">
+                <li>Accurate recording and archiving of meeting minutes.</li>
+                <li>Task management with clear assignment and tracking.</li>
+                <li>Automated notifications to users about their tasks and deadlines.</li>
+                <li>Easy access to past meetings and task statuses.</li>
+            </ul>
+        </div>
+
+        <div class="logo-container mt-4 text-center">
+            <img src="{{asset('images/mom-logo2.png')}}" alt="logo" class="logo-img">
+        </div>
 
         @auth
             <a href="{{ url('/home') }}" class="btn btn-primary btn-sm mt-3">
@@ -55,11 +69,13 @@
             margin-bottom: 1.5rem;
             color: #495057;
         }
-        .btn {
-            min-width: 100px;
+        .test-notification-btn {
+            margin-bottom: 1.5rem;
         }
-        .ml-2 {
-            margin-left: 0.5rem;
+        .logo-img {
+            max-height: 400px;
+            width: auto;
+            display: inline-block;
         }
     </style>
 @endpush
