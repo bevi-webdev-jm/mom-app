@@ -8,7 +8,13 @@
             <br>
             <b>{{__('adminlte::moms.next_step')}}:</b> {{$detail->next_step}}
             <br>
-            <b>{{__('adminlte::moms.responsible')}}:</b> {{!empty($responsible_id) ? (collect($responsibles)->where('id', $responsible_id)->first()['name'] ?? '-') : '-'}}
+            <b>{{ __('adminlte::moms.responsible') }}:</b>
+            @if($responsible_id)
+                <img src="{{ \App\Models\User::find($responsible_id)->adminlte_image() }}" alt="user-img" class="item-user-img">
+                {{ $responsibles->where('id', $responsible_id)->first()->name ?? '-' }}
+            @else
+                -
+            @endif
             <br>
             <b>{{__('adminlte::utilities.status')}}:</b> <span class="badge badge-{{$status_arr[$detail->status]}}">{{$detail->status}}</span>
             @if(!empty($this->days_completed))
@@ -286,6 +292,12 @@
         }
         .topic-assigned {
             background-color:rgb(236, 255, 254) !important;
+        }
+        .item-user-img {
+            border-radius: 50%;
+            object-fit: cover;
+            width: 30px;
+            height: 30px;
         }
     </style>
 </div>
