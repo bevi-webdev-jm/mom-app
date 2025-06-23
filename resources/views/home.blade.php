@@ -9,61 +9,69 @@
 {{-- Content body: main page content --}}
 
 @section('content_body')
-    <div class="hero-section card p-4 shadow-sm">
-        <h2 class="welcome-message">Welcome to the Minutes of Meeting System</h2>
-        <p class="intro-text">
-            This system helps you efficiently record meeting minutes, manage tasks assigned during meetings, and receive timely notifications about your responsibilities.
-            Stay organized and never miss an important update or deadline.
-        </p>
-
-        <div class="additional-info mt-4">
-            <h4>Key Features</h4>
-            <ul class="info-list text-left mx-auto" style="max-width: 500px;">
-                <li>Accurate recording and archiving of meeting minutes.</li>
-                <li>Task management with clear assignment and tracking.</li>
-                <li>Automated notifications to users about their tasks and deadlines.</li>
-                <li>Easy access to past meetings and task statuses.</li>
-            </ul>
-        </div>
-
-        <div class="logo-container mt-4 text-center">
-            <img src="{{asset('images/mom-logo2.png')}}" alt="logo" class="logo-img">
-        </div>
-    </div>
-
     <a href="{{route('test-notification')}}" class="btn btn-primary btn-sm test-notification-btn">
         {{ __('adminlte::adminlte.test_notification') }}
     </a>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <livewire:dashboard.status/>
+        </div>
+        <div class="col-lg-6">
+            <livewire:dashboard.user-completed/>
+        </div>
+    </div>
+    
+
 @stop
 
 {{-- Push extra CSS --}}
 
 @push('css')
     <style>
-        .hero-section {
-            background-color: #fff8f0;
-            border-radius: 8px;
-            max-width: 700px;
-            margin: 2rem auto;
+        .highcharts-figure,
+        .highcharts-data-table table {
+            min-width: 320px;
+            /* max-width: 660px; */
+            margin: 1em auto;
+            margin-bottom: 0;
+            margin-top: 0;
+        }
+
+        .highcharts-data-table table {
+            font-family: Verdana, sans-serif;
+            border-collapse: collapse;
+            border: 1px solid #ebebeb;
+            margin: 10px auto;
             text-align: center;
+            width: 100%;
+            max-width: 500px;
         }
-        .welcome-message {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            color: #6c757d;
+
+        .highcharts-data-table caption {
+            padding: 1em 0;
+            font-size: 1.2em;
+            color: #555;
         }
-        .intro-text {
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
-            color: #495057;
+
+        .highcharts-data-table th {
+            font-weight: 600;
+            padding: 0.5em;
         }
-        .test-notification-btn {
-            margin-bottom: 1.5rem;
+
+        .highcharts-data-table td,
+        .highcharts-data-table th,
+        .highcharts-data-table caption {
+            padding: 0.5em;
         }
-        .logo-img {
-            max-height: 400px;
-            width: auto;
-            display: inline-block;
+
+        .highcharts-data-table thead tr,
+        .highcharts-data-table tbody tr:nth-child(even) {
+            background: #f8f8f8;
+        }
+
+        .highcharts-data-table tr:hover {
+            background: #f1f7ff;
         }
     </style>
 @endpush
@@ -71,4 +79,14 @@
 {{-- Push extra scripts --}}
 
 @push('js')
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script>
+    
+
+    
+
+</script>
 @endpush
