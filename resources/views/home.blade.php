@@ -27,7 +27,7 @@
         </div>
 
         <div class="logo-container mt-4 text-center">
-            <img src="{{asset('images/mom-logo.png')}}" alt="logo" class="logo-img">
+            <img src="{{asset('images/mom-logo2.png')}}" alt="logo" class="logo-img">
         </div>
     </div>
 

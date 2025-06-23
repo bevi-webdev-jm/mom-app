@@ -45,7 +45,7 @@ class MomDetailSubmittedNotification extends Notification
         $subject = "MOM TOPIC SUBMISSION";
         $greeting = "Hello, {$notifiable->name}";
         $introLines = [
-            "A new detail regarding the topic \"<strong>{$this->detail->topic}</strong>\" has been submitted for MOM number <strong>{$this->detail->mom->mom_number}</strong>. Your review is requested.",
+            "A new Mom Topic regarding the topic \"<strong>{$this->detail->topic}</strong>\" has been submitted for MOM number <strong>{$this->detail->mom->mom_number}</strong>. Your review is requested.",
             "Here are the details:"
         ];
         $tableData = [

@@ -1,7 +1,7 @@
 <div>
     
     @if($view == 0)
-        <div class="callout callout-info topic-item" 
+        <div class="callout callout-info topic-item {{in_array(auth()->user()->id, $detail->responsibles()->pluck('id')->toArray()) ? 'topic-assigned' : ''}}" 
             wire:click="changeView(1)" >
             <h5><b>{{__('adminlte::moms.target_date')}}</b>: {{$detail->target_date}}</h5>
             <b>{{__('adminlte::moms.topic')}}:</b> {{$detail->topic}}
@@ -19,7 +19,7 @@
         </div>
     @else
         <div class="card">
-            <div class="card-header callout callout-info mb-0 pb-2">
+            <div class="card-header callout callout-info mb-0 pb-2 {{in_array(auth()->user()->id, $detail->responsibles()->pluck('id')->toArray()) ? 'topic-assigned' : ''}}">
 
                 @if(!empty($messages['success']))
                     <div class="alert alert-success">
@@ -283,6 +283,9 @@
         .topic-item:hover {
             transform: scale(1.01);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .topic-assigned {
+            background-color:rgb(236, 255, 254) !important;
         }
     </style>
 </div>
