@@ -14,8 +14,8 @@
                     <a href="#" class="dropdown-item" wire:click.prevent="readNotif('{{$notification->id}}')">
                         
                         <div class="media">
-                            <div class="media-body">
-                                <h3 class="dropdown-item-title font-weight-bold">
+                            <div class="media-body" style="width: 100%;">
+                                <h3 class="dropdown-item-title font-weight-bold" style="width: 100%; white-space: normal; word-wrap: break-word;">
                                     <i class="fas fa-envelope mr-2"></i>
                                     {{$notification->data['title']}}
                                 </h3>

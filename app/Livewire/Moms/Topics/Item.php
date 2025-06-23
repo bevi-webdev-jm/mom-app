@@ -7,6 +7,7 @@ use Livewire\WithFileUploads;
 use Livewire\Attributes\On;
 
 use App\Helpers\FileSavingHelper;
+use App\Helpers\NotificationHelper;
 use Carbon\Carbon;
 
 use App\Models\MomAction;
@@ -214,6 +215,9 @@ class Item extends Component
         ]);
 
         $changes_arr['changes'] = $this->detail->getChanges();
+
+        // notification
+        NotificationHelper::notifyMomDetailCompleted($this->detail);
 
         // logs
         activity('updated')

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Log;
 
 use App\Notifications\MomSubmittedNotification;
 use App\Notifications\MomDetailSubmittedNotification;
+use App\Notifications\MomCompletedNotification;
 
 class NotificationHelper {
 
@@ -34,6 +35,25 @@ class NotificationHelper {
             self::sendNotification($responsibles, MomDetailSubmittedNotification::class, $detail);
         }
 
+    }
+
+    public static function notifyMomDetailCompleted($detail) {
+        $users = $detail->mom->participants;
+        // if current user is in the participants remove them from the list
+        if ($users instanceof \Illuminate\Support\Collection) {
+            // Remove the current user from the collection if they exist
+            $currentUser = auth()->user();
+            $users = $users->reject(function ($participant) use ($currentUser) {
+                return $participant->id === $currentUser->id;
+            });
+        } elseif (is_array($users)) {
+            // Handle if $users is an array of user objects or IDs
+            $users = array_filter($users, function ($participant) use ($currentUser) {
+                return is_object($participant) && isset($participant->id) && $participant->id !== $currentUser->id;
+            });
+        }
+
+        self::sendNotification($users, MomCompletedNotification::class, $detail);
     }
 
     
