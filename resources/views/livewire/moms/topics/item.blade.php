@@ -11,7 +11,7 @@
             <b>{{ __('adminlte::moms.responsible') }}:</b>
             @if($responsible_id)
                 <img src="{{ \App\Models\User::find($responsible_id)->adminlte_image() }}" alt="user-img" class="item-user-img">
-                {{ $responsibles->where('id', $responsible_id)->first()->name ?? '-' }}
+                {{ collect($responsibles)->where('id', $responsible_id)->first()['name'] ?? '-' }}
             @else
                 -
             @endif
