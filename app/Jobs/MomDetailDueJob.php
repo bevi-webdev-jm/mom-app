@@ -34,11 +34,11 @@ class MomDetailDueJob implements ShouldQueue
     public function handle(): void
     {
         $current_date = Carbon::today();
-        $three_days_later = Carbon::today()->addDays($this->getNotificationDaysBefore());
+        $days_before = Carbon::today()->addDays($this->getNotificationDaysBefore());
 
-        // check all details with less than 3 days
+        // check all details within the number of days specified
         $details = MomDetail::where('status', '<>', 'completed')
-            ->whereBetween('target_date', [$current_date, $three_days_later])
+            ->whereBetween('target_date', [$current_date, $days_before])
             ->get();
 
         foreach($details as $detail) {
