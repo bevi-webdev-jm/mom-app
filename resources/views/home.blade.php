@@ -72,12 +72,12 @@
         :root,
         .highcharts-light {
             /* Colors for data series and points */
-            --highcharts-color-0: #69a285;
-            --highcharts-color-1: #ffbb07;
+            --highcharts-color-0:rgb(16, 38, 99);
+            --highcharts-color-1:rgb(47, 156, 4);
             --highcharts-color-2: #727e8d;
             --highcharts-color-3: #fc6556;
-            --highcharts-color-5: #404040;
-            --highcharts-neutral-color-100: #000;
+            --highcharts-color-5:rgb(36, 35, 35);
+            --highcharts-neutral-color-100:rgb(0, 0, 0);
             --highcharts-neutral-color-5: #f2f2f2;
             --highcharts-neutral-color-3: #f7f7f7;
             --highcharts-neutral-color-0: #fff;
@@ -89,9 +89,9 @@
             --gray: #ccc;
         }
 
-        @media (prefers-color-scheme: dark) {
+        /* @media (prefers-color-scheme: dark) {
             
-        }
+        } */
 
         #container-3 {
             /* background-color: var(--highcharts-neutral-color-5); */

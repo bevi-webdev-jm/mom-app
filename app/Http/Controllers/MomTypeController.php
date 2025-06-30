@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Mom;
 use App\Models\MomType;
 
 use App\Http\Requests\MomTypeAddRequest;
@@ -14,6 +15,14 @@ use App\Http\Traits\SettingTrait;
 class MomTypeController extends Controller
 {
     use SettingTrait;
+
+    public $status_arr = [
+        'draft'         => 'secondary',
+        'submitted'     => 'info',
+        'ongoing'       => 'warning',
+        'completed'     => 'success',
+    ];
+
     /**
      * Display a listing of the resource.
      */
@@ -67,10 +76,29 @@ class MomTypeController extends Controller
      */
     public function show($id)
     {
+        $search = trim(request()->get('search'));
+
         $type = MomType::findOrfail(decrypt($id));
 
+        $moms = Mom::orderBy('mom_number', 'DESC')
+            ->where('mom_type_id', $type->id)
+            ->when(!empty($search), function($query) use($search) {
+                $query->where(function($qry) use($search) {
+                    $qry->where('mom_number', 'LIKE', '%'.$search.'%')
+                        ->orWhere('agenda', 'LIKE', '%'.$search.'%')
+                        ->orWhere('meeting_date', 'LIKE', '%'.$search.'%')
+                        ->orWhere('status', 'LIKE', '%'.$search.'%');
+                });
+            })
+            ->paginate($this->getDataPerPage())
+            ->appends(request()->query());
+
+
         return view('pages.types.show')->with([
-            'mom_type' => $type
+            'mom_type' => $type,
+            'moms' => $moms,
+            'search' => $search,
+            'status_arr' => $this->status_arr
         ]);
     }
 

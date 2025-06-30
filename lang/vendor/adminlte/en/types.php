@@ -4,6 +4,7 @@ return [
     'type'          => 'Type',
     'types'         => 'Types',
     'type_list'     => 'Type List',
+    'type_details'  => 'Type Details',
     'new_type'      => 'New Type',
     'save_type'     => 'Save Type',
     'update_type'   => 'Update Type',
