@@ -20,4 +20,8 @@ class MomType extends Model
     {
         return Session::get('db_connection', 'mysql');
     }
+
+    public function moms() {
+        return $this->hasMany('App\Models\Mom');
+    }
 }

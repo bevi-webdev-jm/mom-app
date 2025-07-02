@@ -12,6 +12,7 @@ use Carbon\Carbon;
 
 use App\Models\MomAction;
 use App\Models\MomActionAttachment;
+use App\Models\MomApproval;
 
 class Item extends Component
 {
@@ -201,6 +202,13 @@ class Item extends Component
         $this->checkDaysExtended();
         $this->checkMomStatus();
 
+        $approval = MomApproval::create([
+            'mom_id' => $this->detail->mom->id,
+            'user_id' => auth()->user()->id,
+            'status' => 'ongoing',
+            'remarks' => 'Topic: '.$this->detail->topic.' Action taken: '.$this->actions_taken.' Remarks: '.$this->remarks
+        ]);
+
         $this->messages['success'] = __('adminlte::moms.action_saved');
     }
 
@@ -224,6 +232,13 @@ class Item extends Component
             ->performedOn($this->detail)
             ->withProperties($changes_arr)
             ->log(':causer.name has completed topic :subject.topic');
+ 
+        $approval = MomApproval::create([
+            'mom_id' => $this->detail->mom->id,
+            'user_id' => auth()->user()->id,
+            'status' => 'completed',
+            'remarks' => auth()->user()->name.' has completed topic.'
+        ]);
         
         $this->checkDaysExtended();
         $this->checkMomStatus();
@@ -233,6 +248,13 @@ class Item extends Component
         $attachment = MomActionAttachment::findOrFail($attachment_id);
         FileSavingHelper::deleteFile($attachment->path);
         $attachment->delete();
+
+        $approval = MomApproval::create([
+            'mom_id' => $this->detail->mom->id,
+            'user_id' => auth()->user()->id,
+            'status' => NULL,
+            'remarks' => auth()->user()->name.' removed attachment'
+        ]);
     }
 
     private function checkMomStatus() {
