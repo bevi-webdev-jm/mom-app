@@ -46,7 +46,7 @@ class MomController extends Controller
 
         // Query MOMs ordered by mom_number descending with related user
         $moms = Mom::orderBy('mom_number', 'DESC')
-            ->with('user')
+            ->with('user', 'type')
             // Apply search filters on multiple fields and related models
             ->when(!empty($search), function($query) use($search) {
                 $query->where('mom_number', 'LIKE', '%'.$search.'%')

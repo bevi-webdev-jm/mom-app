@@ -7,8 +7,9 @@
 
 {{-- Content body: main page content --}}
 @section('content_body')
+
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
                     <div class="row">
@@ -66,6 +67,10 @@
                     </ul>
                 </div>
             </div>
+        </div>
+
+        <div class="col-md-6">
+            <livewire:moms.history :mom="$mom"/>
         </div>
 
         <div class="col-12">

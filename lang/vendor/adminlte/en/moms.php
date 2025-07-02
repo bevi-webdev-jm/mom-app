@@ -33,6 +33,9 @@ return [
     'attachments'           => 'Attachments',
     'attachment_file'       => 'Attachment File',
 
+    'mom_history'           => 'Minutes Of Meeting History',
+    'no_mom_history'        => 'No minutes of meeting history found',
+
     'completed'             => 'Completed',
     'days_completed'        => 'Days Completed',
     'completed_date'        => 'Completed Date',

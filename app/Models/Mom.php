@@ -27,7 +27,7 @@ class Mom extends Model
     }
 
     public function type() {
-        return $this->belongsTo('App\Models\MomType');
+        return $this->belongsTo('App\Models\MomType', 'mom_type_id');
     }
 
     public function details() {
@@ -36,6 +36,10 @@ class Mom extends Model
 
     public function participants() {
         return $this->belongsToMany('App\Models\User', 'mom_participants');
+    }
+
+    public function approvals() {
+        return $this->hasMany('App\Models\MomApproval');
     }
 
     public function user() {

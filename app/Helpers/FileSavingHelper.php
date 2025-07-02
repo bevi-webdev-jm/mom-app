@@ -17,13 +17,22 @@ class FileSavingHelper {
             chmod($fullPath, 0755);
         }
 
-        // Generate a unique filename
-        $filename = time() . '_' . $file->getClientOriginalName();
+        // Get the original filename from the uploaded file.
+        $originalName = $file->getClientOriginalName();
 
-        // Move file using Laravel's Storage (public disk)
+        // Sanitize the filename.
+        // This regular expression replaces any character that is not a word character (\w includes a-z, A-Z, 0-9, _),
+        // a dot (.), or a hyphen (-) with an underscore (_).
+        // The 'u' flag ensures it correctly handles Unicode (UTF-8) characters.
+        $sanitizedName = preg_replace('/[^\w.\-]+/u', '_', $originalName);
+
+        // Generate a unique filename by prepending the current timestamp.
+        $filename = time() . '_' . $sanitizedName;
+
+        // Move the file to the specified path using Laravel's Storage facade
+        // The 'uploads' disk should be configured in your config/filesystems.php.
         $path = $file->storeAs($relativePath, $filename, 'uploads');
 
-        // Return the saved file path
         return "uploads/" . $path;
     }
 
