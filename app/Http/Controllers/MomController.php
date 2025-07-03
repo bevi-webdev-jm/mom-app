@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Mom;
+use App\Models\MomDetail;
+
 use App\Http\Traits\SettingTrait;
 use Illuminate\Support\Facades\Session;
 use App\Helpers\MomNumberHelper;
@@ -186,6 +188,15 @@ class MomController extends Controller
     public function upload() {
         // Return the MOM upload view
         return view('pages.moms.upload');
+    }
+
+    public function topic($id) {
+        $detail = MomDetail::findOrFail(decrypt($id));
+
+        return view('pages.moms.topic')->with([
+            'detail' => $detail,
+            'status_arr' => $this->status_arr
+        ]);
     }
     
 }

@@ -61,7 +61,7 @@ class MomCompletedNotification extends Notification
             "You can view the full MOM topic details by clicking the button below."
         ];
 
-        $url = url('mom/' . encrypt($this->detail->mom->id));
+        $url = url('mom-topic/' . encrypt($this->detail->id));
 
         return (new MailMessage)
             ->subject($subject)
@@ -86,7 +86,7 @@ class MomCompletedNotification extends Notification
         return [
             'title' => "MOM Topic Completed",
             'message' => "The MOM topic '{$this->detail->topic}' for MOM #{$this->detail->mom->mom_number} has been marked as completed.",
-            'action_url' => url('mom/'.encrypt($this->detail->mom->id)),
+            'action_url' => url('mom-topic/'.encrypt($this->detail->id)),
         ];
     }
 }

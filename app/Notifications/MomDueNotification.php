@@ -62,7 +62,7 @@ class MomDueNotification extends Notification
             "You can view the full MOM topic details by clicking the button above."
         ];
 
-        $url = url('mom/' . encrypt($this->detail->mom->id));
+        $url = url('mom-topic/' . encrypt($this->detail->id));
 
         return (new MailMessage)
             ->subject($subject)
@@ -88,7 +88,7 @@ class MomDueNotification extends Notification
         return [
             'title' => "MOM Topiuc Due: {$this->detail->topic}",
             'message' => "The MOM topic '{$this->detail->topic}' for MOM #{$this->detail->mom->mom_number} is due on {$formattedTargetDate}.",
-            'action_url' => url('mom/'.encrypt($this->detail->mom->id)),
+            'action_url' => url('mom-topic/'.encrypt($this->detail->id)),
         ];
     }
 }

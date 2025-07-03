@@ -57,7 +57,7 @@ class MomDetailSubmittedNotification extends Notification
             "Please review the submitted MOM topic at your earliest convenience by clicking the button above."
         ];
 
-        $url = url('mom/' . encrypt($this->detail->mom->id));
+        $url = url('mom-topic/' . encrypt($this->detail->id));
 
         return (new MailMessage)
             ->subject($subject)
@@ -82,7 +82,7 @@ class MomDetailSubmittedNotification extends Notification
         return [
             'title' => 'Mom Submitted',
             'message' => 'A MOM detail has been submitted and requires your attention.',
-            'action_url' => url('mom/'.encrypt($this->detail->mom->id)),
+            'action_url' => url('mom-topic/'.encrypt($this->detail->id)),
         ];
     }
 }

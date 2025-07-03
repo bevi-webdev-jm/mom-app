@@ -62,6 +62,7 @@ Route::group(['middleware' => ['auth', 'optimizeImages']], function() {
         Route::get('mom/upload', [MomController::class, 'upload'])->name('mom.upload')->middleware('permission:mom upload');
         Route::get('mom/{id}', [MomController::class, 'show'])->name('mom.show');
         Route::get('mom/{id}/edit', [MomController::class, 'edit'])->name('mom.edit')->middleware('permission:mom edit');
+        Route::get('mom-topic/{id}', [MomController::class, 'topic'])->name('mom.topic');
     });
 
     // MOM TYPES ROUTES
