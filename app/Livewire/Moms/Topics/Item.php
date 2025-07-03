@@ -158,7 +158,7 @@ class Item extends Component
         }
     }
 
-    public function saveAction() {
+    public function saveAction($status = '') {
         $this->validate([
             'actions_taken' => [
                 'required'
@@ -202,18 +202,20 @@ class Item extends Component
         $this->checkDaysExtended();
         $this->checkMomStatus();
 
-        $approval = MomApproval::create([
-            'mom_id' => $this->detail->mom->id,
-            'user_id' => auth()->user()->id,
-            'status' => 'ongoing',
-            'remarks' => 'Topic: '.$this->detail->topic.' Action taken: '.$this->actions_taken.' Remarks: '.$this->remarks
-        ]);
+        if(empty($status) && $status != 'completed') {
+            $approval = MomApproval::create([
+                'mom_id' => $this->detail->mom->id,
+                'user_id' => auth()->user()->id,
+                'status' => 'ongoing',
+                'remarks' => 'Topic: '.$this->detail->topic.' Action taken: '.$this->actions_taken.' Remarks: '.$this->remarks
+            ]);
+        }
 
         $this->messages['success'] = __('adminlte::moms.action_saved');
     }
 
     public function completeTopic() {
-        $this->saveAction();
+        $this->saveAction('completed');
 
         $changes_arr['old'] = $this->detail->getOriginal();
         
@@ -237,7 +239,7 @@ class Item extends Component
             'mom_id' => $this->detail->mom->id,
             'user_id' => auth()->user()->id,
             'status' => 'completed',
-            'remarks' => auth()->user()->name.' has completed topic.'
+            'remarks' => auth()->user()->name.' has a completed topic. '.$detail->topic
         ]);
         
         $this->checkDaysExtended();

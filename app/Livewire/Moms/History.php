@@ -27,7 +27,7 @@ class History extends Component
             ->groupBy('date')
             ->orderBy('date', 'DESC')
             ->where('mom_id', $this->mom->id)
-            ->paginate(5, ['*'], 'mom-approval-page');
+            ->paginate(2, ['*'], 'mom-approval-page');
 
         $approval_data = [];
         foreach($approval_dates as $data) {

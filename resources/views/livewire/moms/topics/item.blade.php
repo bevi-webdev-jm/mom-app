@@ -102,6 +102,11 @@
                             <i class="fa fa-times"></i>
                             {{__('adminlte::utilities.close')}}
                         </button>
+                       @if(!request()->routeIs('mom.topic'))
+                            <a href="{{ route('mom.topic', encrypt($detail->id)) }}" class="btn btn-primary btn-xs">
+                                View Details
+                            </a>
+                        @endif
 
                         <br>
                     @endif
@@ -229,52 +234,56 @@
                     
                 </div>
             @else
-            <div class="card-body callout callout-warning mb-0">
-                @if($type == 'show')
-                    <button class="btn btn-secondary btn-xs" wire:click.prevent="changeView(0)">
-                        <i class="fa fa-times"></i>
-                        {{__('adminlte::utilities.close')}}
-                    </button>
+                <div class="card-body callout callout-warning mb-0">
+                    @if($type == 'show')
+                        <button class="btn btn-secondary btn-xs" wire:click.prevent="changeView(0)">
+                            <i class="fa fa-times"></i>
+                            {{__('adminlte::utilities.close')}}
+                        </button>
+                        @if(!request()->routeIs('mom.topic'))
+                            <a href="{{ route('mom.topic', encrypt($detail->id)) }}" class="btn btn-primary btn-xs">
+                                View Details
+                            </a>
+                        @endif
+                        <br>
 
-                    <br>
+                        @php
+                            $action = $detail->actions()->first();
+                        @endphp
+                        <b>{{__('adminlte::moms.actions_taken')}}:</b> {{$action->action_taken ?? '-'}}
+                        <br>
+                        <b>{{__('adminlte::utilities.remarks')}}:</b> {{$action->remarks ?? '-'}}
+                        <br>
 
-                    @php
-                        $action = $detail->actions()->first();
-                    @endphp
-                    <b>{{__('adminlte::moms.actions_taken')}}:</b> {{$action->action_taken ?? '-'}}
-                    <br>
-                    <b>{{__('adminlte::utilities.remarks')}}:</b> {{$action->remarks ?? '-'}}
-                    <br>
+                        <strong class="text-lg">{{__('adminlte::moms.attachments')}}</strong>
+                        <hr class="mt-0">
 
-                    <strong class="text-lg">{{__('adminlte::moms.attachments')}}</strong>
-                    <hr class="mt-0">
-
-                    <table class="table table-bordered table-sm">
-                        <thead>
-                            <tr>
-                                <th>{{__('adminlte::moms.attachment_file')}}</th>
-                                <th>{{__('adminlte::utilities.remarks')}}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if(!empty($detail->actions->count()) && !empty($detail->actions()->first()->attachments()->count()))
-                                @foreach($detail->actions()->first()->attachments as $attachment)
-                                    <tr>
-                                        <td>
-                                            <a href="{{asset($attachment->path)}}" class="text-primary">
-                                                {{$attachment->path}}
-                                            </a>
-                                        </td>
-                                        <td>
-                                            {{$attachment->remarks}}
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            @endif
-                        </tbody>
-                    </table>
-                @endif
-            </div>
+                        <table class="table table-bordered table-sm">
+                            <thead>
+                                <tr>
+                                    <th>{{__('adminlte::moms.attachment_file')}}</th>
+                                    <th>{{__('adminlte::utilities.remarks')}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if(!empty($detail->actions->count()) && !empty($detail->actions()->first()->attachments()->count()))
+                                    @foreach($detail->actions()->first()->attachments as $attachment)
+                                        <tr>
+                                            <td>
+                                                <a href="{{asset($attachment->path)}}" class="text-primary">
+                                                    {{$attachment->path}}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                {{$attachment->remarks}}
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endif
+                            </tbody>
+                        </table>
+                    @endif
+                </div>
             @endif
         </div>
     @endif
@@ -298,6 +307,10 @@
             object-fit: cover;
             width: 30px;
             height: 30px;
+        }
+        .callout a {
+            text-decoration: none;
+            color: white;
         }
     </style>
 </div>
