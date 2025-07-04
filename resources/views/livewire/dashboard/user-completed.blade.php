@@ -17,12 +17,7 @@
                         type: 'bar'
                     },
                     title: {
-                        text: 'Historic World Population by Region'
-                    },
-                    subtitle: {
-                        text: 'Source: <a ' +
-                            'href="https://en.wikipedia.org/wiki/List_of_continents_and_continental_subregions_by_population"' +
-                            'target="_blank">Wikipedia.org</a>'
+                        text: 'Topics vs Completed'
                     },
                     xAxis: {
                         categories: data.categories,
@@ -70,7 +65,14 @@
                     credits: {
                         enabled: false
                     },
-                    series: data.series
+                    series: data.series.map(s => {
+                        if (s.name.toLowerCase() === 'completed') {
+                            s.color = 'green';
+                        } else {
+                            s.color = 'navy';
+                        }
+                        return s;
+                    })
                 });
             });
         });

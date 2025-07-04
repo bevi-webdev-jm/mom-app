@@ -20,7 +20,7 @@
             @if(!empty($this->days_completed))
                 <br>
                 <b>{{__('adminlte::moms.days_completed')}}:</b>
-                {{$days_completed}}
+                {{$days_completed}} {{$days_completed >= 1 ? 'early' : 'late'}}
             @endif
         </div>
     @else
