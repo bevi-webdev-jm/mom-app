@@ -16,11 +16,11 @@
                 -
             @endif
             <br>
-            <b>{{__('adminlte::utilities.status')}}:</b> <span class="badge badge-{{$status_arr[$detail->status]}}">{{$detail->status}}</span>
+            <b>{{__('adminlte::utilities.status')}}:</b> <span class="badge badge-{{$status_arr[$status]}}">{{$status}}</span>
             @if(!empty($this->days_completed))
                 <br>
                 <b>{{__('adminlte::moms.days_completed')}}:</b>
-                {{$days_completed}} {{$days_completed >= 1 ? 'early' : 'late'}}
+                {{$days_completed}} {{$days_completed >= 1 ? 'Days early' : 'Days late'}}
             @endif
         </div>
     @else
@@ -84,7 +84,7 @@
                     <br>
                     <b>{{__('adminlte::moms.responsible')}}:</b> {{$detail->responsibles()->first()->name ?? '-'}}
                     <br>
-                    <b>{{__('adminlte::utilities.status')}}:</b> <span class="badge badge-{{$status_arr[$detail->status]}}">{{$detail->status}}</span>
+                    <b>{{__('adminlte::utilities.status')}}:</b> <span class="badge badge-{{$status_arr[$status]}}">{{$status}}</span>
                     <br>
                     <b>{{__('adminlte::moms.completed_date')}}:</b> {{$detail->completed_date}}
                     @if(!empty($this->days_completed))
