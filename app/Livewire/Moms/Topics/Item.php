@@ -239,7 +239,7 @@ class Item extends Component
             'mom_id' => $this->detail->mom->id,
             'user_id' => auth()->user()->id,
             'status' => 'completed',
-            'remarks' => auth()->user()->name.' has a completed topic. '.$detail->topic
+            'remarks' => auth()->user()->name.' has a completed topic. '.$this->detail->topic
         ]);
         
         $this->checkDaysExtended();

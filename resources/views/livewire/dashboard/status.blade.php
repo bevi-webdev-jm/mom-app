@@ -11,6 +11,7 @@
         document.addEventListener('livewire:init', function () {
             window.addEventListener('update-chart-1', event => {
                 const data = event.detail.data;
+                const total = event.detail.totalTopic;
 
                 Highcharts.chart('container-1', {
                     chart: {
@@ -26,7 +27,7 @@
                                     customLabel = chart.options.chart.custom.label =
                                         chart.renderer.label(
                                             'Total<br/>' +
-                                            '<strong>2 877 820</strong>'
+                                            '<strong>'+total+'</strong>'
                                         )
                                             .css({
                                                 color: '#000',

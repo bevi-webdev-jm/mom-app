@@ -18,14 +18,16 @@ class Status extends Component
         ->get();
 
         $chartData = [];
+        $totalTopic = 0;
         foreach($data as $val) {
             $chartData[] = [
                 'name' => $val->status,
                 'y' => $val->total
             ];
+            $totalTopic += $val->total;
         }
 
-        $this->dispatch('update-chart-1', data: $chartData);
+        $this->dispatch('update-chart-1', data: $chartData, totalTopic: $totalTopic);
 
         return view('livewire.dashboard.status');
     }
