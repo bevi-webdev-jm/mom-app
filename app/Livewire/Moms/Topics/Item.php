@@ -30,11 +30,12 @@ class Item extends Component
 
     public $messages = [];
 
+    public $status;
     public $status_arr = [
         'open' => 'secondary',
-        'ongoing' => 'info',
+        'overdue' => 'danger',
         'extended' => 'warning',
-        'completed' => 'success',
+        'on-time' => 'success',
     ];
 
     public function render()
@@ -46,6 +47,7 @@ class Item extends Component
         $this->detail = $detail;
         $this->responsibles = $responsibles;
         $this->type = $type;
+        $this->status = $detail->status;
         
         $this->target_date = $detail->target_date;
         $this->topic = $detail->topic;
@@ -130,21 +132,24 @@ class Item extends Component
             if ($targetDate->lt($currentDate)) {
                 // Target date is **before** current date (past due)
                 $this->detail->update([
-                    'status' => 'extended'
+                    'status' => 'overdue'
                 ]);
+                $this->status = 'overdue';
             } elseif ($targetDate->gt($currentDate)) {
                 // Target date is **after** current date (still time left)
                 if(!empty($this->detail->actions->count())) {
                     $this->detail->update([
-                        'status' => 'ongoing'
+                        'status' => 'open'
                     ]);
+                    $this->status = 'open';
                 }
             } else {
                 // Target date is **today**
                 if(!empty($this->detail->actions->count())) {
                     $this->detail->update([
-                        'status' => 'ongoing'
+                        'status' => 'open'
                     ]);
+                    $this->status = 'open';
                 }
             }
         } else {
@@ -155,6 +160,13 @@ class Item extends Component
             $daysToComplete = $completedDate->diffInDays($targetDate, false); // false = returns negative if completed before target
 
             $this->days_completed = $daysToComplete;
+
+            // check if completed beyond target date
+            if($daysToComplete > 0) {
+                $this->status = 'on-time';
+            } elseif($daysToComplete < 0) {
+                $this->status = 'extended';
+            }
         }
     }
 
