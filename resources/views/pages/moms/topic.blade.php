@@ -28,7 +28,7 @@
         </div>
 
         <div class="col-lg-12">
-            <livewire:moms.topics.item :detail="$detail" :responsibles="$detail->mom->participants" type="show" :key="$detail->id"/>
+            <livewire:moms.topics.item :detail="$detail" :responsibles="$detail->mom->participants" type="show" :key="$detail->id" :show-details-button="false"/>
         </div>
     </div>
 

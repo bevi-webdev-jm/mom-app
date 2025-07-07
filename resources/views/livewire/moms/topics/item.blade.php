@@ -22,6 +22,8 @@
                 <b>{{__('adminlte::moms.days_completed')}}:</b>
                 {{$days_completed}} {{$days_completed >= 1 ? 'Days early' : 'Days late'}}
             @endif
+
+            
         </div>
     @else
         <div class="card">
@@ -102,7 +104,7 @@
                             <i class="fa fa-times"></i>
                             {{__('adminlte::utilities.close')}}
                         </button>
-                       @if(!request()->routeIs('mom.topic'))
+                        @if($showDetailsButton)
                             <a href="{{ route('mom.topic', encrypt($detail->id)) }}" class="btn btn-primary btn-xs">
                                 View Details
                             </a>
@@ -240,7 +242,7 @@
                             <i class="fa fa-times"></i>
                             {{__('adminlte::utilities.close')}}
                         </button>
-                        @if(!request()->routeIs('mom.topic'))
+                        @if($showDetailsButton)
                             <a href="{{ route('mom.topic', encrypt($detail->id)) }}" class="btn btn-primary btn-xs">
                                 View Details
                             </a>

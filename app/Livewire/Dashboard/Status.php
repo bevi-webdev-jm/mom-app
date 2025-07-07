@@ -13,10 +13,10 @@ class Status extends Component
         $data = MomDetail::select(
             DB::raw("
                 CASE
-                    WHEN status = 'Open' AND DATE(NOW()) > target_date THEN 'Overdue'
-                    WHEN status = 'Completed' AND completed_date > target_date THEN 'Extended'
-                    WHEN status = 'Completed' AND completed_date <= target_date THEN 'On time'
-                    WHEN status = 'Open' AND DATE(NOW()) <= target_date THEN 'Open'
+                    WHEN status = 'open' AND DATE(NOW()) > target_date THEN 'Overdue'
+                    WHEN status = 'completed' AND completed_date > target_date THEN 'Extended'
+                    WHEN status = 'completed' AND completed_date <= target_date THEN 'On time'
+                    WHEN status = 'open' AND DATE(NOW()) <= target_date THEN 'Open'
                 END as derived_status
             "),
             DB::raw('COUNT(*) as total')
