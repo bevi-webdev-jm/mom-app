@@ -89,7 +89,7 @@
                         }
                     },
                     series: [{
-                        name: 'Registrations',
+                        name: 'Topics',
                         colorByPoint: true,
                         innerSize: '75%',
                         data: data

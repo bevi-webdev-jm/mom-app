@@ -3,23 +3,34 @@
 namespace App\Livewire\Dashboard;
 
 use Livewire\Component;
-use App\Models\MomDetail;
+use App\Models\Mom;
 use Illuminate\Support\Facades\DB;
 
 class UserCompleted extends Component
 {
     public function render()
     {
-        $data = MomDetail::query()
-            ->leftJoin('mom_responsibles', 'mom_responsibles.mom_detail_id', '=', 'mom_details.id')
-            ->leftJoin('users', 'users.id', '=', 'mom_responsibles.user_id')
+        
+
+        $data = Mom::query()
             ->select(
-                'users.name',
-                DB::raw('COUNT(mom_details.id) as total'),
-                DB::raw("SUM(CASE WHEN mom_details.status = 'Completed' THEN 1 ELSE 0 END) as completed_total")
+                'u.name',
+                DB::raw('COUNT(md.id) as total'),
+                DB::raw("SUM(CASE WHEN md.status = 'Completed' THEN 1 ELSE 0 END) as completed_total")
             )
-            ->whereNotNull('users.name')
-            ->groupBy('users.name')
+            ->leftJoin('mom_details as md', 'md.mom_id', '=', 'moms.id')
+            ->leftJoin('mom_responsibles as mr', 'mr.mom_detail_id', '=', 'md.id')
+            ->leftJoin('users as u', 'u.id', '=', 'mr.user_id')
+            ->whereNotNull('u.name')
+            ->when(!auth()->user()->hasRole('superadmin') && !auth()->user()->hasRole('admin'), function($query) {
+                $query->where(function($qry) {
+                    $qry->whereHas('participants', function($qry1) {
+                        $qry1->where('id', auth()->user()->id);
+                    })
+                    ->orWhere('moms.user_id', auth()->user()->id);
+                });
+            })
+            ->groupBy('u.name')
             ->get();
 
         $categories = $data->pluck('name')->unique()->values()->all();

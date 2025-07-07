@@ -10,7 +10,12 @@ class Timeline extends Component
     public function render()
     {
         $moms = Mom::orderBy('meeting_date')
-            // ->where('status', '<>', 'draft')
+             ->when(!auth()->user()->hasRole('superadmin') && !auth()->user()->hasRole('admin'), function($query) {
+                $query->whereHas('participants', function($qry) {
+                    $qry->where('id', auth()->user()->id);
+                })
+                ->orWhere('user_id', auth()->user()->id);
+            })
             ->get();
 
         $chartData = [];
@@ -28,8 +33,10 @@ class Timeline extends Component
                     'start' => $mom->meeting_date,
                     'end'   => $longestDetail->target_date,
                     'completed' => [
-                        'amount' => $completionPercentage ?? 0
+                        'amount' => $completionPercentage,
+                        'fill' => 'green',
                     ],
+                    'color' => 'navy',
                     'name' => $mom->mom_number,
                     'title' => $mom->agenda ?? '',
                     'status' => $mom->status ?? '',
