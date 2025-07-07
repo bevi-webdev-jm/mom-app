@@ -28,6 +28,8 @@ class Item extends Component
 
     public $days_completed;
 
+    public $showDetailsButton = true;
+
     public $messages = [];
 
     public $status;
