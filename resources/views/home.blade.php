@@ -10,7 +10,7 @@
 
 @section('content_body')
 <div class="dashboard-header mb-2">
-    <h2 class="dashboard-title" >Mom Dashboard</h2>
+    <h2 class="dashboard-title" >MoM Dashboard</h2>
     <p class="dashboard-description">Current progress in <b>{{\Carbon\Carbon::now()->weekOfYear}} Week\s</b></p>
 </div>
 
