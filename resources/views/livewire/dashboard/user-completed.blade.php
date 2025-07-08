@@ -17,7 +17,7 @@
                         type: 'bar'
                     },
                     title: {
-                        text: 'Topics vs Completed'
+                        text: 'Tasks Assigned to People by Status'
                     },
                     xAxis: {
                         categories: data.categories,
@@ -30,40 +30,38 @@
                     yAxis: {
                         min: 0,
                         title: {
-                            text: 'Topics',
-                            align: 'high'
+                            text: 'Number of Tasks'
                         },
-                        labels: {
-                            overflow: 'justify'
-                        },
-                        gridLineWidth: 0
-                    },
-                    tooltip: {
-                        valueSuffix: ' Topics'
-                    },
-                    plotOptions: {
-                        bar: {
-                            borderRadius: '50%',
-                            dataLabels: {
-                                enabled: true
-                            },
-                            groupPadding: 0.1
+                        stackLabels: {
+                            enabled: true,
+                            style: {
+                                fontWeight: 'bold',
+                                color: ( // theme
+                                    Highcharts.defaultOptions.title.style &&
+                                    Highcharts.defaultOptions.title.style.color
+                                ) || 'gray'
+                            }
                         }
                     },
                     legend: {
-                        layout: 'vertical',
                         align: 'right',
+                        x: -30,
                         verticalAlign: 'top',
-                        x: -40,
-                        y: 80,
+                        y: 25,
                         floating: true,
+                        backgroundColor: (Highcharts.defaultOptions.legend.backgroundColor || 'white'),
+                        borderColor: '#CCC',
                         borderWidth: 1,
-                        backgroundColor:
-                            Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
-                        shadow: true
+                        shadow: false
                     },
-                    credits: {
-                        enabled: false
+                    tooltip: {
+                        headerFormat: '<b>{point.x}</b><br/>',
+                        pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+                    },
+                    plotOptions: {
+                        series: {
+                            stacking: 'normal',
+                        }, 
                     },
                     series: data.series.map(s => {
                         if (s.name.toLowerCase() === 'completed') {
@@ -73,7 +71,7 @@
                         }
                         return s;
                     })
-                });
+                }); 
             });
         });
     </script>
