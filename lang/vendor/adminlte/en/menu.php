@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'reports'           => 'Reports',
     'mom'               => 'Minutes of Meeting',
     'types'             => 'MOM Types',
     'fire_alarm'        => 'Fire Alarm',

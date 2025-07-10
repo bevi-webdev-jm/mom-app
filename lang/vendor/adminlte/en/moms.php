@@ -7,8 +7,8 @@ return [
     'update_mom'            => 'Update Minutes Of Meeting',
     'save_as_draft'         => 'Save as Draft',
 
-    'mom_number'            => 'Mom Number',
-    'mom_type'              => 'Mom Type',
+    'mom_number'            => 'MoM Number',
+    'mom_type'              => 'MoM Type',
     'meeting_date'          => 'Meeting Date',
     'agenda'                => 'Agenda',
     'agenda_placeholder'    => 'e.g. Business Review...',

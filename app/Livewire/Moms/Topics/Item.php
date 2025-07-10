@@ -145,7 +145,7 @@ class Item extends Component
                     ]);
                     $this->status = 'open';
                 }
-            } else {
+            } else { 
                 // Target date is **today**
                 if(!empty($this->detail->actions->count())) {
                     $this->detail->update([
