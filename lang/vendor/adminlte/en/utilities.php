@@ -16,6 +16,7 @@ return [
     'details'           => 'Details',
     'required'          => 'Required',
     'select'            => 'Select',
+    'filter'            => 'Filter',
     'settings'          => 'Settings',
     'status'            => 'status',
     'offline'           => 'Offline',

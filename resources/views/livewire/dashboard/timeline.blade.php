@@ -18,7 +18,7 @@
                     },
 
                     title: {
-                        text: 'Mom Timeline'
+                        text: 'MoM Timeline'
                     },
 
                     yAxis: {
@@ -38,7 +38,7 @@
                         useHTML: true,
                         formatter: function() {
                             var point = this.point;
-                            return '<b>Mom Number:</b> ' + point.name + '<br/>' +
+                            return '<b>MoM Number:</b> ' + point.name + '<br/>' +
                                    '<b>Title:</b> ' + (point.options.title || '') + '<br/>' +
                                    '<b>Status:</b> ' + (point.options.status || '') + '<br/>' +
                                    '<b>Start:</b> ' + Highcharts.dateFormat('%Y-%m-%d', point.start) + '<br/>' +

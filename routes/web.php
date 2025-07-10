@@ -7,7 +7,7 @@ use App\Http\Controllers\{
     RoleController, UserController, CompanyController,
     SystemLogController, SystemSettingController, HomeController,
     NotificationController, MomTypeController, MomController,
-    FireAlarmController
+    FireAlarmController, ReportController
 };
 
 /*
@@ -54,6 +54,11 @@ Route::group(['middleware' => ['auth', 'optimizeImages']], function() {
     // NOTIFICATION
     Route::get('test-notification', [NotificationController::class, 'testNotification'])->name('test-notification');
     Route::get('notifications', [NotificationController::class, 'index'])->name('notifications');
+
+    // REPORT ROUTES
+    Route::group(['middleware' => 'permission:report access'], function() {
+        Route::get('report', [ReportController::class, 'index'])->name('report.index');
+    });
 
     // MOM ROUTES
     Route::group(['middleware' => 'permission:mom access'], function() {
