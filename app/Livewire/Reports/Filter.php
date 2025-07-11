@@ -10,6 +10,14 @@ class Filter extends Component
     public $users;
     public $selected_users = [];
     public $search_available, $search_selected;
+    public $status_arr = [
+        'open' => 'secondary',
+        'overdue' => 'danger',
+        'extended' => 'warning',
+        'on-time' => 'success',
+    ];
+
+    public $status = '';
 
     public function render()
     {
@@ -43,24 +51,28 @@ class Filter extends Component
             }
         }
 
-        $this->dispatch('filter-user-selected', selected: $this->selected_users);
+        $this->dispatch('filter-user-selected', selected: $this->selected_users, status: $this->status);
     }
 
     public function unselectUser($user_id) {
         // Remove the user from selected_users
         unset($this->selected_users[$user_id]);
-        $this->dispatch('filter-user-selected', selected: $this->selected_users);
+        $this->dispatch('filter-user-selected', selected: $this->selected_users, status: $this->status);
     }
 
     public function selectAll() {
         foreach($this->users as $user) {
             $this->selected_users[$user->id] = $user;
-            $this->dispatch('filter-user-selected', selected: $this->selected_users);
+            $this->dispatch('filter-user-selected', selected: $this->selected_users, status: $this->status);
         }
     }
 
     public function clearSelected() {
         $this->selected_users = [];
-        $this->dispatch('filter-user-selected', selected: $this->selected_users);
+        $this->dispatch('filter-user-selected', selected: $this->selected_users, status: $this->status);
+    }
+
+    public function updatedStatus() {
+        $this->dispatch('filter-user-selected', selected: $this->selected_users, status: $this->status);
     }
 }

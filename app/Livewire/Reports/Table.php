@@ -14,6 +14,7 @@ class Table extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $selected_users;
+    public $status;
 
     public $status_arr = [
         'open' => 'secondary',
@@ -39,6 +40,17 @@ class Table extends Component
                     $qry->whereIn('id', array_keys($this->selected_users));
                 });
             })
+            ->when(!empty($this->status), function($query) {
+                $query->whereRaw("
+                    CASE
+                        WHEN status = 'open' AND DATE(NOW()) > target_date THEN 'overdue'
+                        WHEN status = 'completed' AND completed_date > target_date THEN 'extended'
+                        WHEN status = 'completed' AND completed_date <= target_date THEN 'on-time'
+                        WHEN status = 'open' AND DATE(NOW()) <= target_date THEN 'open'
+                        ELSE status
+                    END = ?
+                ", [$this->status]);
+            })
             ->orderBy('target_date')
             ->with('responsibles', 'mom')
             ->paginate(10, ['*'], 'mom-page');
@@ -49,8 +61,9 @@ class Table extends Component
     }
 
     #[On('filter-user-selected')]
-    public function updateResponsibles($selected) {
+    public function updateResponsibles($selected, $status) {
         $this->selected_users = $selected;
+        $this->status = $status;
 
         $this->resetPage('mom-page');
     }

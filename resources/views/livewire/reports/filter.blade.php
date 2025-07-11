@@ -63,6 +63,22 @@
                 </div>
             </div>
 
+            <hr>
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="status">{{__('adminlte::utilities.status')}}</label>
+                        <select id="status" class="form-control" wire:model.live="status">
+                            <option value="">All</option>
+                            @foreach ($status_arr as $status => $val)
+                                <option value="{{$status}}">{{$status}}</option>               
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
