@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 class Status extends Component
 {
     public $selected_users = [];
+    public $status;
     
     public function render()
     {
@@ -30,6 +31,17 @@ class Status extends Component
                 $qry->whereIn('id', array_keys($this->selected_users));
             });
         })
+        ->when(!empty($this->status), function($query) {
+            $query->whereRaw("
+                CASE
+                    WHEN status = 'open' AND DATE(NOW()) > target_date THEN 'overdue'
+                    WHEN status = 'completed' AND completed_date > target_date THEN 'extended'
+                    WHEN status = 'completed' AND completed_date <= target_date THEN 'on-time'
+                    WHEN status = 'open' AND DATE(NOW()) <= target_date THEN 'open'
+                    ELSE status
+                END = ?
+            ", [$this->status]);
+        })
         ->groupBy('derived_status')
         ->get();
 
@@ -39,7 +51,8 @@ class Status extends Component
     }
 
     #[On('filter-user-selected')]
-    public function updateResponsibles($selected) {
+    public function updateResponsibles($selected, $status) {
         $this->selected_users = $selected;
+        $this->status = $status;
     }
 }
