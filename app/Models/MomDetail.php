@@ -22,6 +22,11 @@ class MomDetail extends Model
         'status',
     ];
 
+    protected $casts = [
+        'target_date' => 'datetime',
+        'completed_date' => 'datetime',
+    ];
+
     public function getConnectionName()
     {
         return Session::get('db_connection', 'mysql');
