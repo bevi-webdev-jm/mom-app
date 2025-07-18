@@ -12,6 +12,7 @@
             window.addEventListener('update-chart-1', event => {
                 const data = event.detail.data;
                 const total = event.detail.totalTopic;
+                const drilldown = event.detail.drilldownData;
 
                 Highcharts.chart('container-1', {
                     chart: {
@@ -93,7 +94,10 @@
                         colorByPoint: true,
                         innerSize: '75%',
                         data: data
-                    }]
+                    }],
+                    drilldown: {
+                        series: drilldown
+                    }
                 });
 
             });

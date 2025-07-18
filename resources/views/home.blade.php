@@ -53,6 +53,7 @@
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
     <script src="https://code.highcharts.com/dashboards/dashboards.js"></script>
     <script src="https://code.highcharts.com/dashboards/modules/layout.js"></script>
+    <script src="https://code.highcharts.com/modules/drilldown.js"></script>
     <script>
         Highcharts.setOptions({
             chart: {
