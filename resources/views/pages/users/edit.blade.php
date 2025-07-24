@@ -52,6 +52,23 @@
 
                 <div class="row">
                     <div class="col-12">
+                        {{ html()->label(__('adminlte::locations.locations'), 'location_ids')->class(['mb-0', 'text-danger' => $errors->has('location_ids')]) }}
+                        @if($errors->has('location_ids'))
+                            <span class="badge badge-danger pt-1">{{__('adminlte::utilities.required')}}</span>
+                        @endif
+                        <hr class="mt-0">
+                        {{ html()->hidden('location_ids', implode(',', $user->locations()->pluck('id')->toArray()))->id('location_ids')}}
+                    </div>
+
+                    <div class="col-12">
+                        @foreach($locations as $location)
+                            <button class="btn btn-{{$user->locations()->where('id', $location->id)->exists() ? 'success' : 'default'}} btn-location" data-id="{{encrypt($location->id)}}">{{$location->location_name}}</button>
+                        @endforeach
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
                         {{ html()->label(__('adminlte::roles.roles'), 'role_ids')->class(['mb-0', 'text-danger' => $errors->has('role_ids')]) }}
                         @if($errors->has('role_ids'))
                             <span class="badge badge-danger pt-1">{{__('adminlte::utilities.required')}}</span>
@@ -100,6 +117,23 @@
 
                 var roles = role_ids.join(',');
                 $('#role_ids').val(roles);
+            });
+
+            $('body').on('click', '.btn-location', function(e) {
+                e.preventDefault();
+                $(this).toggleClass('btn-success').toggleClass('btn-default');
+
+                // get all selected
+                var location_ids = [];
+                $('body').find('.btn-location').each(function() {
+                    var id = $(this).data('id');
+                    if($(this).hasClass('btn-success')) {
+                        location_ids.push(id);
+                    }
+                });
+
+                var locations = location_ids.join(',');
+                $('#location_ids').val(locations);
             });
         })
     </script>

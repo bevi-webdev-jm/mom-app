@@ -39,6 +39,9 @@ class UserEditRequest extends FormRequest
                     }
                 }
             ],
+            'location_ids' => [
+                'required',
+            ],
             'name' => [
                 'required'
             ],

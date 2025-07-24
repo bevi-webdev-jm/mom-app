@@ -38,7 +38,10 @@ class UserAddRequest extends FormRequest
                         $fail('Invalid company ID.');
                     }
                 }
-            ], 
+            ],
+            'location_ids' => [
+                'required',
+            ],
             'name' => [
                 'required'
             ],

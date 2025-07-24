@@ -92,6 +92,10 @@ class User extends Authenticatable
         return $this->belongsTo('App\Models\Company');
     }
 
+    public function locations() {
+        return $this->belongsToMany('App\Models\Location');
+    }
+
     public function moms() {
         return $this->belongsToMany('App\Models\Mom');
     }

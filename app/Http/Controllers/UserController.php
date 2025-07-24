@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Company;
+use App\Models\Location;
 use App\Models\Role;
 use Illuminate\Http\Request;
 
@@ -48,12 +49,16 @@ class UserController extends Controller
         foreach($companies as $company) {
             $companies_arr[encrypt($company->id)] = $company->name;
         }
+        
+        $locations = Location::orderBy('location_name', 'ASC')
+            ->get();
 
         $roles = Role::orderBy('name', 'ASC')
             ->get();
 
         return view('pages.users.create')->with([
             'companies' => $companies_arr,
+            'locations' => $locations,
             'roles' => $roles
         ]);
     }
@@ -76,6 +81,14 @@ class UserController extends Controller
 
         $role_ids = explode(',', $request->role_ids);
         $user->assignRole($role_ids);
+
+        $locations = explode(',', $request->location_ids);
+        $location_ids = [];
+        foreach($locations as $location_id) {
+            $location_id = decrypt($location_id);
+            $location_ids[] = $location_id;
+        }
+        $user->locations()->sync($location_ids);
 
         // logs
         activity('created')
@@ -118,6 +131,9 @@ class UserController extends Controller
             $companies_arr[$encrypted_id] = $company->name;
         }
 
+        $locations = Location::orderBy('location_name', 'ASC')
+            ->get();
+
         $roles = Role::orderBy('name', 'ASC')
             ->get();
 
@@ -126,6 +142,7 @@ class UserController extends Controller
         return view('pages.users.edit')->with([
             'user' => $user,
             'companies' => $companies_arr,
+            'locations' => $locations,
             'roles' => $roles,
             'company_selected_id' => $company_selected_id,
             'user_roles' => $user_roles
@@ -151,6 +168,14 @@ class UserController extends Controller
         
         $role_ids = explode(',', $request->role_ids);
         $user->syncRoles($role_ids);
+
+        $locations = explode(',', $request->location_ids);
+        $location_ids = [];
+        foreach($locations as $location_id) {
+            $location_id = decrypt($location_id);
+            $location_ids[] = $location_id;
+        }
+        $user->locations()->sync($location_ids);
 
         $changes_arr['changes'] = $user->getChanges();
         $changes_arr['changes']['arr'] = $user->roles->pluck('name');
