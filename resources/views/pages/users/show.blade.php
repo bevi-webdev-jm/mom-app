@@ -54,6 +54,14 @@
                             <span class="float-right">{{$user->email ?? '-'}}</span>
                         </li>
                         <li class="list-group-item py-1">
+                            <b class="text-uppercase">{{__('adminlte::companies.company')}}:</b>
+                            <span class="float-right">{{$user->company->name ?? '-'}}</span>
+                        </li>
+                        <li class="list-group-item py-1">
+                            <b class="text-uppercase">{{__('adminlte::locations.locations')}}:</b>
+                            <span class="float-right">{{implode(', ', $user->locations->pluck('location_name')->toArray()) ?? '-'}}</span>
+                        </li>
+                        <li class="list-group-item py-1">
                             <b class="text-uppercase">{{__('adminlte::roles.roles')}}:</b>
                             <span class="float-right">{{implode(', ', $user->roles->pluck('name')->toArray()) ?? '-'}}</span>
                         </li>

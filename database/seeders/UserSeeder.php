@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Company;
+use App\Models\Location;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
 
@@ -24,6 +25,15 @@ class UserSeeder extends Seeder
             'onestandpoint.com'     => 'OSP',
             'spcmicrotech.com'      => 'SPC',
             'thepbb.com'            => 'PBB',
+        ];
+
+        $location_map_arr = [
+            'BEVI' => 'BEVI Aranga',
+            'BEVA' => 'BEVI Batangas',
+            'BEVM' => 'BEVMI San Pablo',
+            'OSP'  => 'OSP San Pablo',
+            'SPC'  => 'BEVMI San Pablo',
+            'PBB'  => 'BEVMI San Pablo',
         ];
 
         $user = new User([
@@ -53,6 +63,8 @@ class UserSeeder extends Seeder
 
             $password = Hash::make($username.'123!');
             $company = Company::where('name', $company_map_arr[$domain] ?? '')->first();
+            $location = Location::where('location_name', $location_map_arr[$company->name ?? NULL] ?? '')->first();
+
             $user = new User([
                 'company_id' => $company->id ?? NULL,
                 'name' => $name,
@@ -60,6 +72,8 @@ class UserSeeder extends Seeder
                 'password' => $password,
             ]);
             $user->save();
+
+            $user->locations()->attach($location->id ?? NULL);
 
             $user->assignRole('user');
         }
