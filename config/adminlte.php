@@ -331,7 +331,7 @@ return [
             'text'  => 'settings',
             'url'   => '#',
             'icon'  => 'fa fa-fw fa-cog',
-            'can'   => ['user access', 'role access', 'company access', 'system logs', 'system settings'],
+            'can'   => ['user access', 'location access', 'role access', 'company access', 'system logs', 'system settings'],
             'submenu' => [
                 [
                     'text'      => 'companies',
@@ -339,6 +339,13 @@ return [
                     'icon'      => 'fas fa-fw fa-building',
                     'can'       => 'company access',
                     'active'    => ['companies', 'company/*']
+                ],
+                [
+                    'text'      => 'locations',
+                    'url'       => 'locations',
+                    'icon'      => 'fas fa-fw fa-map',
+                    'can'       => 'location access',
+                    'active'    => ['locations', 'location/*']
                 ],
                 [
                     'text'      => 'users',

@@ -96,6 +96,33 @@ class SystemLogController extends Controller
                                 'old' => implode(', ', $old_val),
                                 'new' => implode(', ', $new_val),
                             ];
+
+                        } elseif($key == 'locations') {
+                            if(is_array($old_val) && is_array($new_val)) {
+                                $removed = array_diff($old_val, $new_val);
+                                $added   = array_diff($new_val, $old_val);
+
+                                // Highlight removed items in red
+                                foreach ($old_val as &$val) {
+                                    if (in_array($val, $removed)) {
+                                        $val = '<span class="text-danger font-weight-bold">' . $val . '</span>';
+                                    }
+                                }
+
+                                // Highlight added items in green
+                                foreach ($new_val as &$val) {
+                                    if (in_array($val, $added)) {
+                                        $val = '<span class="text-success font-weight-bold">' . $val . '</span>';
+                                    }
+                                }
+
+                                unset($val); // clean up reference
+                            }
+
+                            $updates[$activity->id][$key] = [
+                                'old' => implode(', ', $old_val),
+                                'new' => implode(', ', $new_val),
+                            ];
                         } else {
                             $updates[$activity->id][$key] = [
                                 'old' => $old_val,
