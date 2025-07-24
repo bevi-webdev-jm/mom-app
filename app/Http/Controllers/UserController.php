@@ -159,6 +159,7 @@ class UserController extends Controller
 
         $changes_arr['old'] = $user->getOriginal();
         $changes_arr['old']['arr'] = $user->roles->pluck('name');
+        $changes_arr['old']['locations'] = $user->locations()->pluck('location_name')->toArray();
 
         $user->update([
             'company_id' => decrypt($request->company_id),
@@ -179,6 +180,7 @@ class UserController extends Controller
 
         $changes_arr['changes'] = $user->getChanges();
         $changes_arr['changes']['arr'] = $user->roles->pluck('name');
+        $changes_arr['changes']['locations'] = $user->locations()->pluck('location_name')->toArray();
 
         // logs
         activity('updated')

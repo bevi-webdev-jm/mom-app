@@ -7,7 +7,7 @@ use App\Http\Controllers\{
     RoleController, UserController, CompanyController,
     SystemLogController, SystemSettingController, HomeController,
     NotificationController, MomTypeController, MomController,
-    FireAlarmController, ReportController
+    FireAlarmController, ReportController, LocationController
 };
 
 /*
@@ -92,6 +92,18 @@ Route::group(['middleware' => ['auth', 'optimizeImages']], function() {
 
         Route::get('company/{id}/edit', [CompanyController::class, 'edit'])->name('company.edit')->middleware('permission:company edit');
         Route::post('company/{id}', [CompanyController::class, 'update'])->name('company.update')->middleware('permission:company edit');
+    });
+
+    // LOCATIONS ROUTES
+    Route::group(['middleware' => 'permission:location access'], function() {
+        Route::get('locations', [LocationController::class, 'index'])->name('location.index');
+        Route::get('location/create', [LocationController::class, 'create'])->name('location.create')->middleware('permission:location create');
+        Route::post('location', [LocationController::class, 'store'])->name('location.store')->middleware('permission:location create');
+
+        Route::get('location/{id}', [LocationController::class, 'show'])->name('location.show');
+
+        Route::get('location/{id}/edit', [LocationController::class, 'edit'])->name('location.edit')->middleware('permission:location edit');
+        Route::post('location/{id}', [LocationController::class, 'update'])->name('location.update')->middleware('permission:location edit');
     });
 
     // ROLES ROUTES

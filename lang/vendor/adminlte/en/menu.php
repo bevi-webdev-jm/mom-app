@@ -7,6 +7,7 @@ return [
     'fire_alarm'        => 'Fire Alarm',
     'settings'          => 'Settings',
     'companies'         => 'Companies',
+    'locations'         => 'Locations',
     'users'             => 'Users',
     'roles'             => 'Roles',
     'system_settings'   => 'System Settings',
