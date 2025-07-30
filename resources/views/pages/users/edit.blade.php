@@ -57,7 +57,7 @@
                             <span class="badge badge-danger pt-1">{{__('adminlte::utilities.required')}}</span>
                         @endif
                         <hr class="mt-0">
-                        {{ html()->hidden('location_ids', implode(',', $user->locations()->pluck('id')->toArray()))->id('location_ids')}}
+                        {{ html()->hidden('location_ids', implode(',', $user->locations()->pluck('id')->map(function($id) { return encrypt($id); })->toArray()))->id('location_ids')}}
                     </div>
 
                     <div class="col-12">
