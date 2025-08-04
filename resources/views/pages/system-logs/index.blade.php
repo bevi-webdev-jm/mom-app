@@ -50,10 +50,10 @@
                                                     @foreach($updates[$activity->id] as $column => $data)
                                                         <li class="list-group-item p-0">
                                                             <p class="m-0 p-0">
-                                                                <b>{{$column == 'arr' ? __('adminlte::systemlogs.from') : $column}}:</b> {!!$data['old']!!}
+                                                                <b>{{$column == 'arr' ? __('adminlte::systemlogs.from') : $column}}:</b> {!! is_array($data['old']) ? json_encode($data['old']) : $data['old'] !!}
                                                             </p>
                                                             <p class="m-0 p-0 d-inline">
-                                                                <b>{{__('adminlte::systemlogs.to')}}:</b> {!!$data['new']!!}
+                                                                <b>{{__('adminlte::systemlogs.to')}}:</b> {!! is_array($data['new']) ? json_encode($data['new']) : $data['new'] !!}
                                                             </p>
                                                         </li>
                                                     @endforeach
