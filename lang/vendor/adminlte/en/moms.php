@@ -11,6 +11,8 @@ return [
     'mom_type'              => 'MoM Type',
     'meeting_date'          => 'Meeting Date',
     'agenda'                => 'Agenda',
+    'remarks'               => 'Remarks',
+    'remarks_placeholder'   => 'Add remarks here...',
     'agenda_placeholder'    => 'e.g. Business Review...',
     'attendees'             => 'Attendees',
     'topics_to_solve'       => 'Topics to Solve',

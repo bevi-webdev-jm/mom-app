@@ -127,7 +127,7 @@ class Item extends Component
     }
 
     private function checkDaysExtended() {
-         if ($this->detail->status != 'completed') {
+        if ($this->detail->status != 'completed') {
             $currentDate = Carbon::today();
             $targetDate = Carbon::parse($this->detail->target_date);
   
