@@ -7,10 +7,25 @@
     <title>Minutes of Meeting</title>
 
     <style>
-        /* table */
+        /* All of your existing styles */
+        body {
+            font-family: sans-serif;
+            margin-top: 50px; /* Add margin-top to prevent content from being hidden by the fixed header */
+        }
+        .pdf-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 40px; /* Adjust height as needed */
+            padding: 5px;
+            background-color: #fff; /* Ensure the header has a white background */
+            z-index: 1000;
+        }
+
         .table {
-            width: 100%;
-            margin-bottom: 0.3rem;
+             width: 100%;
+             margin-bottom: 0.3rem;
             border-collapse: collapse;
         }
         .table thead {
@@ -95,7 +110,6 @@
 
         .bg-secondary {
             background-color: gray;
-            
         }
         .bg-danger {
             background-color: red;
@@ -118,129 +132,168 @@
             padding-top: 3px;
             padding-bottom: 3px;
         }
+        /* New and updated styles for the log section */
+        .log-date {
+            background-color: #f0f0f0;
+            font-weight: bold;
+            padding: 8px;
+            display: block;
+            margin-top: 10px;
+        }
+        .log-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .log-list li {
+            border-bottom: 1px solid #eee;
+            padding: 5px 0;
+        }
+        .log-list li:last-child {
+            border-bottom: none;
+        }
     </style>
 </head>
 <body>
 
-    <!-- LOGO -->
-    <table class="table">
-        <thead>
+    <div class="pdf-header">
+        <table class="table border-0">
             <tr>
-                <th class="align-middle border-0">
+                <td class="align-middle border-0">
                     <img src="{{public_path('/assets/logo/BEVI.jpg')}}" alt="logo" class="logo">
                     <img src="{{public_path('/assets/logo/asia.jpg')}}" alt="logo" class="logo">
-                </th>
-                <th class="text-right align-middle border-0" style="font-size: 14px">
+                </td>
+                <td class="text-right align-middle border-0" style="font-size: 14px">
                     <u class="text-muted">{{$mom->mom_number}}</u>
-                </th>
+                </td>
             </tr>
-        </thead>
-    </table>
+        </table>
+    </div>
 
-    <!-- HEADER -->
-    <table class="table">
-        <thead>
-            <tr>
-                <th colspan="2" class="bg-gray">
-                    HEADER DETAILS
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="w-50">
-                    <span>PREPARED BY: </span>
-                    <strong class="text-uppercase">{{$mom->user->name}}</strong>
-                </td>
-                <td class="w-50">
-                    <span>DATE PREPARED: </span>
-                    <strong class="text-uppercase">{{date('F j, Y', strtotime($mom->created_at))}}</strong>
-                </td>
-            </tr>
-            <tr>
-                <td class="w-50">
-                    <span>STATUS: </span>
-                    <strong class="text-uppercase">{{$mom->status}}</strong>
-                </td>
-                <td class="w-50">
-                    <span>DATE OF THE MEETING: </span>
-                    <strong class="text-uppercase">{{$mom->meeting_date}}</strong>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <span>PURPOSE OF THE MEETING: </span><br>
-                    <strong class="text-justify">
-                        {{$mom->agenda}}
-                    </strong>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-
-    <!-- ATTENDEES -->
-    <table class="table">
-        <thead>
-            <tr>
-                <th class="bg-gray">
-                    ATTENDEES
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    <ol>
-                        @foreach($mom->participants as $participant)
-                            <li class="text-bold align-middle">
-                                {{$participant->name}}
-                            </li>
-                        @endforeach
-                    </ol>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-
-    <!-- TOPICS -->
-    @foreach($mom->details as $detail)
-        @php
-            $status = \App\Http\Controllers\MomController::checkDaysExtended($detail);
-        @endphp
+    <div class="main-content">
         <table class="table">
             <thead>
                 <tr>
-                    <th colspan="4" class="bg-gray">
-                        TOPIC
-                        <span class="bg-status bg-{{$status_arr[$status]}} float-right">{{$status}}</span>
+                    <th colspan="2" class="bg-gray">
+                        HEADER DETAILS
                     </th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <th class="text-center align-middle bg-info">TOPIC</th>
-                    <th class="text-center align-middle bg-info">NEXT STEPS</th>
-                    <th class="text-center align-middle bg-info">RESPONSIBLE</th>
-                    <th class="text-center align-middle bg-info">TARGET DATE</th>
+                    <td class="w-50">
+                        <span>PREPARED BY: </span>
+                        <strong class="text-uppercase">{{$mom->user->name}}</strong>
+                    </td>
+                    <td class="w-50">
+                        <span>DATE PREPARED: </span>
+                        <strong class="text-uppercase">{{date('F j, Y', strtotime($mom->created_at))}}</strong>
+                    </td>
                 </tr>
                 <tr>
-                    <td>
-                        {{$detail->topic}}
+                    <td class="w-50">
+                        <span>STATUS: </span>
+                        <strong class="text-uppercase">{{$mom->status}}</strong>
                     </td>
-                    <td class="text-justify">
-                        {{$detail->next_step}}
-                    </td>
-                    <td class="text-center">
-                        @foreach($detail->responsibles as $responsible)
-                            <strong>{{$responsible->name}}</strong> <br>
-                        @endforeach
-                    </td>
-                    <td class="text-center">
-                        {{date('F j, Y', strtotime($detail->target_date))}}
+                    <td class="w-50">
+                        <span>DATE OF THE MEETING: </span>
+                        <strong class="text-uppercase">{{$mom->meeting_date}}</strong>
                     </td>
                 </tr>
-                @if($detail->actions->count() > 0)
-                    @foreach ($detail->actions as $action)
+                <tr>
+                    <td colspan="2">
+                        <span>PURPOSE OF THE MEETING: </span><br>
+                        <strong class="text-justify">
+                            {{$mom->agenda}}
+                        </strong>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="bg-gray">
+                        ATTENDEES
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <ol>
+                            @foreach($mom->participants as $participant)
+                                <li class="text-bold align-middle">
+                                    {{$participant->name}}
+                                </li>
+                            @endforeach
+                        </ol>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        @foreach($mom->details as $detail)
+            @php
+                $status = \App\Http\Controllers\MomController::checkDaysExtended($detail);
+            @endphp
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th colspan="4" class="bg-gray">
+                            TOPIC
+                            <span class="bg-status bg-{{$status_arr[$status]}} float-right">{{$status}}</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th class="text-center align-middle bg-info">TOPIC</th>
+                        <th class="text-center align-middle bg-info">NEXT STEPS</th>
+                        <th class="text-center align-middle bg-info">RESPONSIBLE</th>
+                        <th class="text-center align-middle bg-info">TARGET DATE</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            {{$detail->topic}}
+                        </td>
+                        <td class="text-justify">
+                            {{$detail->next_step}}
+                        </td>
+                        <td class="text-center">
+                            @foreach($detail->responsibles as $responsible)
+                                <strong>{{$responsible->name}}</strong> <br>
+                            @endforeach
+                        </td>
+                        <td class="text-center">
+                            {{date('F j, Y', strtotime($detail->target_date))}}
+                        </td>
+                    </tr>
+                    @if($detail->actions->count() > 0)
+                        @foreach ($detail->actions as $action)
+                            <tr>
+                                <th class="text-center align-middle bg-primary">ACTION TAKEN</th>
+                                <th class="text-center align-middle bg-primary">REMARKS</th>
+                                <th class="text-center align-middle bg-primary">USER</th>
+                                <th class="text-center align-middle bg-primary">DATE</th>
+                            </tr>
+                            <tr>
+                                <td class="text-justify">
+                                    {{$action->action_taken}}
+                                </td>
+                                <td class="text-justify">
+                                    {{$action->remarks}}
+                                </td>
+                                <td class="text-center">
+                                    {{$action->user->name}}
+                                </td>
+                                <td class="text-center">
+                                    {{date('F j, Y H:i:s a', strtotime($action->created_at))}}
+                                </td>
+                            </tr>
+                        @endforeach
+                    @else
                         <tr>
                             <th class="text-center align-middle bg-primary">ACTION TAKEN</th>
                             <th class="text-center align-middle bg-primary">REMARKS</th>
@@ -248,55 +301,60 @@
                             <th class="text-center align-middle bg-primary">DATE</th>
                         </tr>
                         <tr>
-                            <td class="text-justify">
-                                {{$action->action_taken}}
-                            </td>
-                            <td class="text-justify">
-                                {{$action->remarks}}
-                            </td>
-                            <td class="text-center">
-                                {{$action->user->name}}
-                            </td>
-                            <td class="text-center">
-                                {{date('F j, Y H:i:s a', strtotime($action->created_at))}}
+                            <td colspan="4" class="text-center">
+                                - No action taken yet -
                             </td>
                         </tr>
-                    @endforeach
-                @else
-                    <tr>
-                        <th class="text-center align-middle bg-primary">ACTION TAKEN</th>
-                        <th class="text-center align-middle bg-primary">REMARKS</th>
-                        <th class="text-center align-middle bg-primary">USER</th>
-                        <th class="text-center align-middle bg-primary">DATE</th>
-                    </tr>
-                    <tr>
-                        <td colspan="4" class="text-center">
-                            - No action taken yet -
-                        </td>
-                    </tr>
-                @endif
+                    @endif
+                </tbody>
+            </table>
+        @endforeach
+        
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th colspan="2" class="bg-gray">
+                        REMARKS
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2" class="text-justify">
+                        {{$mom->remarks}}
+                    </td>
+                </tr>
             </tbody>
         </table>
-    @endforeach
+    </div>
 
-
-    <!-- REMARKS -->
-     <table class="table">
-        <thead>
-            <tr>
-                <th colspan="2" class="bg-gray">
-                    REMARKS
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td colspan="2" class="text-justify">
-                    {{$mom->remarks}}
-                </td>
-            </tr>
-        </tbody>
-     </table>
+    <!-- MOM HISTORY LOGS -->
+    <div class="pdf-footer">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th colspan="2" class="bg-gray">MOM HISTORY LOGS</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($approval_data as $date => $data)
+                    <tr>
+                        <td colspan="2">
+                            <span class="log-date">{{date('F j, Y', strtotime($date))}}</span>
+                            <ul class="log-list">
+                                @foreach($data as $approval)
+                                    <li>
+                                        <strong>{{date('F j, Y H:i:s a', strtotime($approval->created_at))}}</strong> - {{ $approval->user->name }} - {{ $approval->remarks }}
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 
 </body>
 </html>

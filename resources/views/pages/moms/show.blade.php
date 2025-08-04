@@ -22,7 +22,13 @@
                                 <i class="fa fa-caret-left mr-1"></i>
                                 {{__('adminlte::utilities.back')}}
                             </a>
-                        </div> 
+                            @can('mom print')
+                                <a href="{{route('mom.printPDF', encrypt($mom->id))}}" class="btn btn-warning btn-sm mb-0 ml-0">
+                                    <i class="fa fa-file-pdf"></i>
+                                    {{__('adminlte::utilities.print')}}
+                                </a>
+                            @endcan
+                        </div>
                     </div>
                 </div>
                 <div class="card-body text-lg">
