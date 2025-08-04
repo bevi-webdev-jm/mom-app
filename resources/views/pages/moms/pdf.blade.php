@@ -72,7 +72,7 @@
         }
 
         .bg-gray {
-            background-color: rgba(75, 75, 75, 1);
+            background-color: rgba(8, 8, 8, 1);
             color: white;
         }
         .bg-info {
@@ -80,6 +80,43 @@
         }
         .bg-primary {
             background-color: rgba(182, 217, 255, 1);
+        }
+
+        .float-right {
+            float: right;
+        }
+
+        .bg-status {
+            padding-left: 5px;
+            padding-right: 5px;
+            padding-bottom: 3px;
+            border-radius: 5px;
+        }
+
+        .bg-secondary {
+            background-color: gray;
+            
+        }
+        .bg-danger {
+            background-color: red;
+            padding-left: 5px;
+            padding-right: 5px;
+            padding-top: 3px;
+            padding-bottom: 3px;
+        }
+        .bg-warning {
+            background-color: yellow;
+            padding-left: 5px;
+            padding-right: 5px;
+            padding-top: 3px;
+            padding-bottom: 3px;
+        }
+        .bg-success {
+            background-color: green;
+            padding-left: 5px;
+            padding-right: 5px;
+            padding-top: 3px;
+            padding-bottom: 3px;
         }
     </style>
 </head>
@@ -166,17 +203,20 @@
     </table>
 
     <!-- TOPICS -->
-    <table class="table">
-        <thead>
-            <tr>
-                <th colspan="4" class="bg-gray">
-                    TOPICS
-                </th>
-            </tr>
-            
-        </thead>
-        <tbody>
-            @foreach($mom->details as $detail)
+    @foreach($mom->details as $detail)
+        @php
+            $status = \App\Http\Controllers\MomController::checkDaysExtended($detail);
+        @endphp
+        <table class="table">
+            <thead>
+                <tr>
+                    <th colspan="4" class="bg-gray">
+                        TOPIC
+                        <span class="bg-status bg-{{$status_arr[$status]}} float-right">{{$status}}</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
                 <tr>
                     <th class="text-center align-middle bg-info">TOPIC</th>
                     <th class="text-center align-middle bg-info">NEXT STEPS</th>
@@ -235,10 +275,28 @@
                         </td>
                     </tr>
                 @endif
-                
-            @endforeach
+            </tbody>
+        </table>
+    @endforeach
+
+
+    <!-- REMARKS -->
+     <table class="table">
+        <thead>
+            <tr>
+                <th colspan="2" class="bg-gray">
+                    REMARKS
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="2" class="text-justify">
+                    {{$mom->remarks}}
+                </td>
+            </tr>
         </tbody>
-    </table>
+     </table>
 
 </body>
 </html>

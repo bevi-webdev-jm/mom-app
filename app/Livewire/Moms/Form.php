@@ -14,7 +14,7 @@ class Form extends Component
     public $mom, $type, $mom_number;
     public $mom_types;
 
-    public $meeting_date, $type_id, $agenda;
+    public $meeting_date, $type_id, $agenda, $remarks;
 
     public $status_arr = [
         'draft'         => 'secondary',
@@ -34,6 +34,7 @@ class Form extends Component
         $this->meeting_date = $mom->meeting_date;
         $this->type_id = $mom->mom_type_id;
         $this->agenda = $mom->agenda;
+        $this->remarks = $mom->remarks;
 
         $this->mom_types = MomType::orderBy('type', 'ASC')
             ->get();
@@ -57,6 +58,7 @@ class Form extends Component
         $this->mom->update([
             'mom_type_id' => $this->type_id,
             'agenda' => $this->agenda,
+            'remarks' => $this->remarks,
             'meeting_date' => $this->meeting_date,
             'status' => $status,
         ]);

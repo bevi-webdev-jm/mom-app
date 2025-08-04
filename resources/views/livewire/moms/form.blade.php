@@ -77,6 +77,14 @@
                                 <small class="text-danger">{{$errors->first('agenda')}}</small>
                             </div>
                         </div>
+
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label for="remarks">{{__('adminlte::moms.remarks')}}</label>
+                                <textarea id="remarks" class="form-control{{$errors->has('remarks') ? ' is-invalid' : ''}}" wire:model="remarks" placeholder="{{__('adminlte::moms.remarks_placeholder')}}"></textarea>
+                                <small class="text-danger">{{$errors->first('remarks')}}</small>
+                            </div>
+                        </div>
                     </div>
 
                 </div>

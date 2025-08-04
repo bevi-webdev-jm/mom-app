@@ -16,7 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('mom_type_id')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('mom_number');
-            $table->string('agenda');
+            $table->text('agenda')->nullable();
+            $table->text('remarks')->nullable();
             $table->date('meeting_date');
             $table->string('status')->nullable();
             $table->timestamps();

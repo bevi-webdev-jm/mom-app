@@ -17,6 +17,7 @@ class Mom extends Model
         'user_id',
         'mom_number',
         'agenda',
+        'remarks',
         'meeting_date',
         'status',
     ];

@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Session;
 use App\Helpers\MomNumberHelper;
 
 use Barryvdh\DomPDF\Facade\Pdf;
+
+use Carbon\Carbon;
+
 /**
  * Class MomController
  * 
@@ -202,12 +205,58 @@ class MomController extends Controller
 
     public function printPDF($id) {
         $mom = Mom::findOrFail(decrypt($id));
+        $status_arr = [
+            'open' => 'secondary',
+            'overdue' => 'danger',
+            'extended' => 'warning',
+            'on-time' => 'success',
+        ];
 
         $pdf = PDF::loadView('pages.moms.pdf', [
-            'mom' => $mom
+            'mom' => $mom,
+            'status_arr' => $status_arr
         ])->setPaper('a4', 'landscape');
 
         return $pdf->stream('weekly-activity-report-'.$mom->mom_number.'-'.time().'.pdf');
+    }
+
+    public static function checkDaysExtended($detail) {
+        $status = 'open';
+
+        if ($detail->status != 'completed') {
+            $currentDate = Carbon::today();
+            $targetDate = Carbon::parse($detail->target_date);
+  
+            if ($targetDate->lt($currentDate)) {
+                // Target date is **before** current date (past due)
+                $status = 'overdue';
+            } elseif ($targetDate->gt($currentDate)) {
+                // Target date is **after** current date (still time left)
+                $status = 'open';
+            } else { 
+                // Target date is **today**
+                if(!empty($detail->actions->count())) {
+                    $status = 'open';
+                }
+            }
+        } else {
+            // Compute days completed
+            $completedDate = Carbon::parse($detail->completed_date);
+            $targetDate = Carbon::parse($detail->target_date);
+
+            $daysToComplete = $completedDate->diffInDays($targetDate, false); // false = returns negative if completed before target
+
+            $days_completed = $daysToComplete;
+
+            // check if completed beyond target date
+            if($daysToComplete > 0) {
+                $status = 'on-time';
+            } elseif($daysToComplete < 0) {
+                $status = 'extended';
+            }
+        }
+
+        return $status;
     }
     
 }
