@@ -12,6 +12,8 @@ return [
     'save'              => 'Save',
     'update'            => 'Update',
     'submit'            => 'Submit',
+    'print'             => 'Print',
+    'cancel'            => 'Cancel',
     'upload'            => 'Upload',
     'details'           => 'Details',
     'required'          => 'Required',

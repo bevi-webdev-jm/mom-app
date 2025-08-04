@@ -26,14 +26,11 @@
                     <p class="text-muted text-center">{{implode(', ', $user->getRoleNames()->toArray()) ?? '-'}}</p>
 
                     <ul class="list-group list-group-unbordered mb-3">
-                        <li class="list-group-item">
-                            <b>{{ __('adminlte::profile.followers') }}</b> <a class="float-right">1,322</a>
+                        <li class="list-group-item py-1 px-1">
+                            <b>{{ __('adminlte::companies.company') }}</b> <a class="float-right">{{$user->company->name ?? '-'}}</a>
                         </li>
-                        <li class="list-group-item">
-                            <b>{{ __('adminlte::profile.following') }}</b> <a class="float-right">543</a>
-                        </li>
-                        <li class="list-group-item">
-                            <b>{{ __('adminlte::profile.friends') }}</b> <a class="float-right">13,287</a>
+                        <li class="list-group-item py-1 px-1">
+                            <b>{{ __('adminlte::locations.locations') }}</b> <a class="float-right">{{$user->locations->pluck('location_name')->toArray() ? implode(', ', $user->locations->pluck('location_name')->toArray()) : '-'}}</a>
                         </li>
                     </ul>
                 </div>

@@ -49,7 +49,7 @@
                             <tr class="text-center">
                                 <th>{{__('adminlte::moms.mom_number')}}</th>
                                 <th>{{__('adminlte::types.type')}}</th>
-                                <th>{{__('adminlte::moms.agenda')}}</th>
+                                <th style="max-width: 300px !important;">{{__('adminlte::moms.agenda')}}</th>
                                 <th>{{__('adminlte::moms.meeting_date')}}</th>
                                 <th>{{__('adminlte::utilities.status')}}</th>
                                 <th>{{__('adminlte::users.user')}}</th>
@@ -65,7 +65,7 @@
                                     <td class="align-middle text-center">
                                         {{$mom->type->type ?? '-'}}
                                     </td>
-                                    <td class="align-middle text-center">
+                                    <td class="align-middle text-center" style="max-width: 300px !important;">
                                         {{$mom->agenda ?? '-'}}
                                     </td>
                                     <td class="align-middle text-center">
@@ -92,6 +92,12 @@
                                             <i class="fa fa-list"></i>
                                             {{__('adminlte::utilities.view')}}
                                         </a>
+                                        @can('mom print')
+                                            <a href="{{route('mom.printPDF', encrypt($mom->id))}}" class="btn btn-warning btn-xs mb-0 ml-0">
+                                                <i class="fa fa-file-pdf"></i>
+                                                {{__('adminlte::utilities.print')}}
+                                            </a>
+                                        @endcan
                                         @can('mom delete')
                                             <a href="" class="btn btn-danger btn-xs mb-0 ml-0 btn-delete" data-id="{{encrypt($mom->id)}}">
                                                 <i class="fa fa-trash-alt"></i>

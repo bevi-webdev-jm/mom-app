@@ -11,6 +11,7 @@ use App\Http\Traits\SettingTrait;
 use Illuminate\Support\Facades\Session;
 use App\Helpers\MomNumberHelper;
 
+use Barryvdh\DomPDF\Facade\Pdf;
 /**
  * Class MomController
  * 
@@ -197,6 +198,16 @@ class MomController extends Controller
             'detail' => $detail,
             'status_arr' => $this->status_arr
         ]);
+    }
+
+    public function printPDF($id) {
+        $mom = Mom::findOrFail(decrypt($id));
+
+        $pdf = PDF::loadView('pages.moms.pdf', [
+            'mom' => $mom
+        ])->setPaper('a4', 'landscape');
+
+        return $pdf->stream('weekly-activity-report-'.$mom->mom_number.'-'.time().'.pdf');
     }
     
 }
