@@ -6,11 +6,12 @@ use Illuminate\Http\Request;
 
 use App\Models\Mom;
 use App\Models\MomDetail;
+use App\Models\MomApproval;
 
 use App\Http\Traits\SettingTrait;
 use Illuminate\Support\Facades\Session;
 use App\Helpers\MomNumberHelper;
-
+use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 use Carbon\Carbon;
@@ -212,9 +213,27 @@ class MomController extends Controller
             'on-time' => 'success',
         ];
 
+        $approval_dates = MomApproval::select(DB::raw('DATE(created_at) as date'))
+            ->groupBy('date')
+            ->orderBy('date', 'DESC')
+            ->where('mom_id', $mom->id)
+            ->get();
+
+        $approval_data = [];
+        foreach($approval_dates as $data) {
+            $approvals = MomApproval::with('user')
+                ->orderBy('created_at', 'DESC')
+                ->where('mom_id', $mom->id)
+                ->where(DB::raw('DATE(created_at)'), $data->date)
+                ->get();
+            
+            $approval_data[$data->date] = $approvals;
+        }
+
         $pdf = PDF::loadView('pages.moms.pdf', [
             'mom' => $mom,
-            'status_arr' => $status_arr
+            'status_arr' => $status_arr,
+            'approval_data' => $approval_data,
         ])->setPaper('a4', 'landscape');
 
         return $pdf->stream('weekly-activity-report-'.$mom->mom_number.'-'.time().'.pdf');
