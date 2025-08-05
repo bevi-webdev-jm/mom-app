@@ -23,7 +23,7 @@
                                 {{__('adminlte::utilities.back')}}
                             </a>
                             @can('mom print')
-                                <a href="{{route('mom.printPDF', encrypt($mom->id))}}" class="btn btn-warning btn-sm mb-0 ml-0">
+                                <a href="{{route('mom.printPDF', encrypt($mom->id))}}" class="btn btn-warning btn-sm mb-0 ml-0" target="_blank">
                                     <i class="fa fa-file-pdf"></i>
                                     {{__('adminlte::utilities.print')}}
                                 </a>
@@ -35,8 +35,8 @@
                     <h5>
                         <b>{{__('adminlte::moms.mom_number')}}</b>: <strong class="badge badge-success text-lg">{{$mom->mom_number}}</strong>
                     </h5>
-                    <b>{{__('adminlte::moms.agenda')}}:</b> <p class="ml-3 mb-0 font-weight-bold text-danger">{{$mom->agenda}}</p>
-                    <b>{{__('adminlte::moms.remarks')}}:</b> <p class="ml-3 mb-0">{{$mom->remarks}}</p>
+                    <b>{{__('adminlte::moms.agenda')}}:</b> <p class="ml-3 mb-0 font-weight-bold text-danger">{{$mom->agenda}}</p>  
+
                     <b>{{__('adminlte::moms.meeting_date')}}:</b> {{$mom->meeting_date}}
                     <br>
                     <b>{{__('adminlte::utilities.status')}}:</b> <span class="badge badge-{{$status_arr[$mom->status]}}">{{$mom->status}}</span>
@@ -73,6 +73,9 @@
                     </ul>
                 </div>
             </div>
+
+
+            <livewire:moms.remarks :mom="$mom"/>
         </div>
 
         <div class="col-md-6">

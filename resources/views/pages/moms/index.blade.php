@@ -93,7 +93,7 @@
                                             {{__('adminlte::utilities.view')}}
                                         </a>
                                         @can('mom print')
-                                            <a href="{{route('mom.printPDF', encrypt($mom->id))}}" class="btn btn-warning btn-xs mb-0 ml-0">
+                                            <a href="{{route('mom.printPDF', encrypt($mom->id))}}" class="btn btn-warning btn-xs mb-0 ml-0" target="_blank">
                                                 <i class="fa fa-file-pdf"></i>
                                                 {{__('adminlte::utilities.print')}}
                                             </a>
