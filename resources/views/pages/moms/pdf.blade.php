@@ -50,7 +50,7 @@
         }
 
         .logo {
-            height: 30px;
+            height: 40px;
         }
 
         .text-center {
@@ -84,6 +84,12 @@
 
         .w-50 {
             width: 50% !important;
+        }
+        .w-40 {
+            width: 40% !important;
+        }
+        .w-25 {
+            width: 25% !important;
         }
 
         .bg-gray {
@@ -249,16 +255,16 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <th class="text-center align-middle bg-info">TOPIC</th>
-                        <th class="text-center align-middle bg-info">NEXT STEPS</th>
+                        <th class="text-center align-middle bg-info w-25">TOPIC</th>
+                        <th class="text-center align-middle bg-info w-40">NEXT STEPS</th>
                         <th class="text-center align-middle bg-info">RESPONSIBLE</th>
                         <th class="text-center align-middle bg-info">TARGET DATE</th>
                     </tr>
                     <tr>
-                        <td>
+                        <td class="text-center w-25">
                             {{$detail->topic}}
                         </td>
-                        <td class="text-justify">
+                        <td class="text-justify w-40">
                             {{$detail->next_step}}
                         </td>
                         <td class="text-center">
@@ -279,7 +285,7 @@
                                 <th class="text-center align-middle bg-primary">DATE</th>
                             </tr>
                             <tr>
-                                <td class="text-justify">
+                                <td class="text-center">
                                     {{$action->action_taken}}
                                 </td>
                                 <td class="text-justify">
@@ -321,9 +327,15 @@
             </thead>
             <tbody>
                 <tr>
+                    @if(!empty($mom->remarks))
                     <td colspan="2" class="text-justify">
                         {{$mom->remarks}}
                     </td>
+                    @else
+                        <td colspan="2" class="text-center">
+                            - No remarks -
+                        </td>
+                    @endif
                 </tr>
             </tbody>
         </table>
