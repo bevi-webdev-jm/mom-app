@@ -24,9 +24,9 @@
         }
 
         .table {
-             width: 100%;
-             margin-bottom: 0.3rem;
-            border-collapse: collapse;
+                width: 100%;
+                margin-bottom: 0.3rem;
+                border-collapse: collapse;
         }
         .table thead {
             display: table-header-group;
@@ -126,6 +126,7 @@
         }
         .bg-warning {
             background-color: yellow;
+            color: black;
             padding-left: 5px;
             padding-right: 5px;
             padding-top: 3px;
@@ -146,28 +147,24 @@
             display: block;
             margin-top: 10px;
         }
-        .log-list {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
+        /* This new style targets the specific table holding the log data */
+        .log-table th, .log-table td {
+            border: none; /* Remove borders for a cleaner look */
+            padding: 5px 10px; /* Adjust padding for better spacing */
         }
-        .log-list li {
-            border-bottom: 1px solid #eee;
-            padding: 5px 0;
-        }
-        .log-list li:last-child {
-            border-bottom: none;
+        .log-table tbody tr:not(:last-child) td {
+            border-bottom: 1px solid #e0e0e0; /* Add a subtle separator between log entries */
         }
 
         pre {
-            white-space: pre-wrap; /* This is crucial for making the text wrap */
-            word-break: break-word; /* Prevents long words from overflowing */
-            font-family: sans-serif; /* Matches the body font */
-            font-size: 14px; /* Matches the table font size */
-            margin: 0; /* Removes default margin */
-            padding: 0; /* Removes default padding */
-            border: none; /* Removes any default border */
-            background-color: transparent; /* Ensures no background color is applied */
+            white-space: pre-wrap;
+            word-break: break-word;
+            font-family: sans-serif;
+            font-size: 14px;
+            margin: 0;
+            padding: 0;
+            border: none;
+            background-color: transparent;
         }
 
         .page-break {
@@ -357,7 +354,7 @@
         </table>
 
         <!-- MOM HISTORY LOGS -->
-        <table class="table">
+        <table class="table log-table">
             <thead>
                 <tr>
                     <th colspan="2" class="bg-gray">MOM HISTORY LOGS</th>
@@ -366,18 +363,19 @@
             <tbody>
                 @foreach($approval_data as $date => $data)
                     <tr>
-                        <td colspan="2">
+                        <td colspan="2" class="border-0">
                             <span class="log-date">{{date('F j, Y', strtotime($date))}}</span>
-                            <ul class="log-list">
-                                @foreach($data as $approval)
-                                    <li>
-                                        <strong>{{date('F j, Y H:i:s a', strtotime($approval->created_at))}}</strong> - {{ $approval->user->name }} - 
-                                        <pre>{{ $approval->remarks }}</pre>
-                                    </li>
-                                @endforeach
-                            </ul>
                         </td>
                     </tr>
+                    @foreach($data as $approval)
+                        <tr class="log-list">
+                            <td colspan="2">
+                                <strong>{{date('F j, Y H:i:s a', strtotime($approval->created_at))}}</strong> - **{{ $approval->user->name }}**
+                                <pre>{{ $approval->remarks }}</pre>
+                                <hr>
+                            </td>
+                        </tr>
+                    @endforeach
                 @endforeach
             </tbody>
         </table>
