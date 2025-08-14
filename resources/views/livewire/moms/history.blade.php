@@ -11,7 +11,7 @@
         <div class="card-body p-1">
 
             @if(!empty($approvals))
-                <div class="timeline timeline-inverse">
+                <div class="timeline timeline-inverse" style="max-height: 800px; overflow-y: auto;">
 
                     @foreach($approvals as $date => $data)
                         {{-- DATE LABEL --}}

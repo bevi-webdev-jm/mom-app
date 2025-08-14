@@ -17,6 +17,7 @@ class OnlineUsers extends Component
         $hour_ago = date('Y-m-d H:i:s', strtotime('-1 hour'));
 
         $users = User::whereNotNull('last_activity')
+            ->where('id', '<>', 1)
             ->where('last_activity', '>=', $hour_ago)
             ->orderBy('last_activity', 'DESC')
             ->paginate();

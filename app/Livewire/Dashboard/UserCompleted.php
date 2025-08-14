@@ -37,7 +37,7 @@ class UserCompleted extends Component
 
         $series = [
             [
-                'name' => 'Total',
+                'name' => 'Open',
                 'data' => [],
             ],
             [
@@ -47,7 +47,7 @@ class UserCompleted extends Component
         ];
 
         foreach ($data as $val) {
-            $series[0]['data'][] = (int) $val->total; 
+            $series[0]['data'][] = (int) $val->total - (int) $val->completed_total; 
             $series[1]['data'][] = (int) $val->completed_total;
         }
 
