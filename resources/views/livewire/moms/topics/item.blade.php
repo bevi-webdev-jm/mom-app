@@ -158,7 +158,7 @@
                                             @foreach($detail->actions()->first()->attachments as $attachment)
                                                 <tr>
                                                     <td>
-                                                        <a href="{{asset($attachment->path)}}" class="text-primary">
+                                                        <a href="{{asset($attachment->path)}}" class="text-primary" target="_blank">
                                                             {{$attachment->path}}
                                                         </a>
                                                     </td>
@@ -200,9 +200,9 @@
                         @php
                             $action = $detail->actions()->first();
                         @endphp
-                        <b>{{__('adminlte::moms.actions_taken')}}:</b> {{$action->action_taken}}
+                        <b>{{__('adminlte::moms.actions_taken')}}:</b> <pre class="mb-0 ml-2 py-0">{{$action->action_taken}}</pre>
                         <br>
-                        <b>{{__('adminlte::utilities.remarks')}}:</b> {{$action->remarks}}
+                        <b>{{__('adminlte::utilities.remarks')}}:</b> <pre class="mb-0 ml-2 py-0">{{$action->remarks}}</pre>
                         <br>
 
                         <strong class="text-lg">{{__('adminlte::moms.attachments')}}</strong>
@@ -220,7 +220,7 @@
                                     @foreach($detail->actions()->first()->attachments as $attachment)
                                         <tr>
                                             <td>
-                                                <a href="{{asset($attachment->path)}}" class="text-primary">
+                                                <a href="{{asset($attachment->path)}}" class="text-primary" target="_blank">
                                                     {{$attachment->path}}
                                                 </a>
                                             </td>
@@ -252,9 +252,9 @@
                         @php
                             $action = $detail->actions()->first();
                         @endphp
-                        <b>{{__('adminlte::moms.actions_taken')}}:</b> {{$action->action_taken ?? '-'}}
+                        <b>{{__('adminlte::moms.actions_taken')}}:</b> <pre class="mb-0 ml-2 py-0">{{$action->action_taken ?? '-'}}</pre>
                         <br>
-                        <b>{{__('adminlte::utilities.remarks')}}:</b> {{$action->remarks ?? '-'}}
+                        <b>{{__('adminlte::utilities.remarks')}}:</b> <pre class="mb-0 ml-2 py-0">{{$action->remarks ?? '-'}}</pre>
                         <br>
 
                         <strong class="text-lg">{{__('adminlte::moms.attachments')}}</strong>
@@ -272,7 +272,7 @@
                                     @foreach($detail->actions()->first()->attachments as $attachment)
                                         <tr>
                                             <td>
-                                                <a href="{{asset($attachment->path)}}" class="text-primary">
+                                                <a href="{{asset($attachment->path)}}" class="text-primary" target="_blank">
                                                     {{$attachment->path}}
                                                 </a>
                                             </td>

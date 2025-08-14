@@ -158,6 +158,21 @@
         .log-list li:last-child {
             border-bottom: none;
         }
+
+        pre {
+            white-space: pre-wrap; /* This is crucial for making the text wrap */
+            word-break: break-word; /* Prevents long words from overflowing */
+            font-family: sans-serif; /* Matches the body font */
+            font-size: 14px; /* Matches the table font size */
+            margin: 0; /* Removes default margin */
+            padding: 0; /* Removes default padding */
+            border: none; /* Removes any default border */
+            background-color: transparent; /* Ensures no background color is applied */
+        }
+
+        .page-break {
+            page-break-after: always;
+        }
     </style>
 </head>
 <body>
@@ -285,11 +300,11 @@
                                 <th class="text-center align-middle bg-primary">DATE</th>
                             </tr>
                             <tr>
-                                <td class="text-center">
-                                    {{$action->action_taken}}
+                                <td class="text-left">
+                                    <pre>{{$action->action_taken}}</pre>
                                 </td>
-                                <td class="text-justify">
-                                    {{$action->remarks}}
+                                <td class="text-justify text-center">
+                                    <pre>{{$action->remarks}}</pre>
                                 </td>
                                 <td class="text-center">
                                     {{$action->user->name}}
@@ -315,7 +330,8 @@
                 </tbody>
             </table>
         @endforeach
-        
+
+        <div class="page-break"></div>
 
         <table class="table">
             <thead>
@@ -329,7 +345,7 @@
                 <tr>
                     @if(!empty($mom->remarks))
                     <td colspan="2" class="text-justify">
-                        {{$mom->remarks}}
+                        <pre>{{$mom->remarks}}</pre>
                     </td>
                     @else
                         <td colspan="2" class="text-center">
@@ -339,10 +355,8 @@
                 </tr>
             </tbody>
         </table>
-    </div>
 
-    <!-- MOM HISTORY LOGS -->
-    <div class="pdf-footer">
+        <!-- MOM HISTORY LOGS -->
         <table class="table">
             <thead>
                 <tr>
@@ -357,7 +371,8 @@
                             <ul class="log-list">
                                 @foreach($data as $approval)
                                     <li>
-                                        <strong>{{date('F j, Y H:i:s a', strtotime($approval->created_at))}}</strong> - {{ $approval->user->name }} - {{ $approval->remarks }}
+                                        <strong>{{date('F j, Y H:i:s a', strtotime($approval->created_at))}}</strong> - {{ $approval->user->name }} - 
+                                        <pre>{{ $approval->remarks }}</pre>
                                     </li>
                                 @endforeach
                             </ul>

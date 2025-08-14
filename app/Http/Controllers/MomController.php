@@ -68,7 +68,7 @@ class MomController extends Controller
                     });
             })
             // Restrict query for non-superadmin users to their own MOMs or participation
-            ->when(!auth()->user()->hasRole('superadmin'), function($query) {
+            ->when(!auth()->user()->hasRole('superadmin') && !auth()->user()->hasRole('admin'), function($query) {
                 $query->where(function($qry) {
                     $qry->whereHas('participants', function($qry1) {
                         $qry1->where('id', auth()->user()->id);
