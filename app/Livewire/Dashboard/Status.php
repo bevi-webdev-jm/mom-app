@@ -11,15 +11,17 @@ class Status extends Component
     public function render()
     {
         // Base query for MomDetail, applying user role filtering
-        $baseQuery = MomDetail::query();
+        $baseQuery = MomDetail::query()
+            ->whereHas('mom', function($query) {
+                $query->where('status', '<>', 'draft');
+            });
 
         // Apply user-specific filtering if not superadmin or admin
         if (!auth()->user()->hasRole('superadmin') && !auth()->user()->hasRole('admin')) {
             $baseQuery->whereHas('mom', function($qry) {
                 $qry->whereHas('participants', function($qry1) {
                     $qry1->where('id', auth()->user()->id);
-                })
-                ->orWhere('user_id', auth()->user()->id);
+                });
             });
         }
 

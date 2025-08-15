@@ -42,6 +42,9 @@ class Status extends Component
                 END = ?
             ", [$this->status]);
         })
+        ->whereHas('mom', function($query) {
+            $query->where('status', '<>', 'draft');
+        })
         ->groupBy('derived_status')
         ->get();
 

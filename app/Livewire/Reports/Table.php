@@ -51,6 +51,9 @@ class Table extends Component
                     END = ?
                 ", [$this->status]);
             })
+            ->whereHas('mom', function($query) {
+                $query->where('status', '<>', 'draft');
+            })
             ->orderBy('target_date')
             ->with('responsibles', 'mom')
             ->paginate(10, ['*'], 'mom-page');

@@ -58,7 +58,18 @@ class MomSubmittedNotification extends Notification
             "Please review the submitted MOM at your earliest convenience by clicking the button above."
         ];
 
-        $url = url('mom/' . encrypt($this->mom->id));
+        $buttons = [
+            [
+                'url' => url('mom/' . encrypt($this->mom->id)),
+                'label' => 'View MOM',
+                'class' => 'button'
+            ],
+            [
+                'url' => url('mom-print/' . encrypt($this->mom->id)),
+                'label' => 'Print PDF',
+                'class' => 'button'
+            ]
+        ];
 
         return (new MailMessage)
             ->subject($subject)
@@ -69,7 +80,9 @@ class MomSubmittedNotification extends Notification
                 'introLines' => $introLines,
                 'outroLines' => $outroLines,
                 'tableData' => $tableData,
-                'url' => $url,
+                'buttons' => $buttons,
+                // Keep 'url' for backward compatibility
+                'url' => url('mom/' . encrypt($this->mom->id)),
             ]);
     }
 

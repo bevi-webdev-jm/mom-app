@@ -77,6 +77,7 @@
             font-size: 16px;
             border: 1px solid #E7D8C0; /* Border matching the theme */
             transition: background-color 0.2s ease-in-out;
+            margin: 0 5px; /* Add margin for spacing between buttons */
         }
         .button:hover {
             background-color:rgb(1, 64, 128); /* Darker shade of theme on hover */
@@ -139,7 +140,15 @@
             @endif
         </div>
         <div class="button-container">
-            <a href="{{ $url }}" class="button">View MOM</a>
+            @if(isset($buttons) && is_array($buttons) && count($buttons) > 0)
+                @foreach($buttons as $button)
+                    <a href="{{ $button['url'] }}" class="{{ $button['class'] ?? 'button' }}" style="margin: 0 5px;">
+                        {{ $button['label'] ?? 'View' }}
+                    </a>
+                @endforeach
+            @else
+                <a href="{{ $url }}" class="button">View MOM</a>
+            @endif
         </div>
         <div class="content">
             @foreach($outroLines ?? [] as $line)
