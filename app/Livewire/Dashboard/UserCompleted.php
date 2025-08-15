@@ -22,6 +22,7 @@ class UserCompleted extends Component
             ->leftJoin('mom_responsibles as mr', 'mr.mom_detail_id', '=', 'md.id')
             ->leftJoin('users as u', 'u.id', '=', 'mr.user_id')
             ->whereNotNull('u.name')
+            ->where('moms.status', '<>', 'draft')
             ->when(!auth()->user()->hasRole('superadmin') && !auth()->user()->hasRole('admin'), function($query) {
                 $query->where(function($qry) {
                     $qry->whereHas('participants', function($qry1) {

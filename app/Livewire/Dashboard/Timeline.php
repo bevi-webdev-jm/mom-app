@@ -30,6 +30,7 @@ class Timeline extends Component
                  })
                  ->orWhere('user_id', auth()->user()->id);
              })
+             ->where('status', '<>', 'draft')
              ->with('details') // Eager load details to avoid N+1 query problem in the loop
              ->get();
 
