@@ -30,25 +30,29 @@ class DeleteModel extends Component
     public function submitForm() {
         $this->error_message = '';
 
-        $this->validate([
-            'password' => 'required'
+        // Temporarily disable password requirement
+        // To re-enable, uncomment the validation and password check below
+        
+        // $this->validate([
+        //     'password' => 'required'
+        // ]);
+
+        // // check password
+        // if(!Hash::check($this->password, auth()->user()->password)) { // invalid
+        //     $this->error_message = 'incorrect password.';
+        // } else { // delete function
+        
+        // Skip password check for temporary disable
+        $this->model->delete();
+
+        activity('delete')
+            ->performedOn($this->model)
+            ->withProperties($this->model)
+            ->log(':causer.name has deleted '.$this->type.' ['.$this->name.']');
+
+        return redirect()->to($this->model_route)->with([
+            'message_success' => $this->type.' ['.$this->name.'] was deleted successfully.'
         ]);
-
-        // check password
-        if(!Hash::check($this->password, auth()->user()->password)) { // invalid
-            $this->error_message = 'incorrect password.';
-        } else { // delete function
-            $this->model->delete();
-
-            activity('delete')
-                ->performedOn($this->model)
-                ->withProperties($this->model)
-                ->log(':causer.name has deleted '.$this->type.' ['.$this->name.']');
-
-            return redirect()->to($this->model_route)->with([
-                'message_success' => $this->type.' ['.$this->name.'] was deleted successfully.'
-            ]);
-        }
     }
 
     public function setModel($type, $model_id) {

@@ -12,7 +12,8 @@
                     </small>
                 </p>
 
-                <div class="row">
+                <!-- Password field temporarily disabled -->
+                {{-- <div class="row">
                     <div class="col-12">
                         <div class="form-group">
                             <input type="text" name="username" autocomplete="username" hidden>
@@ -22,7 +23,7 @@
                             <p class="text-danger">{{$error_message}}</p>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
             </div>
             <div class="modal-footer text-right">
