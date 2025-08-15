@@ -99,10 +99,12 @@
                                             </a>
                                         @endcan
                                         @can('mom delete')
-                                            <a href="" class="btn btn-danger btn-xs mb-0 ml-0 btn-delete" data-id="{{encrypt($mom->id)}}">
-                                                <i class="fa fa-trash-alt"></i>
-                                                {{__('adminlte::utilities.delete')}}
-                                            </a>
+                                            @if(auth()->user()->hasRole('superadmin') || $mom->user->id == auth()->user()->id)
+                                                <a href="" class="btn btn-danger btn-xs mb-0 ml-0 btn-delete" data-id="{{encrypt($mom->id)}}">
+                                                    <i class="fa fa-trash-alt"></i>
+                                                    {{__('adminlte::utilities.delete')}}
+                                                </a>
+                                            @endif
                                         @endcan
                                     </td>
                                 </tr>

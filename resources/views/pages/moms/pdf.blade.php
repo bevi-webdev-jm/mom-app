@@ -141,7 +141,7 @@
         }
         /* New and updated styles for the log section */
         .log-date {
-            background-color: #f0f0f0;
+            background-color: #e0fafcff;
             font-weight: bold;
             padding: 8px;
             display: block;
