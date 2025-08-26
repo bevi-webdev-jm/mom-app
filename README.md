@@ -163,5 +163,4 @@ php artisan test
 ```
 
 **Database Structure:**
-Check the database structure [Database Structure](https://dbdiagram.io/d/MOM-DB-64598ce3dca9fb07c4ba120f)
-
+Check the database structure <a href="https://dbdiagram.io/d/MOM-DB-64598ce3dca9fb07c4ba120f" target="_blank">Database Structure</a>.
