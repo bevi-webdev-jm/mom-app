@@ -161,3 +161,7 @@ Ensure your `.env` file has the test database configured (e.g., `DB_DATABASE_TES
 ```bash
 php artisan test
 ```
+
+**Database Structure:**
+Check the database structure [Database Structure](https://dbdiagram.io/d/MOM-DB-64598ce3dca9fb07c4ba120f)
+
