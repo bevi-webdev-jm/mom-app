@@ -136,15 +136,13 @@ class Item extends Component
                 $this->detail->update([
                     'status' => 'overdue'
                 ]);
-                $this->status = 'overdue';
+                $this->status = 'overdue';  
             } elseif ($targetDate->gt($currentDate)) {
                 // Target date is **after** current date (still time left)
-                if(!empty($this->detail->actions->count())) {
-                    $this->detail->update([
-                        'status' => 'open'
-                    ]);
-                    $this->status = 'open';
-                }
+                $this->detail->update([
+                    'status' => 'open'
+                ]);
+                $this->status = 'open';
             } else { 
                 // Target date is **today**
                 if(!empty($this->detail->actions->count())) {

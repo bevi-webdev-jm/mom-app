@@ -8,18 +8,28 @@ use Illuminate\Support\Facades\DB;
 
 class Status extends Component
 {
+    public $statusColors = [
+        'overdue' => '#f15c80', // Reddish
+        'Extended' => '#f7a35c', // Orangish
+        'On time' => '#90ed7d', // Greenish
+        'Open' => '#7cb5ec',   // Bluish
+        'completed' => '#90ed7d', // Default completed, though 'On time' and 'Extended' are more specific
+        'open' => '#7cb5ec',     // Default open, though 'Overdue' is more specific
+        // Add more statuses if needed
+    ];
+
     public function render()
     {
         // Base query for MomDetail, applying user role filtering
         $baseQuery = MomDetail::query()
-            ->whereHas('mom', function($query) {
+            ->whereHas('mom', function ($query) {
                 $query->where('status', '<>', 'draft');
             });
 
         // Apply user-specific filtering if not superadmin or admin
         if (!auth()->user()->hasRole('superadmin') && !auth()->user()->hasRole('admin')) {
-            $baseQuery->whereHas('mom', function($qry) {
-                $qry->whereHas('participants', function($qry1) {
+            $baseQuery->whereHas('mom', function ($qry) {
+                $qry->whereHas('participants', function ($qry1) {
                     $qry1->where('id', auth()->user()->id);
                 });
             });
@@ -45,14 +55,18 @@ class Status extends Component
         $drilldownData = [];
         $totalTopic = 0;
 
-        foreach($data as $val) {
+        foreach ($data as $val) {
             $derivedStatus = $val->derived_status;
             $total = $val->total;
+
+            // Apply the status color, defaulting to a fallback if not found
+            $color = $this->statusColors[$derivedStatus] ?? '#666666';
 
             $chartData[] = [
                 'name' => $derivedStatus,
                 'y' => $total,
-                'drilldown' => $derivedStatus // Link to drilldown data
+                'drilldown' => $derivedStatus, // Link to drilldown data
+                'color' => $color // Include the color property for the chart
             ];
 
             // --- Prepare drilldown data for the current derived status ---
@@ -99,4 +113,3 @@ class Status extends Component
         return view('livewire.dashboard.status');
     }
 }
-
