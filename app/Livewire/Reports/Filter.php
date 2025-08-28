@@ -5,6 +5,9 @@ namespace App\Livewire\Reports;
 use Livewire\Component;
 use App\Models\User;
 
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\MomExport;
+
 class Filter extends Component
 {
     public $users;
@@ -74,5 +77,9 @@ class Filter extends Component
 
     public function updatedStatus() {
         $this->dispatch('filter-user-selected', selected: $this->selected_users, status: $this->status);
+    }
+
+    public function export() {
+        return Excel::download(new MomExport($this->selected_users, $this->status), 'MoM Data-'.time().'.xlsx');
     }
 }
