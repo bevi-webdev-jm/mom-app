@@ -164,7 +164,7 @@ class Item extends Component
             $this->days_completed = $daysToComplete;
 
             // check if completed beyond target date
-            if($daysToComplete > 0) {
+            if($daysToComplete >= 0) {
                 $this->status = 'on-time';
             } elseif($daysToComplete < 0) {
                 $this->status = 'extended';

@@ -5,6 +5,12 @@
                 <div class="col-lg-6">
                     <strong class="text-lg">{{__('adminlte::utilities.filter')}}</strong>
                 </div>
+                <div class="col-lg-6 text-right">
+                    <button class="btn btn-sm btn-success" wire:click.prevent="export" wire:loading.attr="disabled">
+                        <i class="fa fa-file-excel"></i>
+                        EXPORT
+                    </button>
+                </div>
             </div>
         </div>
         <div class="card-body">
@@ -84,6 +90,7 @@
 
     <style>
         .scroll-box {
+            
             padding-top: 5px;
             padding-bottom: 5px;
             max-height: 200px;
