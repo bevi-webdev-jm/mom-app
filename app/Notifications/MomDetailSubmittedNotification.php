@@ -51,7 +51,7 @@ class MomDetailSubmittedNotification extends Notification
         $tableData = [
             'Topic' => $this->detail->topic,
             'Next Step' => $this->detail->next_step,
-            'Target Date' => \Carbon\Carbon::parse($this->detail->target)->format('F j, Y'),
+            'Target Date' => \Carbon\Carbon::parse($this->detail->target_date)->format('F j, Y'),
         ];
         $outroLines = [
             "Please review the submitted MOM topic at your earliest convenience by clicking the button above."
