@@ -14,7 +14,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-lg-6">
-                            <strong class="text-lg">{{__('adminlte::moms.mom_number')}}: {{$detail->mom->mom_number}}</strong>
+                            <strong class="text-lg">{{__('adminlte::moms.mom_number')}}: {{$detail->mom->mom_number ?? '-'}}</strong>
                         </div>
                         <div class="col-lg-6 text-right">
                             <a href="{{route('mom.show', encrypt($detail->mom_id))}}" class="btn btn-secondary btn-sm">
