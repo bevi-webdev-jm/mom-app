@@ -1,16 +1,18 @@
 <div>
     <div class="card">
-        <div class="card-header row">
-            <div class="col-lg-6 align-middle">
-                <strong class="text-lg">{{__('adminlte::moms.remarks')}}</strong>
-            </div>
-            <div class="col-lg-6 text-right">
-                @if(!$switch)
-                    <button class="btn btn-success btn-sm" wire:click.prevent="switchEdit" wire:loading.attr="disabled">
-                        <i class="fa fa-pen-alt mr-1"></i>
-                        {{__('adminlte::utilities.edit')}}
-                    </button>
-                @endif
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-6 align-middle">
+                    <strong class="text-lg">{{__('adminlte::moms.remarks')}}</strong>
+                </div>
+                <div class="col-lg-6 text-right">
+                    @if(!$switch)
+                        <button class="btn btn-success btn-sm" wire:click.prevent="switchEdit" wire:loading.attr="disabled">
+                            <i class="fa fa-pen-alt mr-1"></i>
+                            {{__('adminlte::utilities.edit')}}
+                        </button>
+                    @endif
+                </div>
             </div>
         </div>
         <div class="card-body p-1">

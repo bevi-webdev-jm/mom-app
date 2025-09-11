@@ -141,33 +141,6 @@ class MomController extends Controller
             'status_arr' => $this->status_arr,
         ]);
 
-        // $subject = "MOM Submission Notification";
-        // $greeting = 'Hello,';
-        // $introLines = [
-        //     "A new Minutes of Meeting (MOM) with number \"<strong>{$mom->mom_number}</strong>\" has been submitted and requires your attention.",
-        //     "Here are the details:"
-        // ];
-        // $tableData = [
-        //     'MOM Number' => $mom->mom_number,
-        //     'Agenda' => $mom->agenda,
-        //     'Meeting Date' => \Carbon\Carbon::parse($mom->meeting_date)->format('F j, Y'),
-        //     'Created By' => $mom->user->name
-        // ];
-        // $outroLines = [
-        //     "Please review the submitted MOM detail at your earliest convenience by clicking the button above."
-        // ];
-
-        // $url = url('mom/' . encrypt($mom->id));
-
-        // return view('pages.mails.mail-template', [
-        //         'emailTitle' => $subject,
-        //         'emailHeading' => 'MOM DETAIL SUBMITTED',
-        //         'greeting' => $greeting,
-        //         'introLines' => $introLines,
-        //         'outroLines' => $outroLines,
-        //         'tableData' => $tableData,
-        //         'url' => $url,
-        //     ]);
     }
 
     /**
