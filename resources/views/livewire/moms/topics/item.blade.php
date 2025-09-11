@@ -304,6 +304,10 @@
         .topic-assigned {
             background-color:rgb(236, 255, 254) !important;
         }
+        .dark-mode .topic-assigned {
+            background-color:rgba(174, 201, 199, 1) !important;
+            color: black !important;
+        }
         .item-user-img {
             border-radius: 50%;
             object-fit: cover;
