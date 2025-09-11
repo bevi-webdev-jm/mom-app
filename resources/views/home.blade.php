@@ -120,7 +120,6 @@
         .dark-mode .highcharts-data-table tr:hover {
             background: #f1f7ff;
         }
-        
     </style>
 @endpush
 

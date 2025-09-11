@@ -117,6 +117,9 @@
             white-space: pre-wrap;
             font-weight: 800;
         }
+        .dark-mode pre{
+            color: white;
+        }
     </style>
 @endpush
 
