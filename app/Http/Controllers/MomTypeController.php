@@ -90,6 +90,11 @@ class MomTypeController extends Controller
                         ->orWhere('status', 'LIKE', '%'.$search.'%');
                 });
             })
+            ->when(!auth()->user()->hasRole('superadmin') && !auth()->user()->hasRole('admin'), function($query) {
+                $query->whereHas('participants', function($q) {
+                    $q->where('user_id', auth()->user()->id);
+                });
+            })
             ->paginate($this->getDataPerPage())
             ->appends(request()->query());
 
