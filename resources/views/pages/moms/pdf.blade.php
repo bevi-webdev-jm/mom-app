@@ -342,7 +342,7 @@
                 <tr>
                     @if(!empty($mom->remarks))
                     <td colspan="2" class="text-justify">
-                        <pre>{{$mom->remarks}}</pre>
+                        <pre>{{ Illuminate\Support\Str::squish($mom->remarks) }}</pre>
                     </td>
                     @else
                         <td colspan="2" class="text-center">
